@@ -1,4 +1,4 @@
-
+# macaco
 
 controlador = input('Nome do controlador:  ')
 atributos = input('Atributos da entidade:  ').split()
