@@ -22,7 +22,7 @@ class TelaFilme:
 		return {"titulo": titulo}
 
 	def mostra_filme(self, dados_filme):
-    	print("-------==X( LISTA FILME(S) )X==-------")
+		print("-------==X( LISTA FILME(S) )X==-------")
 		print("TITULO: ", dados_filme["titulo"])
 		print()
 
