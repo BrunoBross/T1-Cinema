@@ -3,19 +3,19 @@
 class TelaGenero:
 
 	def tela_opcoes(self):
-		print("----------GENERO----------")
-		print("Escolha uma opcao")
+		print("-------==X( GÊNERO )X==-------")
+		print("Escolha uma opção:")
 		print("0 - Retornar")
-		print("1 - Incluir Genero")
-		print("2 - Alterar Genero")
-		print("3 - Listar Genero")
-		print("4 - Excluir Genero")
+		print("1 - Incluir Gênero")
+		print("2 - Alterar Gênero")
+		print("3 - Listar Gêneros")
+		print("4 - Excluir Gênero")
 
-		opcao = int(input("Escolha uma das opcoes:"))
+		opcao = int(input("Escolha uma das opções:"))
 		return opcao
 
 	def pega_dados_genero(self):
-		print("----------DADOS GENERO----------")
+		print("-------==X( DADOS GÊNERO )X==-------")
 
 		nome = input("nome: ")
 

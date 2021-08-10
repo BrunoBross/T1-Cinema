@@ -3,19 +3,19 @@
 class TelaSessao:
 
 	def tela_opcoes(self):
-		print("----------SESSAO----------")
-		print("Escolha uma opcao")
+		print("-------==X( SESSÃO )X==-------")
+		print("Escolha uma opção:")
 		print("0 - Retornar")
-		print("1 - Incluir Sessao")
-		print("2 - Alterar Sessao")
-		print("3 - Listar Sessao")
-		print("4 - Excluir Sessao")
+		print("1 - Incluir Sessão")
+		print("2 - Alterar Sessão")
+		print("3 - Listar Sessões")
+		print("4 - Excluir Sessão")
 
-		opcao = int(input("Escolha uma das opcoes:"))
+		opcao = int(input("Escolha uma das opções:"))
 		return opcao
 
 	def pega_dados_sessao(self):
-		print("----------DADOS SESSAO----------")
+		print("-------==X( DADOS SESSÃO )X==-------")
 
 		horario = input("horario: ")
 

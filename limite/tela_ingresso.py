@@ -3,19 +3,19 @@
 class TelaIngresso:
 
 	def tela_opcoes(self):
-		print("----------INGRESSO----------")
-		print("Escolha uma opcao")
+		print("-------==X( INGRESSO )X==-------")
+		print("Escolha uma opção:")
 		print("0 - Retornar")
 		print("1 - Incluir Ingresso")
 		print("2 - Alterar Ingresso")
-		print("3 - Listar Ingresso")
+		print("3 - Listar Ingressos")
 		print("4 - Excluir Ingresso")
 
-		opcao = int(input("Escolha uma das opcoes:"))
+		opcao = int(input("Escolha uma das opções:"))
 		return opcao
 
 	def pega_dados_ingresso(self):
-		print("----------DADOS INGRESSO----------")
+		print("-------==X( DADOS INGRESSO )X==-------")
 
 		sessao = input("sessao: ")
 

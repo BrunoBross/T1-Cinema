@@ -3,19 +3,19 @@
 class TelaSala:
 
 	def tela_opcoes(self):
-		print("----------SALA----------")
-		print("Escolha uma opcao")
+		print("-------==X( SALA )X==-------")
+		print("Escolha uma opção:")
 		print("0 - Retornar")
 		print("1 - Incluir Sala")
 		print("2 - Alterar Sala")
-		print("3 - Listar Sala")
+		print("3 - Listar Salas")
 		print("4 - Excluir Sala")
 
-		opcao = int(input("Escolha uma das opcoes:"))
+		opcao = int(input("Escolha uma das opções:"))
 		return opcao
 
 	def pega_dados_sala(self):
-		print("----------DADOS SALA----------")
+		print("-------==X( DADOS SALA )X==-------")
 
 		numero = input("numero: ")
 

@@ -3,19 +3,19 @@
 class TelaPoltrona:
 
 	def tela_opcoes(self):
-		print("----------POLTRONA----------")
-		print("Escolha uma opcao")
+		print("-------==X( POLTRONA )X==-------")
+		print("Escolha uma opção:")
 		print("0 - Retornar")
 		print("1 - Incluir Poltrona")
 		print("2 - Alterar Poltrona")
-		print("3 - Listar Poltrona")
+		print("3 - Listar Poltronas")
 		print("4 - Excluir Poltrona")
 
-		opcao = int(input("Escolha uma das opcoes:"))
+		opcao = int(input("Escolha uma das opções:"))
 		return opcao
 
 	def pega_dados_poltrona(self):
-		print("----------DADOS POLTRONA----------")
+		print("-------==X( DADOS POLTRONA )X==-------")
 
 		fileira = input("fileira: ")
 
