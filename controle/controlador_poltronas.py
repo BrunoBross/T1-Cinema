@@ -44,7 +44,7 @@ class ControladorPoltronas:
 			)
 
 	def lista_poltronas(self):
-    	contador = len(self.__poltronas)
+		contador = len(self.__poltronas)
 		if contador == 1:
 			self.__tela_poltrona.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
 		else:
