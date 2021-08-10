@@ -39,7 +39,7 @@ class ControladorSalas:
 			)
 
 	def lista_salas(self):
-    	contador = len(self.__salas)
+		contador = len(self.__salas)
 		if contador == 1:
 			self.__tela_sala.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
 		else:
