@@ -39,6 +39,11 @@ class ControladorGeneros:
 			)
 
 	def lista_generos(self):
+		contador = len(self.__generos)
+		if contador == 1:
+			self.__tela_genero.mostra_mensagem("\n-------==X( GÊNERO )X==-------")
+		else:
+			self.__tela_genero.mostra_mensagem(f"\n-------==X( GÊNEROS TOTAIS ({contador}) )X==-------")
 		for genero in self.__generos:
 			self.__tela_genero.mostra_genero({"nome": genero.nome})
 
@@ -52,7 +57,7 @@ class ControladorGeneros:
 			self.lista_generos()
 		else:
 			self.__tela_genero.mostra_mensagem(
-				"ATENCAO: Genero nao existente"
+				"ATENCAO: Gênero nao existente"
 			)
 
 	def abre_tela(self):

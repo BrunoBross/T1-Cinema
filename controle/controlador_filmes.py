@@ -39,6 +39,11 @@ class ControladorFilmes:
 			)
 
 	def lista_filmes(self):
+		contador = len(self.__filmes)
+		if contador == 1:
+			self.__tela_filme.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
+		else:
+			self.__tela_filme.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
 		for filme in self.__filmes:
 			self.__tela_filme.mostra_filme({"titulo": filme.titulo})
 
