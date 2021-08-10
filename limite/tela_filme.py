@@ -2,7 +2,7 @@
 
 class TelaFilme:
 
-	def tela_opcoes(self) -> int:
+	def tela_opcoes(self):
 		print(
 			"\n-------==X( FILME )X==-------"
 			"\nEscolha uma opção:"
@@ -16,7 +16,7 @@ class TelaFilme:
 		opcao = int(input("\nEscolha uma das opções:"))
 		return opcao
 
-	def pega_dados_filme(self) -> dict:
+	def pega_dados_filme(self):
 		print("\n-------==X( DADOS FILME )X==-------")
 
 		titulo = input("\nTítulo do Filme: ")
@@ -24,16 +24,9 @@ class TelaFilme:
 		return {"titulo": titulo}
 
 	def mostra_filme(self, dados_filme):
-<<<<<<< HEAD
-		print(
-			"\n-------==X( LISTA FILME(S) )X==-------"
-			"\nTITULO: ", dados_filme["titulo"]
-		)
-=======
-		print("-------==X( LISTA FILME(S) )X==-------")
-		print("TITULO: ", dados_filme["titulo"])
+		print("\n-------==X( LISTA FILME(S) )X==-------")
+		print("\nTITULO: ", dados_filme["titulo"])
 		print()
->>>>>>> c50ba1d7ee59745768004a631fc4165347ca6d66
 
 	def seleciona_filme(self):
 		id_filme = input("id do filme que deseja selecionar: ")
