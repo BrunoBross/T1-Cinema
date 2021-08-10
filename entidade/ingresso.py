@@ -1,4 +1,5 @@
 from entidade.sessao import Sessao
+from entidade.poltrona import Poltrona
 
 class Ingresso:
 
@@ -10,11 +11,8 @@ class Ingresso:
 		if isinstance(sessao, Sessao):
 			self.__sessao = sessao
 
-		if isinstance(fileira, str):
-			self.__fileira = fileira
-
-		if isinstance(acento, str):
-			self.__acento = acento
+		if isinstance(fileira, str) and isinstance(acento, str):
+			self.__poltrona = Poltrona(fileira, acento)
 
 	@property
 	def id_ingresso(self):
@@ -31,21 +29,11 @@ class Ingresso:
 			self.__sessao = sessao
 
 	@property
-	def fileira(self):
-		return self.__fileira
+	def poltrona(self):
+    		return self.__poltrona
 
-	@fileira.setter
-	def fileira(self, fileira: str):
-
-		if isinstance(fileira, str):
-			self.__fileira = fileira
-
-	@property
-	def acento(self):
-		return self.__acento
-
-	@acento.setter
-	def acento(self, acento: str):
-
-		if isinstance(acento, str):
-			self.__acento = acento
+	@poltrona.setter
+	def poltrona(self, fileira: str, acento: str):
+    	
+		if isinstance(fileira, str) and isinstance(acento, str):
+    			self.__poltrona = Poltrona(fileira, acento)

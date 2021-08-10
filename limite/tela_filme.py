@@ -24,10 +24,16 @@ class TelaFilme:
 		return {"titulo": titulo}
 
 	def mostra_filme(self, dados_filme):
+<<<<<<< HEAD
 		print(
 			"\n-------==X( LISTA FILME(S) )X==-------"
 			"\nTITULO: ", dados_filme["titulo"]
 		)
+=======
+		print("-------==X( LISTA FILME(S) )X==-------")
+		print("TITULO: ", dados_filme["titulo"])
+		print()
+>>>>>>> c50ba1d7ee59745768004a631fc4165347ca6d66
 
 	def seleciona_filme(self):
 		id_filme = input("id do filme que deseja selecionar: ")

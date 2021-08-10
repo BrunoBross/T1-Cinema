@@ -3,13 +3,15 @@
 class TelaSala:
 
 	def tela_opcoes(self):
-		print("-------==X( SALA )X==-------")
-		print("Escolha uma opção:")
-		print("0 - Retornar")
-		print("1 - Incluir Sala")
-		print("2 - Alterar Sala")
-		print("3 - Listar Salas")
-		print("4 - Excluir Sala")
+		print(
+				"\n-------==X( SALA )X==-------"
+				"\nEscolha uma opção:"
+				"\n0 - Retornar"
+				"\n1 - Incluir Sala"
+				"\n2 - Alterar Sala"
+				"\n3 - Listar Salas"
+				"\n4 - Excluir Sala"
+		)
 
 		opcao = int(input("Escolha uma das opções:"))
 		return opcao
