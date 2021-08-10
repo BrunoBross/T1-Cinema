@@ -1,4 +1,4 @@
-
+from entidade.sessao import Sessao
 
 class Ingresso:
 

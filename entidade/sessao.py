@@ -1,4 +1,5 @@
-
+from entidade.filme import Filme
+from entidade.sala import Sala
 
 class Sessao:
 
