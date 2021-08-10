@@ -1,4 +1,4 @@
-
+# macaco
 
 controlador = input('Nome do controlador:  ')
 atributos = input('Atributos da entidade:  ').split()
@@ -50,3 +50,4 @@ file.write(f'\n\t\telse:\n\t\t\tself.__tela_{control}.mostra_mensagem("ATENÇÃO
 #abre tela
 file.write('\n\n\tdef abre_tela(self):\n\t\tlista_opcoes = {'+f'\n\t\t\t0: self.retornar,\n\t\t\t1: self.incluir_{control},\n\t\t\t2: self.alterar_{control},\n\t\t\t3: self.lista_{controlador.lower()},\n\t\t\t4: self.excluir_{control}\n\t\t'+'}')
 file.write(f'\n\n\t\twhile True:\n\t\t\tlista_opcoes[self.__tela_{control}.tela_opcoes()]()\n')
+
