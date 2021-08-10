@@ -46,6 +46,12 @@ class ControladorSessaos:
 			)
 
 	def lista_sessaos(self):
+		contador = len(self.__sessaos)
+		if contador == 1:
+			self.__tela_sessao.mostra_mensagem("\n-------==X( SESSÃO DISPONÍVEL )X==-------")
+		else:
+			self.__tela_sessao.mostra_mensagem(f"\n-------==X( LISTA DE SESSÕES ({contador}) )X==-------")
+			
 		for sessao in self.__sessaos:
 			self.__tela_sessao.mostra_sessao({
 				"horario": sessao.horario,

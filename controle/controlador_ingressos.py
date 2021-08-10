@@ -46,6 +46,12 @@ class ControladorIngressos:
 			)
 
 	def lista_ingressos(self):
+    	contador = len(self.__ingressos)
+		if contador == 1:
+			self.__tela_ingresso.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
+		else:
+			self.__tela_ingresso.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
+			
 		for ingresso in self.__ingressos:
 			self.__tela_ingresso.mostra_ingresso({
 				"sessao": ingresso.sessao,

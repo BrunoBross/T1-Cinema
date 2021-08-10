@@ -44,6 +44,12 @@ class ControladorPoltronas:
 			)
 
 	def lista_poltronas(self):
+    	contador = len(self.__poltronas)
+		if contador == 1:
+			self.__tela_poltrona.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
+		else:
+			self.__tela_poltrona.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
+			
 		for poltrona in self.__poltronas:
 			self.__tela_poltrona.mostra_poltrona({
 				"fileira": poltrona.fileira,
