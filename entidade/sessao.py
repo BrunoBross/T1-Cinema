@@ -1,6 +1,7 @@
 from entidade.filme import Filme
 from entidade.sala import Sala
 
+
 class Sessao:
 
 	def __init__(self, id_sessao: int, horario: str, filme: Filme, sala: Sala):

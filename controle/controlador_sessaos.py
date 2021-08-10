@@ -42,7 +42,7 @@ class ControladorSessaos:
 			self.lista_sessaos()
 		else:
 			self.__tela_sessao.mostra_mensagem(
-				"ATENCAO: sessao nao existente"
+				"ATENÇÃO: sessão nao existente"
 			)
 
 	def lista_sessaos(self):
@@ -63,7 +63,7 @@ class ControladorSessaos:
 			self.lista_sessaos()
 		else:
 			self.__tela_sessao.mostra_mensagem(
-				"ATENCAO: Sessao nao existente"
+				"ATENÇÃO: Sessão nao existente"
 			)
 
 	def abre_tela(self):

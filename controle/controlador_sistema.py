@@ -6,6 +6,7 @@ from controle.controlador_salas import ControladorSalas
 from controle.controlador_filmes import ControladorFilmes
 from controle.controlador_generos import ControladorGeneros
 
+
 class ControladorSistema:
 
 	def __init__(self):
