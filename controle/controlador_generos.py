@@ -14,24 +14,28 @@ class ControladorGeneros:
 		for genero in self.__generos:
 			if genero.id_genero == id_genero:
 				return genero
-			return None
+		return None
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_genero(self):
 		dados_genero = self.__tela_genero.pega_dados_genero()
-		genero = Genero(self.__contador+1, dados_genero["nome"])
+		genero = Genero(
+			self.__contador+1,
+			dados_genero["tipo"]
+		)
 		self.__generos.append(genero)
+		self.__contador += 1
 
 	def alterar_genero(self):
 		self.lista_generos()
 		id_genero = self.__tela_genero.seleciona_genero()
-		genero = self.pega_genero_por_id(id_genero)
+		genero = self.pega_genero_por_id(int(id_genero))
 
 		if genero is not None:
 			novos_dados_genero = self.__tela_genero.pega_dados_genero()
-			genero.nome = novos_dados_genero["nome"]
+			genero.tipo = novos_dados_genero["tipo"]
 			self.lista_generos()
 		else:
 			self.__tela_genero.mostra_mensagem(
@@ -39,13 +43,12 @@ class ControladorGeneros:
 			)
 
 	def lista_generos(self):
-		contador = len(self.__generos)
-		if contador == 1:
-			self.__tela_genero.mostra_mensagem("\n-------==X( GÊNERO )X==-------")
-		else:
-			self.__tela_genero.mostra_mensagem(f"\n-------==X( GÊNEROS TOTAIS ({contador}) )X==-------")
+		self.__tela_genero.mostra_mensagem("-------==X( LISTA GENEROS )X==-------")
 		for genero in self.__generos:
-			self.__tela_genero.mostra_genero({"nome": genero.nome})
+			self.__tela_genero.mostra_genero({
+				"tipo": genero.tipo,
+				"id_genero": genero.id_genero
+			})
 
 	def excluir_genero(self):
 		self.lista_generos()
@@ -57,7 +60,7 @@ class ControladorGeneros:
 			self.lista_generos()
 		else:
 			self.__tela_genero.mostra_mensagem(
-				"ATENCAO: Gênero nao existente"
+				"ATENCAO: Genero nao existente"
 			)
 
 	def abre_tela(self):

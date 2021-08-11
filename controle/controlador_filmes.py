@@ -14,20 +14,24 @@ class ControladorFilmes:
 		for filme in self.__filmes:
 			if filme.id_filme == id_filme:
 				return filme
-			return None
+		return None
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_filme(self):
 		dados_filme = self.__tela_filme.pega_dados_filme()
-		filme = Filme(self.__contador+1, dados_filme["titulo"])
+		filme = Filme(
+			self.__contador+1,
+			dados_filme["titulo"]
+		)
 		self.__filmes.append(filme)
+		self.__contador += 1
 
 	def alterar_filme(self):
 		self.lista_filmes()
 		id_filme = self.__tela_filme.seleciona_filme()
-		filme = self.pega_filme_por_id(id_filme)
+		filme = self.pega_filme_por_id(int(id_filme))
 
 		if filme is not None:
 			novos_dados_filme = self.__tela_filme.pega_dados_filme()
@@ -39,13 +43,12 @@ class ControladorFilmes:
 			)
 
 	def lista_filmes(self):
-		contador = len(self.__filmes)
-		if contador == 1:
-			self.__tela_filme.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
-		else:
-			self.__tela_filme.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
+		self.__tela_filme.mostra_mensagem("-------==X( LISTA FILMES )X==-------")
 		for filme in self.__filmes:
-			self.__tela_filme.mostra_filme({"titulo": filme.titulo})
+			self.__tela_filme.mostra_filme({
+				"titulo": filme.titulo,
+				"id_filme": filme.id_filme
+			})
 
 	def excluir_filme(self):
 		self.lista_filmes()

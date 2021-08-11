@@ -3,45 +3,39 @@
 class TelaSessao:
 
 	def tela_opcoes(self):
-		print(
-				"\n-------==X( SESSÃO )X==-------"
-				"\nEscolha uma opção:"
-				"\n0 - Retornar"
-				"\n1 - Incluir Sessão"
-				"\n2 - Alterar Sessão"
-				"\n3 - Listar Sessões"
-				"\n4 - Excluir Sessão"
-		)
+		print("----------SESSAO----------")
+		print("Escolha uma opcao")
+		print("0 - Retornar")
+		print("1 - Incluir Sessao")
+		print("2 - Alterar Sessao")
+		print("3 - Listar Sessao")
+		print("4 - Excluir Sessao")
 
-		opcao = int(input("\nEscolha uma das opções:"))
+		opcao = int(input("Escolha uma das opcoes:"))
 		return opcao
 
 	def pega_dados_sessao(self):
-		print("\n-------==X( DADOS SESSÃO )X==-------")
-
-		horario = input("\nhorario: ")
-
-		id_filme = int(input("\nid do filme: "))
-
-		id_sala = input("\nid_sala: ")
-
+		print("-------==X( DADOS SESSAO )X==-------")
+		id_filme = int(input("id do filme: "))
+		horario = input("horario: ")
+		id_sala = int(input("id da sala: "))
 		return {
-			"horario": horario,
 			"filme": id_filme,
+			"horario": horario,
 			"sala": id_sala
 		}
 
-	def mostra_sessao(self, dados_sessao) -> None:
+	def mostra_sessao(self, dados_sessao):
 		print(
-			"\nID: ", dados_sessao["id_sessao"],
-			"\nHORARIO: ", dados_sessao["horario"],
-			"\nFILME: ", dados_sessao["filme"],
-			"\nSALA: ", dados_sessao["sala"]
-			)
+			"FILME: ", dados_sessao["filme"],
+			"HORARIO: ", dados_sessao["horario"],
+			"SALA: ", dados_sessao["sala"],
+			"ID: ", dados_sessao["id_sessao"]
+		)
 
 	def seleciona_sessao(self):
-		id_sessao = input("\nid da sessão que deseja selecionar: ")
+		id_sessao = input("id do sessao que deseja selecionar: ")
 		return id_sessao
 
-	def mostra_mensagem(self, msg) -> None:
+	def mostra_mensagem(self, msg):
 		print(msg)
