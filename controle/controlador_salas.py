@@ -14,20 +14,24 @@ class ControladorSalas:
 		for sala in self.__salas:
 			if sala.id_sala == id_sala:
 				return sala
-			return None
+		return None
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_sala(self):
 		dados_sala = self.__tela_sala.pega_dados_sala()
-		sala = Sala(self.__contador+1, dados_sala["numero"])
+		sala = Sala(
+			self.__contador+1,
+			dados_sala["numero"]
+		)
 		self.__salas.append(sala)
+		self.__contador += 1
 
 	def alterar_sala(self):
 		self.lista_salas()
 		id_sala = self.__tela_sala.seleciona_sala()
-		sala = self.pega_sala_por_id(id_sala)
+		sala = self.pega_sala_por_id(int(id_sala))
 
 		if sala is not None:
 			novos_dados_sala = self.__tela_sala.pega_dados_sala()
@@ -39,14 +43,12 @@ class ControladorSalas:
 			)
 
 	def lista_salas(self):
-		contador = len(self.__salas)
-		if contador == 1:
-			self.__tela_sala.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
-		else:
-			self.__tela_sala.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
-
+		self.__tela_sala.mostra_mensagem("-------==X( LISTA SALAS )X==-------")
 		for sala in self.__salas:
-			self.__tela_sala.mostra_sala({"numero": sala.numero})
+			self.__tela_sala.mostra_sala({
+				"numero": sala.numero,
+				"id_sala": sala.id_sala
+			})
 
 	def excluir_sala(self):
 		self.lista_salas()

@@ -2,37 +2,17 @@
 
 class Poltrona:
 
-	def __init__(self, id_poltrona: int, fileira: str, acento: str):
+	def __init__(self, fileira: str, acento: str):
 
-		if isinstance(id_poltrona, int):
-			self.__id_poltrona = id_poltrona
-
-		if isinstance(fileira, str):
-			self.__fileira = fileira
-
-		if isinstance(acento, str):
-			self.__acento = acento
+		if isinstance(fileira, str) and isinstance(acento, str):
+			self.__codigo = fileira+acento
 
 	@property
-	def id_poltrona(self):
-		return self.__id_poltrona
+	def codigo(self):
+		return self.__codigo
 
-	@property
-	def fileira(self):
-		return self.__fileira
+	@codigo.setter
+	def codigo(self, fileira: str, acento: str):
 
-	@fileira.setter
-	def fileira(self, fileira: str):
-
-		if isinstance(fileira, str):
-			self.__fileira = fileira
-
-	@property
-	def acento(self):
-		return self.__acento
-
-	@acento.setter
-	def acento(self, acento: str):
-
-		if isinstance(acento, str):
-			self.__acento = acento
+		if isinstance(fileira, str) and isinstance(acento, str):
+			self.__codigo = fileira+acento

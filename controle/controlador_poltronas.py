@@ -14,7 +14,7 @@ class ControladorPoltronas:
 		for poltrona in self.__poltronas:
 			if poltrona.id_poltrona == id_poltrona:
 				return poltrona
-			return None
+		return None
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
@@ -27,11 +27,12 @@ class ControladorPoltronas:
 			dados_poltrona["acento"]
 		)
 		self.__poltronas.append(poltrona)
+		self.__contador += 1
 
 	def alterar_poltrona(self):
 		self.lista_poltronas()
 		id_poltrona = self.__tela_poltrona.seleciona_poltrona()
-		poltrona = self.pega_poltrona_por_id(id_poltrona)
+		poltrona = self.pega_poltrona_por_id(int(id_poltrona))
 
 		if poltrona is not None:
 			novos_dados_poltrona = self.__tela_poltrona.pega_dados_poltrona()
@@ -44,16 +45,12 @@ class ControladorPoltronas:
 			)
 
 	def lista_poltronas(self):
-		contador = len(self.__poltronas)
-		if contador == 1:
-			self.__tela_poltrona.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
-		else:
-			self.__tela_poltrona.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
-			
+		self.__tela_poltrona.mostra_mensagem("-------==X( LISTA POLTRONAS )X==-------")
 		for poltrona in self.__poltronas:
 			self.__tela_poltrona.mostra_poltrona({
 				"fileira": poltrona.fileira,
 				"acento": poltrona.acento,
+				"id_poltrona": poltrona.id_poltrona
 			})
 
 	def excluir_poltrona(self):

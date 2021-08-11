@@ -14,31 +14,36 @@ class ControladorIngressos:
 		for ingresso in self.__ingressos:
 			if ingresso.id_ingresso == id_ingresso:
 				return ingresso
-			return None
+		return None
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_ingresso(self):
+		self.__controlador_sistema.controlador_sessaos.lista_sessaos()
 		dados_ingresso = self.__tela_ingresso.pega_dados_ingresso()
+		id_sessao = self.__controlador_sistema.controlador_sessaos.pega_sessao_por_id(dados_ingresso["sessao"])
+		dados_ingresso["sessao"] = id_sessao
 		ingresso = Ingresso(
 			self.__contador+1,
-			dados_ingresso["sessao"],
 			dados_ingresso["fileira"],
-			dados_ingresso["acento"]
+			dados_ingresso["acento"],
+			dados_ingresso["sessao"]
 		)
 		self.__ingressos.append(ingresso)
+		self.__contador += 1
 
 	def alterar_ingresso(self):
 		self.lista_ingressos()
 		id_ingresso = self.__tela_ingresso.seleciona_ingresso()
-		ingresso = self.pega_ingresso_por_id(id_ingresso)
+		ingresso = self.pega_ingresso_por_id(int(id_ingresso))
 
 		if ingresso is not None:
+			self.__controlador_sistema.controlador_sessaos.lista_sessaos()
 			novos_dados_ingresso = self.__tela_ingresso.pega_dados_ingresso()
-			ingresso.sessao = novos_dados_ingresso["sessao"]
 			ingresso.fileira = novos_dados_ingresso["fileira"]
 			ingresso.acento = novos_dados_ingresso["acento"]
+			ingresso.sessao = novos_dados_ingresso["sessao"]
 			self.lista_ingressos()
 		else:
 			self.__tela_ingresso.mostra_mensagem(
@@ -46,17 +51,13 @@ class ControladorIngressos:
 			)
 
 	def lista_ingressos(self):
-		contador = len(self.__ingressos)
-		if contador == 1:
-			self.__tela_ingresso.mostra_mensagem("\n-------==X( FILME DISPONÍVEL )X==-------")
-		else:
-			self.__tela_ingresso.mostra_mensagem(f"\n-------==X( LISTA DE FILMES ({contador}) )X==-------")
-			
+		self.__tela_ingresso.mostra_mensagem("-------==X( LISTA INGRESSOS )X==-------")
 		for ingresso in self.__ingressos:
 			self.__tela_ingresso.mostra_ingresso({
-				"sessao": ingresso.sessao,
-				"fileira": ingresso.fileira,
-				"acento": ingresso.acento,
+				"poltrona": ingresso.poltrona,
+				"sessao_horario": ingresso.sessao.horario,
+				"sessao_filme": ingresso.sessao.filme.titulo,
+				"id_ingresso": ingresso.id_ingresso
 			})
 
 	def excluir_ingresso(self):
