@@ -3,7 +3,7 @@
 class TelaSessao:
 
 	def tela_opcoes(self):
-		print("----------SESSAO----------")
+		print("\033[1;96m----------SESSAO----------\033[0;0m")
 		print("Escolha uma opcao")
 		print("0 - Retornar")
 		print("1 - Incluir Sessao")
@@ -15,7 +15,7 @@ class TelaSessao:
 		return opcao
 
 	def pega_dados_sessao(self):
-		print("-------==X( DADOS SESSAO )X==-------")
+		print("\033[1;96m-------==X( DADOS SESSAO )X==-------\033[0;0m")
 		id_filme = int(input("id do filme: "))
 		horario = input("horario: ")
 		id_sala = int(input("id da sala: "))

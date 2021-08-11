@@ -3,7 +3,7 @@
 class TelaFilme:
 
 	def tela_opcoes(self):
-		print("----------FILME----------")
+		print("\033[1;96m----------FILME----------\033[0;0m")
 		print("Escolha uma opcao")
 		print("0 - Retornar")
 		print("1 - Incluir Filme")
@@ -15,7 +15,7 @@ class TelaFilme:
 		return opcao
 
 	def pega_dados_filme(self):
-		print("-------==X( DADOS FILME )X==-------")
+		print("\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
 		titulo = input("titulo: ")
 		return {
 			"titulo": titulo

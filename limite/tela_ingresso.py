@@ -3,7 +3,7 @@
 class TelaIngresso:
 
 	def tela_opcoes(self):
-		print("-------==X( INGRESSO )X==-------")
+		print("\033[1;96m-------==X( INGRESSO )X==-------\033[0;0m")
 		print("Escolha uma opcao")
 		print("0 - Retornar")
 		print("1 - Incluir Ingresso")
@@ -15,7 +15,7 @@ class TelaIngresso:
 		return opcao
 
 	def pega_dados_ingresso(self):
-		print("-------==X( DADOS INGRESSO )X==-------")
+		print("\033[1;96m-------==X( DADOS INGRESSO )X==-------\033[0;0m")
 		fileira = input("fileira: ")
 		acento = input("acento: ")
 		id_sessao = int(input("id do sessao: "))

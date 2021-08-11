@@ -3,7 +3,7 @@
 class TelaGenero:
 
 	def tela_opcoes(self):
-		print("----------GENERO----------")
+		print("\033[1;96m----------GENERO----------\033[0;0m")
 		print("Escolha uma opcao")
 		print("0 - Retornar")
 		print("1 - Incluir Genero")
@@ -15,7 +15,7 @@ class TelaGenero:
 		return opcao
 
 	def pega_dados_genero(self):
-		print("-------==X( DADOS GENERO )X==-------")
+		print("\033[1;96m-------==X( DADOS GENERO )X==-------\033[0;0m")
 		tipo = input("tipo: ")
 		return {
 			"tipo": tipo
