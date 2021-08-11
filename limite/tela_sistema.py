@@ -18,5 +18,3 @@ class TelaSistema:
 				return opcao
 			except ValueError:
 				print('\033[1;31mDigite um número correto!\033[0;0m')
-				#TelaSistema.tela_opcoes(self)
-
