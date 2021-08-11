@@ -3,7 +3,7 @@
 class TelaPoltrona:
 
 	def tela_opcoes(self):
-		print("----------POLTRONA----------")
+		print("-------==X( POLTRONA )X==-------")
 		print("Escolha uma opcao")
 		print("0 - Retornar")
 		print("1 - Incluir Poltrona")
