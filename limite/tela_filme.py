@@ -25,6 +25,7 @@ class TelaFilme:
 
 	def mostra_filme(self, dados_filme: dict):
 		print(
+			dados_filme["id_filme"],
 			dados_filme["titulo"]
 		)
 

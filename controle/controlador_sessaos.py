@@ -54,9 +54,10 @@ class ControladorSessaos:
 			
 		for sessao in self.__sessaos:
 			self.__tela_sessao.mostra_sessao({
+				"id_sessao": sessao.id_sessao,
 				"horario": sessao.horario,
 				"filme": sessao.filme,
-				"sala": sessao.sala,
+				"sala": sessao.sala
 			})
 
 	def excluir_sessao(self):

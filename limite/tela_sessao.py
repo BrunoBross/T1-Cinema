@@ -21,14 +21,19 @@ class TelaSessao:
 
 		horario = input("\nhorario: ")
 
-		filme = input("\nfilme: ")
+		id_filme = int(input("\nid do filme: "))
 
-		sala = input("\nsala: ")
+		id_sala = input("\nid_sala: ")
 
-		return {"horario": horario, "filme": filme, "sala": sala}
+		return {
+			"horario": horario,
+			"filme": id_filme,
+			"sala": id_sala
+		}
 
 	def mostra_sessao(self, dados_sessao) -> None:
 		print(
+			"\nID: ", dados_sessao["id_sessao"],
 			"\nHORARIO: ", dados_sessao["horario"],
 			"\nFILME: ", dados_sessao["filme"],
 			"\nSALA: ", dados_sessao["sala"]
