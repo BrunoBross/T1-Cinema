@@ -1,14 +1,14 @@
 class TelaSistema:
 
 	def tela_opcoes(self):
-		print("-------==X( CINEMA )X==-------")
-		print("Escolha uma opção:")
+		print("---------------- Sistema Cinema ----------------")
+		print("Escolha sua opcao")
 		print("0 - Finalizar sistema")
-		print("1 - Poltronas")
-		print("2 - Sessões")
-		print("3 - Ingressos")
-		print("4 - Salas")
-		print("5 - Filmes")
-		print("6 - Gêneros")
-		opcao = int(input("Escolha uma das opções:"))
+		print("1 - Ingressos")
+		print("2 - Sessaos")
+		print("3 - Salas")
+		print("4 - Filmes")
+		print("5 - Generos")
+		print("6 - Poltronas")
+		opcao = int(input("Escolha a opcao: "))
 		return opcao
