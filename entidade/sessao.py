@@ -4,16 +4,16 @@ from entidade.sala import Sala
 
 class Sessao:
 
-	def __init__(self, id_sessao: int, horario: str, filme: Filme, sala: Sala):
+	def __init__(self, id_sessao: int, filme: Filme, horario: str, sala: Sala):
 
 		if isinstance(id_sessao, int):
 			self.__id_sessao = id_sessao
 
-		if isinstance(horario, str):
-			self.__horario = horario
-
 		if isinstance(filme, Filme):
 			self.__filme = filme
+
+		if isinstance(horario, str):
+			self.__horario = horario
 
 		if isinstance(sala, Sala):
 			self.__sala = sala
@@ -21,16 +21,6 @@ class Sessao:
 	@property
 	def id_sessao(self):
 		return self.__id_sessao
-
-	@property
-	def horario(self):
-		return self.__horario
-
-	@horario.setter
-	def horario(self, horario: str):
-
-		if isinstance(horario, str):
-			self.__horario = horario
 
 	@property
 	def filme(self):
@@ -41,6 +31,16 @@ class Sessao:
 
 		if isinstance(filme, Filme):
 			self.__filme = filme
+
+	@property
+	def horario(self):
+		return self.__horario
+
+	@horario.setter
+	def horario(self, horario: str):
+
+		if isinstance(horario, str):
+			self.__horario = horario
 
 	@property
 	def sala(self):

@@ -3,32 +3,33 @@
 class TelaGenero:
 
 	def tela_opcoes(self):
-		print(
-				"\n-------==X( GÊNERO )X==-------"
-				"\ndEscolha uma opção:"
-				"\n0 - Retornar"
-				"\n1 - Incluir Gênero"
-				"\n2 - Alterar Gênero"
-				"\n3 - Listar Gêneros"
-				"\n4 - Excluir Gênero"
-		)
+		print("----------GENERO----------")
+		print("Escolha uma opcao")
+		print("0 - Retornar")
+		print("1 - Incluir Genero")
+		print("2 - Alterar Genero")
+		print("3 - Listar Genero")
+		print("4 - Excluir Genero")
 
-		opcao = int(input("\nEscolha uma das opções:"))
+		opcao = int(input("Escolha uma das opcoes:"))
 		return opcao
 
 	def pega_dados_genero(self):
-		print("\n-------==X( DADOS GÊNERO )X==-------")
+		print("-------==X( DADOS GENERO )X==-------")
+		tipo = input("tipo: ")
+		return {
+			"tipo": tipo
+		}
 
-		nome = input("\nnome: ")
-
-		return {"nome": nome}
-
-	def mostra_genero(self, dados_genero) -> None:
-		print("\nNOME: ", dados_genero["nome"])
+	def mostra_genero(self, dados_genero):
+		print(
+			"TIPO: ", dados_genero["tipo"],
+			"ID: ", dados_genero["id_genero"]
+		)
 
 	def seleciona_genero(self):
-		id_genero = input("\nid do genero que deseja selecionar: ")
+		id_genero = input("id do genero que deseja selecionar: ")
 		return id_genero
 
-	def mostra_mensagem(self, msg) -> None:
+	def mostra_mensagem(self, msg):
 		print(msg)
