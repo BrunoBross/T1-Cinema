@@ -7,6 +7,7 @@ class ControladorGeneros:
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
 		self.__generos = []
+		self.__id_generos = []
 		self.__tela_genero = TelaGenero()
 		self.__contador = 0
 
@@ -22,12 +23,10 @@ class ControladorGeneros:
 	def incluir_genero(self):
 		dados_genero = self.__tela_genero.pega_dados_genero()
 		if dados_genero is not None:
-			genero = Genero(
-				self.__contador+1,
-				dados_genero["tipo"]
-			)
+			genero = Genero(self.__contador+1, dados_genero["tipo"])
 			self.__generos.append(genero)
 			self.__contador += 1
+			self.__id_generos.append(self.__contador)
 
 	def alterar_genero(self):
 		self.lista_generos()
