@@ -30,16 +30,15 @@ class ControladorFilmes:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_filme(self):
-		contagem = self.__contador
 		dados_filme = self.__tela_filme.pega_dados_filme()
 		if dados_filme is not None:
 			filme = Filme(
-				contagem+1,
+				self.__contador+1,
 				dados_filme["titulo"]
 			)
 			self.__filmes.append(filme)
-			contagem += 1
-			self.__id_filmes.append(contagem)
+			self.__contador += 1
+			self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
 		self.lista_filmes()

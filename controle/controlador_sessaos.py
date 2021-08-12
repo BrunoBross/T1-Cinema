@@ -28,12 +28,12 @@ class ControladorSessaos:
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
+
 	def incluir_sessao(self):
-		contagem = self.__contador
 		control_filme = self.__controlador_sistema.controlador_filmes
 		control_sala = self.__controlador_sistema.controlador_salas
 		tela = self.__tela_sessao
-		material = [contagem+1]
+		material = [self.__contador+1]
 		while True:
 			control_filme.lista_filmes()
 			id_filme = tela.pega_dados_sessao("id_filme")
@@ -59,8 +59,8 @@ class ControladorSessaos:
 				break
 		sessao = Sessao(material[0], material[1], material[2], material[3])
 		self.__sessaos.append(sessao)
-		contagem += 1
-		self.__id_sessaos.append(contagem)
+		self.__contador += 1
+		self.__id_sessaos.append(self.__contador)
 
 	def alterar_sessao(self):
 		tela = self.__tela_sessao
@@ -75,18 +75,36 @@ class ControladorSessaos:
 				break
 			else:
 				tela.mostra_mensagem("Tente novamente")
-
-		self.__controlador_sistema.controlador_filmes.lista_filmes()
-		self.__controlador_sistema.controlador_salas.lista_salas()
-		novos_dados_sessao = tela.pega_dados_sessao()
-		if novos_dados_sessao is not None:
-			sessao.filme = novos_dados_sessao["filme"]
-			sessao.horario = novos_dados_sessao["horario"]
-			sessao.sala = novos_dados_sessao["sala"]
-			self.lista_sessaos()
+		control_filme = self.__controlador_sistema.controlador_filmes
+		control_sala = self.__controlador_sistema.controlador_salas
+		tela = self.__tela_sessao
+		while True:
+			control_filme.lista_filmes()
+			id_filme = tela.pega_dados_sessao("id_filme")
+			if control_filme.checa_id(id_filme):
+				filme = control_filme.pega_filme_por_id(int(id_filme))
+				sessao.filme = filme
+				tela.mostra_mensagem(f'\no filme "{filme.titulo}" foi adicionado a esta sessão')
+				break
+		while True:
+			horario = tela.pega_dados_sessao("horario")
+			tela.mostra_mensagem(f'\ndeseja confirmar "{horario}" como horário?')
+			certeza = tela.pega_dados_sessao("certeza")
+			if certeza == '1':
+				sessao.horario = horario
+				tela.mostra_mensagem(f'{horario} adicionado a sessão como horário')
+				break
+		while True:
+			control_sala.lista_salas()
+			id_sala = tela.pega_dados_sessao("id_sala")
+			if control_sala.checa_id(id_sala):
+				sala = control_sala.pega_sala_por_id(int(id_sala))
+				sessao.sala = sala
+				tela.mostra_mensagem(f'\na sala {sala.numero} foi adicionada à sessão')
+				break
 
 	def lista_sessaos(self):
-		self.__tela_sessao.mostra_mensagem("-------==X( LISTA SESSAOS )X==-------")
+		self.__tela_sessao.mostra_mensagem("-------==X( LISTA SESSÕES )X==-------")
 		for sessao in self.__sessaos:
 			self.__tela_sessao.mostra_sessao({
 				"filme": sessao.filme.titulo,

@@ -36,8 +36,7 @@ class TelaSala:
 		)
 
 	def seleciona_sala(self):
-		id_sala = input("id do sala que deseja selecionar: ")
-		return id_sala
+		return input("id do sala que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

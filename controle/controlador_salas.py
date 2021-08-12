@@ -30,16 +30,15 @@ class ControladorSalas:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_sala(self):
-		contagem = self.__contador
 		dados_sala = self.__tela_sala.pega_dados_sala()
 		if dados_sala is not None:
 			sala = Sala(
-				contagem+1,
+				self.__contador+1,
 				dados_sala["numero"]
 			)
 			self.__salas.append(sala)
 			self.__contador += 1
-			self.__id_salas.append(contagem)
+			self.__id_salas.append(self.__contador)
 
 	def alterar_sala(self):
 		self.lista_salas()
