@@ -26,20 +26,20 @@ class TelaSessao:
 
 	def pega_dados_sessao(self, dado: str):
 		print("\033[1;96m-------==X( DADOS SESSAO )X==-------\033[0;0m")
-		mensagem = {"id_filme": "id do filme: ", "horario": "horário: ", "id_sala": "id da sala: ", "certeza": "digite 1 para confirmar: "}
+		mensagem = {
+			"id_filme": "id do filme: ", "horario": "horário: ",
+			"id_sala": "id da sala: ", "certeza": "digite 1 para confirmar: "
+		}
 		return input(f'{mensagem[dado]}')
 
 	def mostra_sessao(self, dados_sessao):
 		print(
-			"FILME: ", dados_sessao["filme"],
-			"HORÁRIO: ", dados_sessao["horario"],
-			"SALA: ", dados_sessao["sala"],
-			"ID: ", dados_sessao["id_sessao"]
+			"FILME: ", dados_sessao["filme"], "HORÁRIO: ", dados_sessao["horario"],
+			"SALA: ", dados_sessao["sala"], "ID: ", dados_sessao["id_sessao"]
 		)
 
 	def seleciona_sessao(self):
-		id_sessao = int(input("id da sessão que deseja selecionar: "))
-		return id_sessao
+		return input("id da sessão que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

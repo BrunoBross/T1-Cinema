@@ -7,6 +7,7 @@ class ControladorSessaos:
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
 		self.__sessaos = []
+		self.__id_sessaos = []
 		self.__tela_sessao = TelaSessao()
 		self.__contador = 0
 
@@ -16,14 +17,23 @@ class ControladorSessaos:
 				return sessao
 		return None
 
+	def checa_id(self, id_sessao: str):
+		if id_sessao.isalnum():
+			if int(id_sessao) in self.__id_sessaos:
+				return True
+			else:
+				return False
+		else:
+			return False
+
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
-
 	def incluir_sessao(self):
+		contagem = self.__contador
 		control_filme = self.__controlador_sistema.controlador_filmes
 		control_sala = self.__controlador_sistema.controlador_salas
 		tela = self.__tela_sessao
-		material = [self.__contador+1]
+		material = [contagem+1]
 		while True:
 			control_filme.lista_filmes()
 			id_filme = tela.pega_dados_sessao("id_filme")
@@ -49,26 +59,31 @@ class ControladorSessaos:
 				break
 		sessao = Sessao(material[0], material[1], material[2], material[3])
 		self.__sessaos.append(sessao)
-		self.__contador += 1
+		contagem += 1
+		self.__id_sessaos.append(contagem)
 
 	def alterar_sessao(self):
-		self.lista_sessaos()
-		id_sessao = self.__tela_sessao.seleciona_sessao()
-		sessao = self.pega_sessao_por_id(int(id_sessao))
+		tela = self.__tela_sessao
+		if len(self.__id_sessaos) < 1:
+			tela.mostra_mensagem("Nenhuma sessão dispónível")
+			return
+		while True:
+			self.lista_sessaos()
+			id_sessao = tela.seleciona_sessao()
+			if self.checa_id(id_sessao):
+				sessao = self.pega_sessao_por_id(int(id_sessao))
+				break
+			else:
+				tela.mostra_mensagem("Tente novamente")
 
-		if sessao is not None:
-			self.__controlador_sistema.controlador_filmes.lista_filmes()
-			self.__controlador_sistema.controlador_salas.lista_salas()
-			novos_dados_sessao = self.__tela_sessao.pega_dados_sessao()
-			if novos_dados_sessao is not None:
-				sessao.filme = novos_dados_sessao["filme"]
-				sessao.horario = novos_dados_sessao["horario"]
-				sessao.sala = novos_dados_sessao["sala"]
-				self.lista_sessaos()
-		else:
-			self.__tela_sessao.mostra_mensagem(
-				"ATENCAO: sessao nao existente"
-			)
+		self.__controlador_sistema.controlador_filmes.lista_filmes()
+		self.__controlador_sistema.controlador_salas.lista_salas()
+		novos_dados_sessao = tela.pega_dados_sessao()
+		if novos_dados_sessao is not None:
+			sessao.filme = novos_dados_sessao["filme"]
+			sessao.horario = novos_dados_sessao["horario"]
+			sessao.sala = novos_dados_sessao["sala"]
+			self.lista_sessaos()
 
 	def lista_sessaos(self):
 		self.__tela_sessao.mostra_mensagem("-------==X( LISTA SESSAOS )X==-------")
@@ -104,3 +119,7 @@ class ControladorSessaos:
 
 		while True:
 			lista_opcoes[self.__tela_sessao.tela_opcoes()]()
+
+	@property
+	def id_sessaos(self):
+		return self.__id_sessaos
