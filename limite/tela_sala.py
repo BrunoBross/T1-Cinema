@@ -23,15 +23,15 @@ class TelaSala:
 				print('\033[1;31mDigite um número correto!\033[0;0m')
 
 	def pega_dados_sala(self):
-		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 		print("\033[1;96m-------==X( DADOS SALA )X==-------\033[0;0m")
+		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 		while True:
-			numero = input("numero: ")
-			print('\n'+numero+'\n')
+			numero = input("Número da Sala: ")
+			print(f'\nSala Nª: {numero}\n')
 			while True:
 				try:
-					certeza = int(input("tem certeza do número da sala?\n1 - sim\n2 - não\n3 - cancelar\nDigite um número: "))
-					if 3 >= certeza >= 0:
+					certeza = int(input('Tem certeza disso? \n1- Sim \n2- Não \n3- Cancelar \nDigite uma opção: '))
+					if 3 >= certeza >= 1:
 						if certeza == 1:
 							return numero
 						elif certeza == 3:

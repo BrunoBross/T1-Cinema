@@ -22,16 +22,15 @@ class TelaIngresso:
 			except ValueError:
 				print('\033[1;31mDigite um número correto!\033[0;0m')
 
-	def pega_dados_ingresso(self):
-		print("\033[1;96m-------==X( DADOS INGRESSO )X==-------\033[0;0m")
-		fileira = input("fileira: ")
-		acento = input("acento: ")
-		id_sessao = int(input("id do sessao: "))
-		return {
-			"fileira": fileira,
-			"acento": acento,
-			"sessao": id_sessao
+	def pega_dados_ingresso(self, dados: int):
+		mensagem = {
+			0: 'Digite o ID da sessão: ',
+			1: 'Escolha a fileira: ',
+			2: 'Escolha o acento: '
 		}
+		return input(mensagem[dados])
+
+
 
 	def mostra_ingresso(self, dados_ingresso):
 		print(

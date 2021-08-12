@@ -148,3 +148,7 @@ class ControladorSessaos:
 	@property
 	def id_sessaos(self):
 		return self.__id_sessaos
+
+	@property
+	def sessaos(self):
+		return self.__sessaos

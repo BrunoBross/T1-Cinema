@@ -24,12 +24,32 @@ class TelaPoltrona:
 
 	def pega_dados_poltrona(self):
 		print("\033[1;96m-------==X( DADOS POLTRONA )X==-------\033[0;0m")
-		fileira = input("fileira: ")
-		acento = input("acento: ")
-		return {
-			"fileira": fileira,
-			"acento": acento
-		}
+		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
+		while True:
+			fileira = input("Fileira: ")
+			acento = input("Acento: ")
+			print(f'Poltrona: \033[1;96m{fileira}-{acento}\033[0;0m')
+			while True:
+				try:
+					certeza = int(input("Tem certeza da poltrona?\n1 - Sim\n2 - Não\n3 - Cancelar\nDigite um número: "))
+					if 3 >= certeza >= 0:
+						if certeza == 1:
+							return {
+								"fileira": fileira,
+								"acento": acento
+							}
+						elif certeza == 3:
+							cancelar = True
+							break
+						elif certeza == 2:
+							cancelar = False
+							break
+					else:
+						print(aviso)
+				except ValueError:
+					print(aviso)
+			if cancelar:
+				break
 
 	def mostra_poltrona(self, dados_poltrona):
 		print(
