@@ -14,7 +14,7 @@ class TelaSistema:
 			print("6 - Poltronas")
 
 			try:
-				opcao = int(input("Escolha uma das opções:"))
+				opcao = int(input("Escolha uma das opções: "))
 				if 6 >= opcao >= 0:
 					return opcao
 				else:

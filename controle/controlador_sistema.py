@@ -64,6 +64,7 @@ class ControladorSistema:
 		self.__controlador_poltronas.abre_tela()
 
 	def encerra_sistema(self):
+		print('\033[1;31mAté logo ;(\033[0;0m')
 		exit(0)
 
 	def abre_tela(self):
