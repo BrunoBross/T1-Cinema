@@ -24,16 +24,10 @@ class TelaSessao:
 			except ValueError:
 				print(aviso)
 
-	def pega_dados_sessao(self):
+	def pega_dados_sessao(self, dado: str):
 		print("\033[1;96m-------==X( DADOS SESSAO )X==-------\033[0;0m")
-		id_filme = int(input("id do filme: "))
-		horario = input("horário: ")
-		id_sala = int(input("id da sala: "))
-		return {
-			"filme": id_filme,
-			"horario": horario,
-			"sala": id_sala
-		}
+		mensagem = {"id_filme": "id do filme: ", "horario": "horário: ", "id_sala": "id da sala: ", "certeza": "digite 1 para confirmar: "}
+		return input(f'{mensagem[dado]}')
 
 	def mostra_sessao(self, dados_sessao):
 		print(

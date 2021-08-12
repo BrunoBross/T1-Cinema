@@ -20,19 +20,34 @@ class ControladorSessaos:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_sessao(self):
-		self.__controlador_sistema.controlador_filmes.lista_filmes()
-		self.__controlador_sistema.controlador_salas.lista_salas()
-		dados_sessao = self.__tela_sessao.pega_dados_sessao()
-		id_filme = self.__controlador_sistema.controlador_filmes.pega_filme_por_id(dados_sessao["filme"])
-		dados_sessao["filme"] = id_filme
-		id_sala = self.__controlador_sistema.controlador_salas.pega_sala_por_id(dados_sessao["sala"])
-		dados_sessao["sala"] = id_sala
-		sessao = Sessao(
-			self.__contador+1,
-			dados_sessao["filme"],
-			dados_sessao["horario"],
-			dados_sessao["sala"]
-		)
+		control_filme = self.__controlador_sistema.controlador_filmes
+		control_sala = self.__controlador_sistema.controlador_salas
+		tela = self.__tela_sessao
+		material = [self.__contador+1]
+		while True:
+			control_filme.lista_filmes()
+			id_filme = tela.pega_dados_sessao("id_filme")
+			if control_filme.checa_id(id_filme):
+				filme = control_filme.pega_filme_por_id(int(id_filme))
+				material.append(filme)
+				tela.mostra_mensagem(f'\no filme "{filme.titulo}" foi adicionado a esta sessão')
+				break
+		while True:
+			horario = tela.pega_dados_sessao("horario")
+			tela.mostra_mensagem(f'\ndeseja confirmar "{horario}" como horário?')
+			certeza = tela.pega_dados_sessao("certeza")
+			if certeza == '1':
+				material.append(horario)
+				break
+		while True:
+			control_sala.lista_salas()
+			id_sala = tela.pega_dados_sessao("id_sala")
+			if control_sala.checa_id(id_sala):
+				sala = control_sala.pega_sala_por_id(int(id_sala))
+				material.append(sala)
+				tela.mostra_mensagem(f'\na sala {sala.numero} foi adicionada à sessão')
+				break
+		sessao = Sessao(material[0], material[1], material[2], material[3])
 		self.__sessaos.append(sessao)
 		self.__contador += 1
 
@@ -45,10 +60,11 @@ class ControladorSessaos:
 			self.__controlador_sistema.controlador_filmes.lista_filmes()
 			self.__controlador_sistema.controlador_salas.lista_salas()
 			novos_dados_sessao = self.__tela_sessao.pega_dados_sessao()
-			sessao.filme = novos_dados_sessao["filme"]
-			sessao.horario = novos_dados_sessao["horario"]
-			sessao.sala = novos_dados_sessao["sala"]
-			self.lista_sessaos()
+			if novos_dados_sessao is not None:
+				sessao.filme = novos_dados_sessao["filme"]
+				sessao.horario = novos_dados_sessao["horario"]
+				sessao.sala = novos_dados_sessao["sala"]
+				self.lista_sessaos()
 		else:
 			self.__tela_sessao.mostra_mensagem(
 				"ATENCAO: sessao nao existente"

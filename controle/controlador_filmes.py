@@ -7,6 +7,7 @@ class ControladorFilmes:
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
 		self.__filmes = []
+		self.__id_filmes = []
 		self.__tela_filme = TelaFilme()
 		self.__contador = 0
 
@@ -16,17 +17,29 @@ class ControladorFilmes:
 				return filme
 		return None
 
+	def checa_id(self, id_filme: str):
+		if id_filme.isalnum():
+			if int(id_filme) in self.__id_filmes:
+				return True
+			else:
+				return False
+		else:
+			return False
+
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_filme(self):
+		contagem = self.__contador
 		dados_filme = self.__tela_filme.pega_dados_filme()
-		filme = Filme(
-			self.__contador+1,
-			dados_filme["titulo"]
-		)
-		self.__filmes.append(filme)
-		self.__contador += 1
+		if dados_filme is not None:
+			filme = Filme(
+				contagem+1,
+				dados_filme["titulo"]
+			)
+			self.__filmes.append(filme)
+			contagem += 1
+			self.__id_filmes.append(contagem)
 
 	def alterar_filme(self):
 		self.lista_filmes()
@@ -35,8 +48,9 @@ class ControladorFilmes:
 
 		if filme is not None:
 			novos_dados_filme = self.__tela_filme.pega_dados_filme()
-			filme.titulo = novos_dados_filme["titulo"]
-			self.lista_filmes()
+			if novos_dados_filme is not None:
+				filme.titulo = novos_dados_filme["titulo"]
+				self.lista_filmes()
 		else:
 			self.__tela_filme.mostra_mensagem(
 				"ATENCAO: filme nao existente"
@@ -74,3 +88,7 @@ class ControladorFilmes:
 
 		while True:
 			lista_opcoes[self.__tela_filme.tela_opcoes()]()
+
+	@property
+	def id_filmes(self):
+		return self.__id_filmes

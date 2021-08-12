@@ -21,12 +21,13 @@ class ControladorGeneros:
 
 	def incluir_genero(self):
 		dados_genero = self.__tela_genero.pega_dados_genero()
-		genero = Genero(
-			self.__contador+1,
-			dados_genero["tipo"]
-		)
-		self.__generos.append(genero)
-		self.__contador += 1
+		if dados_genero is not None:
+			genero = Genero(
+				self.__contador+1,
+				dados_genero["tipo"]
+			)
+			self.__generos.append(genero)
+			self.__contador += 1
 
 	def alterar_genero(self):
 		self.lista_generos()
@@ -35,8 +36,9 @@ class ControladorGeneros:
 
 		if genero is not None:
 			novos_dados_genero = self.__tela_genero.pega_dados_genero()
-			genero.tipo = novos_dados_genero["tipo"]
-			self.lista_generos()
+			if novos_dados_genero is not None:
+				genero.tipo = novos_dados_genero["tipo"]
+				self.lista_generos()
 		else:
 			self.__tela_genero.mostra_mensagem(
 				"ATENCAO: genero nao existente"

@@ -7,6 +7,7 @@ class ControladorSalas:
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
 		self.__salas = []
+		self.__id_salas = []
 		self.__tela_sala = TelaSala()
 		self.__contador = 0
 
@@ -16,17 +17,29 @@ class ControladorSalas:
 				return sala
 		return None
 
+	def checa_id(self, id_sala: str):
+		if id_sala.isalnum():
+			if int(id_sala) in self.__id_salas:
+				return True
+			else:
+				return False
+		else:
+			return False
+
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_sala(self):
+		contagem = self.__contador
 		dados_sala = self.__tela_sala.pega_dados_sala()
-		sala = Sala(
-			self.__contador+1,
-			dados_sala["numero"]
-		)
-		self.__salas.append(sala)
-		self.__contador += 1
+		if dados_sala is not None:
+			sala = Sala(
+				contagem+1,
+				dados_sala["numero"]
+			)
+			self.__salas.append(sala)
+			self.__contador += 1
+			self.__id_salas.append(contagem)
 
 	def alterar_sala(self):
 		self.lista_salas()
@@ -74,3 +87,7 @@ class ControladorSalas:
 
 		while True:
 			lista_opcoes[self.__tela_sala.tela_opcoes()]()
+
+	@property
+	def id_salas(self):
+		return self.__id_salas
