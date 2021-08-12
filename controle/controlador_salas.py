@@ -50,11 +50,7 @@ class ControladorSalas:
 				if sala is not None:
 					novos_dados_sala = self.__tela_sala.pega_dados_sala()
 					sala.numero = novos_dados_sala
-					self.lista_salas()
-				else:
-					self.__tela_sala.mostra_mensagem(
-						"ATENÇÃO: sala não existente"
-					)
+					break
 
 	def lista_salas(self):
 		self.__tela_sala.mostra_mensagem("-------==X( LISTA SALAS )X==-------")
@@ -65,17 +61,23 @@ class ControladorSalas:
 			})
 
 	def excluir_sala(self):
-		self.lista_salas()
-		id_sala = self.__tela_sala.seleciona_sala()
-		sala = self.pega_sala_por_id(int(id_sala))
-
-		if sala is not None:
-			self.__salas.remove(sala)
+		if len(self.__salas) < 1:
+			self.__tela_sala.mostra_mensagem('não existem salas cadastradas')
+			return
+		while True:
 			self.lista_salas()
-		else:
-			self.__tela_sala.mostra_mensagem(
-				"ATENCAO: Sala nao existente"
-			)
+			id_sala = self.__tela_sala.seleciona_sala()
+			if self.checa_id(id_sala):
+				sala = self.pega_sala_por_id(int(id_sala))
+				if sala is not None:
+					numero = sala.numero
+					quantidade = len(self.__salas)
+					self.__salas.remove(sala)
+					if quantidade == len(self.__salas):
+						self.__tela_sala.mostra_mensagem(f'"sala {numero}" removida do sistema')
+					break
+			else:
+				self.__tela_sala.mostra_mensagem('\t\ttente novamente')
 
 	def abre_tela(self):
 		lista_opcoes = {
