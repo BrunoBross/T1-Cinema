@@ -14,7 +14,7 @@ class TelaSala:
 			print("4 - Excluir Sala")
 
 			try:
-				opcao = int(input("Escolha uma das opções:"))
+				opcao = int(input("Escolha uma das opções: "))
 				if 4 >= opcao >= 0:
 					return opcao
 				else:
