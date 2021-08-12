@@ -59,8 +59,7 @@ class TelaGenero:
 		)
 
 	def seleciona_genero(self):
-		id_genero = int(input("id do genero que deseja selecionar: "))
-		return id_genero
+		return int(input("id do genero que deseja selecionar: "))
 
 	def mostra_mensagem(self, msg):
 		print(msg)
