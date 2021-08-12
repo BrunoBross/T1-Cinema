@@ -35,9 +35,7 @@ class TelaFilme:
 					certeza = int(input("tem certeza do título?\n1 - sim\n2 - não\n3 - cancelar\nDigite um número: "))
 					if 3 >= certeza >= 0:
 						if certeza == 1:
-							return {
-								"titulo": titulo
-							}
+							return titulo
 						elif certeza == 3:
 							cancelar = True
 							break
@@ -58,8 +56,7 @@ class TelaFilme:
 		)
 
 	def seleciona_filme(self):
-		id_filme = int(input("id do filme que deseja selecionar: "))
-		return id_filme
+		return input("id do filme que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

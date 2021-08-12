@@ -18,7 +18,7 @@ class ControladorSessaos:
 		return None
 
 	def checa_id(self, id_sessao: str):
-		if id_sessao.isalnum():
+		if id_sessao.isdecimal():
 			if int(id_sessao) in self.__id_sessaos:
 				return True
 			else:
@@ -114,17 +114,24 @@ class ControladorSessaos:
 			})
 
 	def excluir_sessao(self):
-		self.lista_sessaos()
-		id_sessao = self.__tela_sessao.seleciona_sessao()
-		sessao = self.pega_sessao_por_id(int(id_sessao))
-
-		if sessao is not None:
-			self.__sessaos.remove(sessao)
+		if len(self.__sessaos) < 1:
+			self.__tela_sessao.mostra_mensagem('não existem filmes cadastrados')
+			return
+		while True:
 			self.lista_sessaos()
-		else:
-			self.__tela_sessao.mostra_mensagem(
-				"ATENCAO: Sessao nao existente"
-			)
+			id_filme = self.__tela_sessao.seleciona_sessao()
+			if self.checa_id(id_filme):
+				filme = self.pega_sessao_por_id(int(id_filme))
+				if filme is not None:
+					titulo = filme.titulo
+					quantidade = len(self.__sessaos)
+					self.__sessaos.remove(filme)
+					if quantidade+1 == len(self.__sessaos):
+						self.__tela_sessao.mostra_mensagem(f'o filme {titulo} foi removido do sistema')
+				else:
+					self.__tela_sessao.mostra_mensagem("ATENÇÃO: Filme não existente")
+			else:
+				self.__tela_sessao.mostra_mensagem('\t\ttente novamente')
 
 	def abre_tela(self):
 		lista_opcoes = {

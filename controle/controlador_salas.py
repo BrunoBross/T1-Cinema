@@ -18,7 +18,7 @@ class ControladorSalas:
 		return None
 
 	def checa_id(self, id_sala: str):
-		if id_sala.isalnum():
+		if id_sala.isdecimal():
 			if int(id_sala) in self.__id_salas:
 				return True
 			else:
@@ -32,27 +32,29 @@ class ControladorSalas:
 	def incluir_sala(self):
 		dados_sala = self.__tela_sala.pega_dados_sala()
 		if dados_sala is not None:
-			sala = Sala(
-				self.__contador+1,
-				dados_sala["numero"]
-			)
+			sala = Sala(self.__contador+1, dados_sala)
 			self.__salas.append(sala)
 			self.__contador += 1
 			self.__id_salas.append(self.__contador)
 
 	def alterar_sala(self):
+		if len(self.__salas) < 1:
+			self.__tela_sala.mostra_mensagem('não existem salas')
+			return
 		self.lista_salas()
 		id_sala = self.__tela_sala.seleciona_sala()
-		sala = self.pega_sala_por_id(int(id_sala))
+		while True:
+			if self.checa_id(id_sala):
+				sala = self.pega_sala_por_id(int(id_sala))
 
-		if sala is not None:
-			novos_dados_sala = self.__tela_sala.pega_dados_sala()
-			sala.numero = novos_dados_sala["numero"]
-			self.lista_salas()
-		else:
-			self.__tela_sala.mostra_mensagem(
-				"ATENCAO: sala nao existente"
-			)
+				if sala is not None:
+					novos_dados_sala = self.__tela_sala.pega_dados_sala()
+					sala.numero = novos_dados_sala
+					self.lista_salas()
+				else:
+					self.__tela_sala.mostra_mensagem(
+						"ATENÇÃO: sala não existente"
+					)
 
 	def lista_salas(self):
 		self.__tela_sala.mostra_mensagem("-------==X( LISTA SALAS )X==-------")
