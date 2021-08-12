@@ -29,28 +29,42 @@ class ControladorSalas:
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
+	def checa_numero(self, numero_novo):
+		for sala in self.__salas:
+			if numero_novo == sala.numero:
+				self.__tela_sala.mostra_mensagem('sala já existente')
+				return False
+			if numero_novo == '':
+				self.__tela_sala.mostra_mensagem('número inválido')
+				return False
+		return True
+
 	def incluir_sala(self):
 		dados_sala = self.__tela_sala.pega_dados_sala()
 		if dados_sala is not None:
-			sala = Sala(self.__contador+1, dados_sala)
-			self.__salas.append(sala)
-			self.__contador += 1
-			self.__id_salas.append(self.__contador)
+			if self.checa_numero(dados_sala):
+				sala = Sala(self.__contador+1, dados_sala)
+				self.__salas.append(sala)
+				self.__contador += 1
+				self.__id_salas.append(self.__contador)
 
 	def alterar_sala(self):
+		tela = self.__tela_sala
+
 		if len(self.__salas) < 1:
-			self.__tela_sala.mostra_mensagem('não existem salas')
+			tela.mostra_mensagem('não existem salas')
 			return
 		self.lista_salas()
-		id_sala = self.__tela_sala.seleciona_sala()
+		id_sala = tela.seleciona_sala()
 		while True:
 			if self.checa_id(id_sala):
 				sala = self.pega_sala_por_id(int(id_sala))
 
 				if sala is not None:
-					novos_dados_sala = self.__tela_sala.pega_dados_sala()
-					sala.numero = novos_dados_sala
-					break
+					novos_numero = tela.pega_dados_sala()
+					if self.checa_numero(novos_numero):
+						sala.numero = novos_numero
+						break
 
 	def lista_salas(self):
 		self.__tela_sala.mostra_mensagem("-------==X( LISTA SALAS )X==-------")
