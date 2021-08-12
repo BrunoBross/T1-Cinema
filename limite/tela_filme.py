@@ -38,7 +38,7 @@ class TelaFilme:
 		)
 
 	def seleciona_filme(self):
-		id_filme = input("id do filme que deseja selecionar: ")
+		id_filme = int(input("id do filme que deseja selecionar: "))
 		return id_filme
 
 	def mostra_mensagem(self, msg):
