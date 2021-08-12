@@ -18,13 +18,9 @@ class ControladorSalas:
 		return None
 
 	def checa_id(self, id_sala: str):
-		if id_sala.isdecimal():
-			if int(id_sala) in self.__id_salas:
-				return True
-			else:
-				return False
-		else:
-			return False
+		if id_sala.isdecimal() and int(id_sala) in self.__id_salas:
+			return True
+		return False
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
@@ -55,11 +51,11 @@ class ControladorSalas:
 			tela.mostra_mensagem('não existem salas')
 			return
 		self.lista_salas()
-		id_sala = tela.seleciona_sala()
 		while True:
+			id_sala = tela.seleciona_sala()
+			print(id_sala, self.checa_id(id_sala))
 			if self.checa_id(id_sala):
 				sala = self.pega_sala_por_id(int(id_sala))
-
 				if sala is not None:
 					novos_numero = tela.pega_dados_sala()
 					if self.checa_numero(novos_numero):
