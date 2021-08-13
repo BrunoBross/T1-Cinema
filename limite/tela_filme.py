@@ -28,11 +28,11 @@ class TelaFilme:
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 		print("\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
 		while True:
-			titulo = input("título: ")
-			print('\n'+titulo+'\n')
+			titulo = input("Título: ")
+			print('\n\033[1;96m'+titulo+'\033[0;0m\n')
 			while True:
 				try:
-					certeza = int(input("tem certeza do título?\n1 - sim\n2 - não\n3 - cancelar\nDigite um número: "))
+					certeza = int(input("Tem certeza do título?\n1 - Sim\n2 - Não\n3 - Cancelar\nDigite uma opção: "))
 					if 3 >= certeza >= 0:
 						if certeza == 1:
 							return titulo
