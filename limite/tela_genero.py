@@ -12,13 +12,14 @@ class TelaGenero:
 			print("2 - Alterar Gênero")
 			print("3 - Listar Gênero")
 			print("4 - Excluir Gênero")
+			print("5 - Adiciona Filme")
 
 			try:
 				opcao = int(input("Escolha uma das opções: "))
-				if 4 >= opcao >= 0:
+				if 5 >= opcao >= 0:
 					return opcao
 				else:
-					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
+					print('\n\033[1;31mDigite um número entre 0 e 5!\033[0;0m')
 			except ValueError:
 				print('\n\033[1;31mDigite um número!\033[0;0m')
 

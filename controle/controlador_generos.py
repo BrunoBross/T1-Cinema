@@ -65,6 +65,30 @@ class ControladorGeneros:
 					self.__tela_genero.mostra_mensagem('\noperação cancelada')
 					return
 
+	def adiciona_filme(self):
+		control_filme = self.__controlador_sistema.controlador_filmes
+		tela = self.__tela_genero
+
+		if len(self.__generos) > 1 and len(control_filme.filmes) > 1:
+			self.lista_generos()
+			id_genero = tela.seleciona_genero()
+			if self.checa_id(id_genero):
+				genero = self.pega_genero_por_id(int(id_genero))
+				while True:
+					control_filme.lista_filmes()
+					id_filme = control_filme.tela.seleciona_filme()
+					if control_filme.checa_id(id_filme):
+						filme = control_filme.pega_filme_por_id(int(id_filme))
+						filme.generos.append(genero)
+						tela.mostra_mensagem(f'\n{filme.titulo} é do gênero {genero.tipo}')
+						return
+					else:
+						tela.mostra_mensagem('\nID inválido, tente novamente')
+			else:
+				tela.mostra_mensagem('\n id inválido, operação cancelada')
+		tela.mostra_mensagem('\nfaltam dados para executar esta ação')
+
+
 	def lista_generos(self):
 		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
 		for genero in self.__generos:
@@ -87,7 +111,8 @@ class ControladorGeneros:
 			1: self.incluir_genero,
 			2: self.alterar_genero,
 			3: self.lista_generos,
-			4: self.excluir_genero
+			4: self.excluir_genero,
+			5: self.adiciona_filme
 		}
 
 		while True:

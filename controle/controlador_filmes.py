@@ -102,3 +102,7 @@ class ControladorFilmes:
 	@property
 	def filmes(self):
 		return self.__filmes
+
+	@property
+	def tela(self):
+		return self.__tela_filme
