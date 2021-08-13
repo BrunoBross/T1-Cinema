@@ -15,6 +15,12 @@ class Ingresso:
         if isinstance(fileira, str) and isinstance(acento, str):
             self.__poltrona = Poltrona(fileira, acento)
 
+        if isinstance(fileira, str):
+            self.__fileira = fileira
+
+        if isinstance(acento, str):
+            self.__acento = acento
+
     @property
     def id_ingresso(self):
         return self.__id_ingresso
@@ -38,3 +44,11 @@ class Ingresso:
 
         if isinstance(fileira, str) and isinstance(acento, str):
             self.__poltrona = Poltrona(fileira, acento)
+
+    @property
+    def fileira(self):
+        return self.__fileira
+
+    @property
+    def acento(self):
+        return self.__acento

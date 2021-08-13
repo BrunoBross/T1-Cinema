@@ -31,41 +31,55 @@ class ControladorPoltronas:
 
 	def alterar_poltrona(self):
 		self.lista_poltronas()
-		id_poltrona = self.__tela_poltrona.seleciona_poltrona()
-		poltrona = self.pega_poltrona_por_id(int(id_poltrona))
 
-		if poltrona is not None:
-			novos_dados_poltrona = self.__tela_poltrona.pega_dados_poltrona()
-			poltrona.fileira = novos_dados_poltrona["fileira"]
-			poltrona.acento = novos_dados_poltrona["acento"]
-			self.lista_poltronas()
+		if len(self.__poltronas) > 0:
+
+			id_poltrona = self.__tela_poltrona.seleciona_poltrona()
+			poltrona = self.pega_poltrona_por_id(int(id_poltrona))
+
+			if poltrona is not None:
+				novos_dados_poltrona = self.__tela_poltrona.pega_dados_poltrona()
+				poltrona.fileira = novos_dados_poltrona["fileira"]
+				poltrona.acento = novos_dados_poltrona["acento"]
+				self.lista_poltronas()
+			else:
+				self.__tela_poltrona.mostra_mensagem(
+					"ATENÇÃO: poltrona não existente"
+				)
 		else:
-			self.__tela_poltrona.mostra_mensagem(
-				"ATENÇÃO: poltrona não existente"
-			)
+			pass # já está mostrando a mensagem na listagem de poltronas, por isso que não estou printando novamente
 
 	def lista_poltronas(self):
 		self.__tela_poltrona.mostra_mensagem("\n\033[1;96m-------==X( LISTA POLTRONAS )X==-------\033[0;0m")
-		for poltrona in self.__poltronas:
-			self.__tela_poltrona.mostra_poltrona({
-				"fileira": poltrona.fileira,
-				"acento": poltrona.acento,
-				"id_poltrona": poltrona.id_poltrona
-			})
+
+		if len(self.__poltronas) > 0:
+			for poltrona in self.__poltronas:
+				self.__tela_poltrona.mostra_poltrona({
+					"fileira": poltrona.fileira,
+					"acento": poltrona.acento,
+					"id_poltrona": poltrona.id_poltrona
+				})
+		else:
+			self.__tela_poltrona.mostra_mensagem('\033[1;31mNão há poltronas disponíveis, crie uma antes.\033[0;0m')
 
 	def excluir_poltrona(self):
 
 		self.lista_poltronas()
-		id_poltrona = self.__tela_poltrona.seleciona_poltrona()
-		poltrona = self.pega_poltrona_por_id(int(id_poltrona))
 
-		if poltrona is not None:
-			self.__poltronas.remove(poltrona)
-			self.lista_poltronas()
+		if len(self.__poltronas) > 0:
+
+			id_poltrona = self.__tela_poltrona.seleciona_poltrona()
+			poltrona = self.pega_poltrona_por_id(int(id_poltrona))
+
+			if poltrona is not None:
+				self.__poltronas.remove(poltrona)
+				self.lista_poltronas()
+			else:
+				self.__tela_poltrona.mostra_mensagem(
+					"ATENÇÃO: poltrona não existente"
+				)
 		else:
-			self.__tela_poltrona.mostra_mensagem(
-				"ATENÇÃO: poltrona não existente"
-			)
+			pass # já está mostrando a mensagem na listagem de poltronas, por isso que não estou printando novamente
 
 	def abre_tela(self):
 		lista_opcoes = {

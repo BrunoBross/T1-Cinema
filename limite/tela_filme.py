@@ -6,7 +6,7 @@ class TelaFilme:
 
 		while True:
 			print("\n\033[1;96m-------==X( FILME )X==-------\033[0;0m")
-			print("Escolha uma opcao")
+			print("Escolha uma opção")
 			print("0 - Retornar")
 			print("1 - Incluir Filme")
 			print("2 - Alterar Filme")

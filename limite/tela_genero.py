@@ -8,7 +8,7 @@ class TelaGenero:
 
 		while True:
 			print("\n\033[1;96m-------==X( GÊNERO )X==-------\033[0;0m")
-			print("Escolha uma opcao")
+			print("Escolha uma opção")
 			print("0 - Retornar")
 			print("1 - Incluir Genero")
 			print("2 - Alterar Genero")

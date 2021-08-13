@@ -59,7 +59,7 @@ class TelaPoltrona:
 		)
 
 	def seleciona_poltrona(self):
-		id_poltrona = input("id do poltrona que deseja selecionar: ")
+		id_poltrona = input("ID da poltrona que deseja selecionar: ")
 		return id_poltrona
 
 	def mostra_mensagem(self, msg):
