@@ -71,7 +71,7 @@ class ControladorFilmes:
 
 	def excluir_filme(self):
 		if len(self.__filmes) < 1:
-			self.__tela_filme.mostra_mensagem('\n\033[1;31mNão existem filmes cadastrados!\033[0;0m')
+			self.lista_filmes()
 			return
 		self.lista_filmes()
 		while True:
