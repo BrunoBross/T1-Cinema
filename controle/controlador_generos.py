@@ -17,23 +17,32 @@ class ControladorGeneros:
 				return genero
 		return None
 
+	def checa_tipo(self, dado: str):
+		if dado.isalpha():
+			for genero in self.__generos:
+				if genero.tipo == dado:
+					self.__tela_genero.mostra_mensagem(f'o genero {dado} já está cadastrado')
+					return False
+			return True
+		self.__tela_genero.mostra_mensagem('em letras por favor')
+		return False
+
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_genero(self):
-		dados_genero = self.__tela_genero.pega_dados_genero()
-
-		if dados_genero is not None:
-			genero = Genero(self.__contador+1, dados_genero["tipo"])
-			self.__generos.append(genero)
-			self.__contador += 1
-			self.__id_generos.append(self.__contador)
+		while True:
+			tipo = self.__tela_genero.pega_dados_genero()
+			if self.checa_tipo(tipo):
+				genero = Genero(self.__contador+1, tipo)
+				self.__generos.append(genero)
+				self.__contador += 1
+				self.__id_generos.append(self.__contador)
 
 	def alterar_genero(self):
 		self.lista_generos()
 		id_genero = self.__tela_genero.seleciona_genero()
 		genero = self.pega_genero_por_id(int(id_genero))
-
 		if genero is not None:
 			novos_dados_genero = self.__tela_genero.pega_dados_genero()
 			if novos_dados_genero is not None:
