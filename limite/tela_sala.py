@@ -5,7 +5,7 @@ class TelaSala:
 	def tela_opcoes(self):
 
 		while True:
-			print("\033[1;96m-------==X( SALA )X==-------\033[0;0m")
+			print("\n\033[1;96m-------==X( SALA )X==-------\033[0;0m")
 			print("Escolha uma opcao")
 			print("0 - Retornar")
 			print("1 - Incluir Sala")
@@ -23,7 +23,7 @@ class TelaSala:
 				print('\033[1;31mDigite um número correto!\033[0;0m')
 
 	def pega_dados_sala(self):
-		print("\033[1;96m-------==X( DADOS SALA )X==-------\033[0;0m")
+		print("\n\033[1;96m-------==X( DADOS SALA )X==-------\033[0;0m")
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 		while True:
 			numero = input("Número da Sala: ")

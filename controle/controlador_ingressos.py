@@ -28,7 +28,7 @@ class ControladorIngressos:
         material = [self.__contador + 1]
         control_sessao = self.__controlador_sistema.controlador_sessaos
         if len(control_sessao.sessaos) < 1:
-            self.__tela_ingresso.mostra_mensagem('Não existem sessões cadastradas.')
+            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão existem sessões cadastradas.\033[0;0m')
             return
 
         while True:
@@ -44,7 +44,7 @@ class ControladorIngressos:
                 material.append(fileira)
                 break
             else:
-                self.__tela_ingresso.mostra_mensagem('Fileira inválida.')
+                self.__tela_ingresso.mostra_mensagem('\033[1;31mFileira inválida.\033[0;0m')
 
         while True:
             acento = self.__tela_ingresso.pega_dados_ingresso(2)
@@ -52,7 +52,7 @@ class ControladorIngressos:
                 material.append(acento)
                 break
             else:
-                self.__tela_ingresso.mostra_mensagem('Acento inválido.')
+                self.__tela_ingresso.mostra_mensagem('\033[1;31mAcento inválido.\033[0;0m')
 
         self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
         self.__contador += 1
@@ -72,12 +72,12 @@ class ControladorIngressos:
             self.lista_ingressos()
         else:
             self.__tela_ingresso.mostra_mensagem(
-                "ATENCAO: ingresso nao existente"
+                "\033[1;31mATENÇÃO: ingresso não existente\033[0;0m"
             )
 
 
     def lista_ingressos(self):
-        self.__tela_ingresso.mostra_mensagem("-------==X( LISTA INGRESSOS )X==-------")
+        self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( LISTA INGRESSOS )X==-------\033[0;0m")
         for ingresso in self.__ingressos:
             self.__tela_ingresso.mostra_ingresso({
                 "poltrona": ingresso.poltrona,

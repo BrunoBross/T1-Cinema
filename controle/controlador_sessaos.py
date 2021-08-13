@@ -47,12 +47,12 @@ class ControladorSessaos:
 				if control_filme.checa_id(id_filme):
 					filme = control_filme.pega_filme_por_id(int(id_filme))
 					material.append(filme)
-					tela.mostra_mensagem(f'\no filme "{filme.titulo}" foi adicionado a esta sessão')
+					tela.mostra_mensagem(f'\nO filme \033[1;96m"{filme.titulo}"\033[0;0m foi adicionado a esta sessão')
 					break
 
 			while True:
 				horario = tela.pega_dados_sessao("horario")
-				tela.mostra_mensagem(f'\ndeseja confirmar "{horario}" como horário?')
+				tela.mostra_mensagem(f'\nDeseja confirmar \033[1;96m"{horario}"\033[0;0m como horário?')
 				certeza = tela.pega_dados_sessao("certeza")
 				if certeza == '1':
 					material.append(horario)
@@ -63,7 +63,7 @@ class ControladorSessaos:
 				if control_sala.checa_id(id_sala):
 					sala = control_sala.pega_sala_por_id(int(id_sala))
 					material.append(sala)
-					tela.mostra_mensagem(f'\na sala {sala.numero} foi adicionada à sessão')
+					tela.mostra_mensagem(f'\nA sala \033[1;96m"{sala.numero}"\033[0;0m foi adicionada à sessão')
 					break
 			sessao = Sessao(material[0], material[1], material[2], material[3])
 			self.__sessaos.append(sessao)
@@ -77,9 +77,11 @@ class ControladorSessaos:
 				self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sala disponível, crie uma antes.\033[0;0m')
 
 	def alterar_sessao(self):
+		self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR SESSÕES )X==-------\033[0;0m")
+
 		tela = self.__tela_sessao
 		if len(self.__id_sessaos) < 1:
-			tela.mostra_mensagem("Nenhuma sessão dispónível")
+			tela.mostra_mensagem("\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m")
 			return
 		while True:
 			self.lista_sessaos()
@@ -88,7 +90,7 @@ class ControladorSessaos:
 				sessao = self.pega_sessao_por_id(int(id_sessao))
 				break
 			else:
-				tela.mostra_mensagem("Tente novamente")
+				tela.mostra_mensagem("\033[1;31mTente novamente\033[0;0m")
 		control_filme = self.__controlador_sistema.controlador_filmes
 		control_sala = self.__controlador_sistema.controlador_salas
 		tela = self.__tela_sessao
@@ -98,11 +100,11 @@ class ControladorSessaos:
 			if control_filme.checa_id(id_filme):
 				filme = control_filme.pega_filme_por_id(int(id_filme))
 				sessao.filme = filme
-				tela.mostra_mensagem(f'\no filme "{filme.titulo}" foi adicionado a esta sessão')
+				tela.mostra_mensagem(f'\nO filme "{filme.titulo}" foi adicionado a esta sessão')
 				break
 		while True:
 			horario = tela.pega_dados_sessao("horario")
-			tela.mostra_mensagem(f'\ndeseja confirmar "{horario}" como horário?')
+			tela.mostra_mensagem(f'\nDeseja confirmar "{horario}" como horário?')
 			certeza = tela.pega_dados_sessao("certeza")
 			if certeza == '1':
 				sessao.horario = horario
@@ -118,18 +120,24 @@ class ControladorSessaos:
 				break
 
 	def lista_sessaos(self):
-		self.__tela_sessao.mostra_mensagem("-------==X( LISTA SESSÕES )X==-------")
-		for sessao in self.__sessaos:
-			self.__tela_sessao.mostra_sessao({
-				"filme": sessao.filme.titulo,
-				"horario": sessao.horario,
-				"sala": sessao.sala.numero,
-				"id_sessao": sessao.id_sessao
-			})
+		self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( LISTA SESSÕES )X==-------\033[0;0m")
+
+		if len(self.sessaos) > 0:
+			for sessao in self.__sessaos:
+				self.__tela_sessao.mostra_sessao({
+					"filme": sessao.filme.titulo,
+					"horario": sessao.horario,
+					"sala": sessao.sala.numero,
+					"id_sessao": sessao.id_sessao
+				})
+		else:
+			self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m')
 
 	def excluir_sessao(self):
+		self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR SESSÕES )X==-------\033[0;0m")
+
 		if len(self.__sessaos) < 1:
-			self.__tela_sessao.mostra_mensagem('não existem filmes cadastrados')
+			self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m')
 			return
 		while True:
 			self.lista_sessaos()
@@ -143,7 +151,7 @@ class ControladorSessaos:
 					if quantidade+1 == len(self.__sessaos):
 						self.__tela_sessao.mostra_mensagem(f'o filme {titulo} foi removido do sistema')
 				else:
-					self.__tela_sessao.mostra_mensagem("ATENÇÃO: Filme não existente")
+					self.__tela_sessao.mostra_mensagem("\033[1;31mATENÇÃO: Filme não existente\033[0;0m")
 			else:
 				self.__tela_sessao.mostra_mensagem('\t\ttente novamente')
 
