@@ -23,7 +23,7 @@ class TelaSala:
 				print('\n\033[1;31mDigite um número!\033[0;0m')
 
 	def pega_dados_sala(self):
-		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
+
 		while True:
 			numero = input("Número da Sala: ")
 			print(f'\n\033[1;96mSala Nª: {numero}\033[0;0m\n')
@@ -40,9 +40,9 @@ class TelaSala:
 							cancelar = False
 							break
 					else:
-						print(aviso)
+						print('\n\033[1;31mDigite um número entre 1 e 3!\033[0;0m\n')
 				except ValueError:
-					print(aviso)
+					print('\n\033[1;31mDigite um número correto!\033[0;0m\n')
 			if cancelar:
 				break
 
@@ -53,7 +53,7 @@ class TelaSala:
 		)
 
 	def seleciona_sala(self):
-		return input("id do sala que deseja selecionar: ")
+		return input("\nID da sala que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

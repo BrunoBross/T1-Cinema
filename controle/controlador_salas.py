@@ -49,18 +49,16 @@ class ControladorSalas:
 
 	def alterar_sala(self):
 
-		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR SALAS )X==-------\033[0;0m")
-
 		tela = self.__tela_sala
 
 		if len(self.__salas) < 1:
-			tela.mostra_mensagem('\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
+			self.lista_salas()
 			return
 		self.lista_salas()
 		while True:
 			id_sala = tela.seleciona_sala()
-			print(id_sala, self.checa_id(id_sala))
 			if self.checa_id(id_sala):
+				self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( NOVO NÚMERO SALA )X==-------\033[0;0m")
 				sala = self.pega_sala_por_id(int(id_sala))
 				if sala is not None:
 					novos_numero = tela.pega_dados_sala()
@@ -83,10 +81,8 @@ class ControladorSalas:
 
 	def excluir_sala(self):
 
-		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR SALAS )X==-------\033[0;0m")
-
 		if len(self.__salas) < 1:
-			self.__tela_sala.mostra_mensagem('\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
+			self.lista_salas()
 			return
 		while True:
 			self.lista_salas()
@@ -95,13 +91,11 @@ class ControladorSalas:
 				sala = self.pega_sala_por_id(int(id_sala))
 				if sala is not None:
 					numero = sala.numero
-					quantidade = len(self.__salas)
 					self.__salas.remove(sala)
-					if quantidade == len(self.__salas):
-						self.__tela_sala.mostra_mensagem(f'"A Sala {numero}" foi removida do sistema')
-					break
+					self.__tela_sala.mostra_mensagem(f'\nA Sala \033[1;96m"{numero}"\033[0;0m foi \033[1;31mremovida\033[0;0m do sistema')
+					return
 			else:
-				self.__tela_sala.mostra_mensagem('\t\t\033[1;31mTente novamente\033[0;0m')
+				self.__tela_sala.mostra_mensagem('\n\033[1;31mDigite um ID válido!\033[0;0m')
 
 	def abre_tela(self):
 		lista_opcoes = {

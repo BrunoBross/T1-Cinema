@@ -45,7 +45,7 @@ class ControladorFilmes:
 			if self.checa_id(id_filme):
 				filme = self.pega_filme_por_id(int(id_filme))
 				if filme is not None:
-					self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( NOVO FILME )X==-------\033[0;0m")
+					self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( NOVO TÍTULO FILME )X==-------\033[0;0m")
 					novos_dados_filme = self.__tela_filme.pega_dados_filme()
 					if novos_dados_filme is not None:
 						filme.titulo = novos_dados_filme
@@ -58,7 +58,7 @@ class ControladorFilmes:
 			self.lista_filmes()
 
 	def lista_filmes(self):
-		self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( LISTA FILMES )X==-------\033[0;0m")
+		self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( LISTA FILMES )X==-------\n\033[1;96m")
 		if len(self.__filmes) > 0:
 			for filme in self.__filmes:
 				self.__tela_filme.mostra_filme({
@@ -81,7 +81,6 @@ class ControladorFilmes:
 				filme = self.pega_filme_por_id(int(id_filme))
 				if filme is not None:
 					titulo = filme.titulo
-					quantidade = len(self.__filmes)
 					self.__filmes.remove(filme)
 					self.__tela_filme.mostra_mensagem(f'\nO filme \033[1;96m{titulo}\033[0;0m foi \033[1;31mremovido\033[0;0m do sistema')
 					return
