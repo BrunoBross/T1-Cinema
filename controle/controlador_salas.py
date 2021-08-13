@@ -28,14 +28,17 @@ class ControladorSalas:
 	def checa_numero(self, numero_novo):
 		for sala in self.__salas:
 			if numero_novo == sala.numero:
-				self.__tela_sala.mostra_mensagem('Sala já existente')
+				self.__tela_sala.mostra_mensagem('\033[1;31mSala já existente\033[0;0m')
 				return False
 			if numero_novo == '':
-				self.__tela_sala.mostra_mensagem('Número inválido')
+				self.__tela_sala.mostra_mensagem('\033[1;31mNúmero inválido\033[0;0m')
 				return False
 		return True
 
 	def incluir_sala(self):
+
+		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR SALAS )X==-------\033[0;0m")
+
 		dados_sala = self.__tela_sala.pega_dados_sala()
 		if dados_sala is not None:
 			if self.checa_numero(dados_sala):
@@ -45,10 +48,13 @@ class ControladorSalas:
 				self.__id_salas.append(self.__contador)
 
 	def alterar_sala(self):
+
+		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR SALAS )X==-------\033[0;0m")
+
 		tela = self.__tela_sala
 
 		if len(self.__salas) < 1:
-			tela.mostra_mensagem('não existem salas')
+			tela.mostra_mensagem('\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
 			return
 		self.lista_salas()
 		while True:
@@ -63,16 +69,24 @@ class ControladorSalas:
 						break
 
 	def lista_salas(self):
+
 		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( LISTA SALAS )X==-------\033[0;0m")
-		for sala in self.__salas:
-			self.__tela_sala.mostra_sala({
-				"numero": sala.numero,
-				"id_sala": sala.id_sala
-			})
+
+		if len(self.__salas) > 0:
+			for sala in self.__salas:
+				self.__tela_sala.mostra_sala({
+					"numero": sala.numero,
+					"id_sala": sala.id_sala
+				})
+		else:
+			self.__tela_sala.mostra_mensagem('\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
 
 	def excluir_sala(self):
+
+		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR SALAS )X==-------\033[0;0m")
+
 		if len(self.__salas) < 1:
-			self.__tela_sala.mostra_mensagem('Não existem salas cadastradas')
+			self.__tela_sala.mostra_mensagem('\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
 			return
 		while True:
 			self.lista_salas()
@@ -87,7 +101,7 @@ class ControladorSalas:
 						self.__tela_sala.mostra_mensagem(f'"A Sala {numero}" foi removida do sistema')
 					break
 			else:
-				self.__tela_sala.mostra_mensagem('\t\tTente novamente')
+				self.__tela_sala.mostra_mensagem('\t\t\033[1;31mTente novamente\033[0;0m')
 
 	def abre_tela(self):
 		lista_opcoes = {

@@ -31,6 +31,9 @@ class ControladorSessaos:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_sessao(self):
+
+		self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( DADOS SESSÃO )X==-------\033[0;0m")
+
 		control_filme = self.__controlador_sistema.controlador_filmes
 		control_sala = self.__controlador_sistema.controlador_salas
 		tela = self.__tela_sessao

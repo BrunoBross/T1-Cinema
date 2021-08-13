@@ -56,7 +56,7 @@ class ControladorFilmes:
 			self.__tela_filme.mostra_mensagem(f'"{id_filme}" não é válido, operação cancelada')
 
 	def lista_filmes(self):
-		self.__tela_filme.mostra_mensagem("-------==X( LISTA FILMES )X==-------")
+		self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( LISTA FILMES )X==-------\033[0;0m")
 		for filme in self.__filmes:
 			self.__tela_filme.mostra_filme({
 				"titulo": filme.titulo,
