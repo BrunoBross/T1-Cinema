@@ -30,6 +30,7 @@ class ControladorFilmes:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_filme(self):
+		self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR FILMES )X==-------\033[0;0m")
 		dados_filme = self.__tela_filme.pega_dados_filme()
 		if dados_filme is not None:
 			filme = Filme(self.__contador+1, dados_filme)
@@ -44,6 +45,7 @@ class ControladorFilmes:
 			if self.checa_id(id_filme):
 				filme = self.pega_filme_por_id(int(id_filme))
 				if filme is not None:
+					self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( NOVO FILME )X==-------\033[0;0m")
 					novos_dados_filme = self.__tela_filme.pega_dados_filme()
 					if novos_dados_filme is not None:
 						filme.titulo = novos_dados_filme

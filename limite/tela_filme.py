@@ -25,7 +25,7 @@ class TelaFilme:
 	def pega_dados_filme(self):
 
 		while True:
-			print("\n\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
+
 			titulo = input("Título: ")
 			print('\n\033[1;96m'+titulo+'\033[0;0m\n')
 			while True:
