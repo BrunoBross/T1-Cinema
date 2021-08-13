@@ -36,9 +36,7 @@ class TelaGenero:
 					certeza = int(input("tem certeza do tipo de gênero?\n1 - sim\n2 - não\n3 - cancelar\nDigite um número: "))
 					if 3 >= certeza >= 0:
 						if certeza == 1:
-							return {
-								"tipo": tipo
-							}
+							return tipo
 						elif certeza == 3:
 							cancelar = True
 							break
