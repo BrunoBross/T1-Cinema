@@ -51,7 +51,7 @@ class ControladorFilmes:
 					filme.titulo = novos_dados_filme
 					self.lista_filmes()
 			else:
-				self.__tela_filme.mostra_mensagem("ATENCAO: filme nao existente")
+				self.__tela_filme.mostra_mensagem("ATENÇÃO: filme não existente")
 		else:
 			self.__tela_filme.mostra_mensagem(f'"{id_filme}" não é válido, operação cancelada')
 
@@ -65,7 +65,7 @@ class ControladorFilmes:
 
 	def excluir_filme(self):
 		if len(self.__filmes) < 1:
-			self.__tela_filme.mostra_mensagem('não existem filmes cadastrados')
+			self.__tela_filme.mostra_mensagem('Não existem filmes cadastrados')
 			return
 		while True:
 			self.lista_filmes()
@@ -77,11 +77,11 @@ class ControladorFilmes:
 					quantidade = len(self.__filmes)
 					self.__filmes.remove(filme)
 					if quantidade+1 == len(self.__filmes):
-						self.__tela_filme.mostra_mensagem(f'o filme {titulo} foi removido do sistema')
+						self.__tela_filme.mostra_mensagem(f'O filme {titulo} foi removido do sistema')
 				else:
 					self.__tela_filme.mostra_mensagem("ATENÇÃO: Filme não existente")
 			else:
-				self.__tela_filme.mostra_mensagem('\t\ttente novamente')
+				self.__tela_filme.mostra_mensagem('\t\tTente novamente!')
 
 	def abre_tela(self):
 		lista_opcoes = {
@@ -98,3 +98,7 @@ class ControladorFilmes:
 	@property
 	def id_filmes(self):
 		return self.__id_filmes
+
+	@property
+	def filmes(self):
+		return self.__filmes

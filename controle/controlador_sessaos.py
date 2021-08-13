@@ -1,5 +1,6 @@
 from limite.tela_sessao import TelaSessao
 from entidade.sessao import Sessao
+from controle.controlador_filmes import ControladorFilmes
 
 
 class ControladorSessaos:
@@ -34,33 +35,46 @@ class ControladorSessaos:
 		control_sala = self.__controlador_sistema.controlador_salas
 		tela = self.__tela_sessao
 		material = [self.__contador+1]
-		while True:
-			control_filme.lista_filmes()
-			id_filme = tela.pega_dados_sessao("id_filme")
-			if control_filme.checa_id(id_filme):
-				filme = control_filme.pega_filme_por_id(int(id_filme))
-				material.append(filme)
-				tela.mostra_mensagem(f'\no filme "{filme.titulo}" foi adicionado a esta sessão')
-				break
-		while True:
-			horario = tela.pega_dados_sessao("horario")
-			tela.mostra_mensagem(f'\ndeseja confirmar "{horario}" como horário?')
-			certeza = tela.pega_dados_sessao("certeza")
-			if certeza == '1':
-				material.append(horario)
-				break
-		while True:
-			control_sala.lista_salas()
-			id_sala = tela.pega_dados_sessao("id_sala")
-			if control_sala.checa_id(id_sala):
-				sala = control_sala.pega_sala_por_id(int(id_sala))
-				material.append(sala)
-				tela.mostra_mensagem(f'\na sala {sala.numero} foi adicionada à sessão')
-				break
-		sessao = Sessao(material[0], material[1], material[2], material[3])
-		self.__sessaos.append(sessao)
-		self.__contador += 1
-		self.__id_sessaos.append(self.__contador)
+		nao_possui = ''
+		tem_filme = False
+		if len(control_filme.filmes) > 0:
+			nao_possui += 'nao possui filme.'
+			tem_filme = True
+		if len(control_sala.salas) > 0 and tem_filme:
+			while True:
+				control_filme.lista_filmes()
+				id_filme = tela.pega_dados_sessao("id_filme")
+				if control_filme.checa_id(id_filme):
+					filme = control_filme.pega_filme_por_id(int(id_filme))
+					material.append(filme)
+					tela.mostra_mensagem(f'\no filme "{filme.titulo}" foi adicionado a esta sessão')
+					break
+
+			while True:
+				horario = tela.pega_dados_sessao("horario")
+				tela.mostra_mensagem(f'\ndeseja confirmar "{horario}" como horário?')
+				certeza = tela.pega_dados_sessao("certeza")
+				if certeza == '1':
+					material.append(horario)
+					break
+			while True:
+				control_sala.lista_salas()
+				id_sala = tela.pega_dados_sessao("id_sala")
+				if control_sala.checa_id(id_sala):
+					sala = control_sala.pega_sala_por_id(int(id_sala))
+					material.append(sala)
+					tela.mostra_mensagem(f'\na sala {sala.numero} foi adicionada à sessão')
+					break
+			sessao = Sessao(material[0], material[1], material[2], material[3])
+			self.__sessaos.append(sessao)
+			self.__contador += 1
+			self.__id_sessaos.append(self.__contador)
+
+		else:
+			if tem_filme == False:
+				self.__tela_sessao.mostra_mensagem('\033[1;31mNão há filme disponível, adicione um antes.\033[0;0m')
+			else:
+				self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sala disponível, crie uma antes.\033[0;0m')
 
 	def alterar_sessao(self):
 		tela = self.__tela_sessao

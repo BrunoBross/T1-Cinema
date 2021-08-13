@@ -104,3 +104,7 @@ class ControladorSalas:
 	@property
 	def id_salas(self):
 		return self.__id_salas
+
+	@property
+	def salas(self):
+		return self.__salas
