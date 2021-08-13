@@ -22,6 +22,7 @@ class ControladorGeneros:
 
 	def incluir_genero(self):
 		dados_genero = self.__tela_genero.pega_dados_genero()
+
 		if dados_genero is not None:
 			genero = Genero(self.__contador+1, dados_genero["tipo"])
 			self.__generos.append(genero)
