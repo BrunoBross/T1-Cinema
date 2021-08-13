@@ -3,7 +3,7 @@ class TelaSistema:
 	def tela_opcoes(self):
 
 		while True:
-			print("\033[1;96m-------==X( CINEMA )X==-------\033[0;0m")
+			print("\n\033[1;96m-------==X( CINEMA )X==-------\033[0;0m")
 			print("Escolha uma opção:")
 			print("0 - Finalizar sistema")
 			print("1 - Ingressos")

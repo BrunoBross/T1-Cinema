@@ -6,7 +6,7 @@ class TelaFilme:
 
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 		while True:
-			print("\033[1;96m----------FILME----------\033[0;0m")
+			print("\n\033[1;96m-------==X( FILME )X==-------\033[0;0m")
 			print("Escolha uma opcao")
 			print("0 - Retornar")
 			print("1 - Incluir Filme")
@@ -26,7 +26,7 @@ class TelaFilme:
 	def pega_dados_filme(self):
 
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
-		print("\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
+		print("\n\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
 		while True:
 			titulo = input("Título: ")
 			print('\n\033[1;96m'+titulo+'\033[0;0m\n')

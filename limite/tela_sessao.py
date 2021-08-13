@@ -7,7 +7,7 @@ class TelaSessao:
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 
 		while True:
-			print("\033[1;96m----------SESSAO----------\033[0;0m")
+			print("\n\033[1;96m----------SESSAO----------\033[0;0m")
 			print("Escolha uma opcao")
 			print("0 - Retornar")
 			print("1 - Incluir Sessao")
@@ -25,10 +25,10 @@ class TelaSessao:
 				print(aviso)
 
 	def pega_dados_sessao(self, dado: str):
-		print("\033[1;96m-------==X( DADOS SESSAO )X==-------\033[0;0m")
+		print("\n\033[1;96m-------==X( DADOS SESSAO )X==-------\033[0;0m")
 		mensagem = {
-			"id_filme": "id do filme: ", "horario": "horário: ",
-			"id_sala": "id da sala: ", "certeza": "digite 1 para confirmar: "
+			"id_filme": "Digite o ID do filme: ", "horario": "Horário da sessão: ",
+			"id_sala": "Digite o ID da sala: ", "certeza": "Digite 1 para confirmar: "
 		}
 		return input(f'{mensagem[dado]}')
 

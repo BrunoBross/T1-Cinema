@@ -5,7 +5,7 @@ class TelaIngresso:
 	def tela_opcoes(self):
 
 		while True:
-			print("\033[1;96m-------==X( INGRESSO )X==-------\033[0;0m")
+			print("\n\033[1;96m-------==X( INGRESSO )X==-------\033[0;0m")
 			print("Escolha uma opcao")
 			print("0 - Retornar")
 			print("1 - Incluir Ingresso")

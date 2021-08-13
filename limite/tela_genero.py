@@ -7,7 +7,7 @@ class TelaGenero:
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
 
 		while True:
-			print("\033[1;96m----------GENERO----------\033[0;0m")
+			print("\n\033[1;96m-------==X( GÊNERO )X==-------\033[0;0m")
 			print("Escolha uma opcao")
 			print("0 - Retornar")
 			print("1 - Incluir Genero")
@@ -27,7 +27,7 @@ class TelaGenero:
 	def pega_dados_genero(self):
 
 		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
-		print("\033[1;96m-------==X( DADOS GENERO )X==-------\033[0;0m")
+		print("\n\033[1;96m-------==X( DADOS GÊNERO )X==-------\033[0;0m")
 		while True:
 			tipo = input("tipo: ")
 			print('\n'+tipo+'\n')
