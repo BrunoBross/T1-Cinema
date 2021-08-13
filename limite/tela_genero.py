@@ -36,8 +36,7 @@ class TelaGenero:
 						if certeza == 1:
 							return tipo
 						elif certeza == 3:
-							cancelar = True
-							break
+							return False
 						elif certeza == 2:
 							cancelar = False
 							break
@@ -55,7 +54,7 @@ class TelaGenero:
 		)
 
 	def seleciona_genero(self):
-		return int(input("id do genero que deseja selecionar: "))
+		return input("id do genero que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

@@ -17,14 +17,21 @@ class ControladorGeneros:
 				return genero
 		return None
 
+	def checa_id(self, dado: str):
+		if dado.isdecimal() and int(dado) in self.__id_generos:
+			return True
+		return False
+
 	def checa_tipo(self, dado: str):
+		if not dado:
+			return None
 		if dado.isalpha():
 			for genero in self.__generos:
 				if genero.tipo == dado:
-					self.__tela_genero.mostra_mensagem(f'o genero {dado} já está cadastrado')
+					self.__tela_genero.mostra_mensagem(f'\no genero {dado} já está cadastrado')
 					return False
 			return True
-		self.__tela_genero.mostra_mensagem('em letras por favor')
+		self.__tela_genero.mostra_mensagem('\nem letras por favor')
 		return False
 
 	def retornar(self):
@@ -33,6 +40,9 @@ class ControladorGeneros:
 	def incluir_genero(self):
 		while True:
 			tipo = self.__tela_genero.pega_dados_genero()
+			if not tipo:
+				self.__tela_genero.mostra_mensagem('\noperação cancelada')
+				break
 			if self.checa_tipo(tipo):
 				genero = Genero(self.__contador+1, tipo)
 				self.__generos.append(genero)
@@ -43,16 +53,17 @@ class ControladorGeneros:
 	def alterar_genero(self):
 		self.lista_generos()
 		id_genero = self.__tela_genero.seleciona_genero()
-		genero = self.pega_genero_por_id(int(id_genero))
-		if genero is not None:
-			novos_dados_genero = self.__tela_genero.pega_dados_genero()
-			if novos_dados_genero is not None:
-				genero.tipo = novos_dados_genero["tipo"]
-				self.lista_generos()
-		else:
-			self.__tela_genero.mostra_mensagem(
-				"ATENCAO: genero nao existente"
-			)
+		if self.checa_id(id_genero):
+			while True:
+				tipo = self.__tela_genero.pega_dados_genero()
+				checagem = self.checa_tipo(tipo)
+				if checagem is not None:
+					if checagem:
+						self.pega_genero_por_id(int(id_genero)).tipo = tipo
+						break
+				else:
+					self.__tela_genero.mostra_mensagem('\noperação cancelada')
+					return
 
 	def lista_generos(self):
 		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
@@ -65,13 +76,10 @@ class ControladorGeneros:
 	def excluir_genero(self):
 		self.lista_generos()
 		id_genero = self.__tela_genero.seleciona_genero()
-		genero = self.pega_genero_por_id(int(id_genero))
-
-		if genero is not None:
+		if self.checa_id(id_genero):
+			genero = self.pega_genero_por_id(int(id_genero))
 			self.__generos.remove(genero)
-			self.lista_generos()
-		else:
-			self.__tela_genero.mostra_mensagem("ATENÇÃO: Gênero não existente")
+			self.__tela_genero.mostra_mensagem(f'\ngênero {genero.tipo} removido com sucesso')
 
 	def abre_tela(self):
 		lista_opcoes = {
