@@ -18,9 +18,9 @@ class TelaIngresso:
 				if 4 >= opcao >= 0:
 					return opcao
 				else:
-					print('\033[1;31mDigite um número correto!\033[0;0m')
+					print('\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
 			except ValueError:
-				print('\033[1;31mDigite um número correto!\033[0;0m')
+				print('\033[1;31mDigite um número!\033[0;0m')
 
 	def pega_dados_ingresso(self, dados: int):
 		mensagem = {

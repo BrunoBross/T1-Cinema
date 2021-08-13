@@ -41,11 +41,11 @@ class ControladorPoltronas:
 			self.lista_poltronas()
 		else:
 			self.__tela_poltrona.mostra_mensagem(
-				"ATENCAO: poltrona nao existente"
+				"ATENÇÃO: poltrona não existente"
 			)
 
 	def lista_poltronas(self):
-		self.__tela_poltrona.mostra_mensagem("-------==X( LISTA POLTRONAS )X==-------")
+		self.__tela_poltrona.mostra_mensagem("\n\033[1;96m-------==X( LISTA POLTRONAS )X==-------\033[0;0m")
 		for poltrona in self.__poltronas:
 			self.__tela_poltrona.mostra_poltrona({
 				"fileira": poltrona.fileira,
@@ -54,6 +54,7 @@ class ControladorPoltronas:
 			})
 
 	def excluir_poltrona(self):
+
 		self.lista_poltronas()
 		id_poltrona = self.__tela_poltrona.seleciona_poltrona()
 		poltrona = self.pega_poltrona_por_id(int(id_poltrona))
@@ -63,7 +64,7 @@ class ControladorPoltronas:
 			self.lista_poltronas()
 		else:
 			self.__tela_poltrona.mostra_mensagem(
-				"ATENCAO: Poltrona nao existente"
+				"ATENÇÃO: poltrona não existente"
 			)
 
 	def abre_tela(self):
@@ -77,3 +78,7 @@ class ControladorPoltronas:
 
 		while True:
 			lista_opcoes[self.__tela_poltrona.tela_opcoes()]()
+
+	@property
+	def poltronas(self):
+		return self.__poltronas

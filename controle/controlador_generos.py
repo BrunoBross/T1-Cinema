@@ -61,7 +61,7 @@ class ControladorGeneros:
 			self.lista_generos()
 		else:
 			self.__tela_genero.mostra_mensagem(
-				"ATENCAO: Genero nao existente"
+				"ATENÇÃO: Gênero não existente"
 			)
 
 	def abre_tela(self):
