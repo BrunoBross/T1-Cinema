@@ -38,6 +38,7 @@ class ControladorGeneros:
 				self.__generos.append(genero)
 				self.__contador += 1
 				self.__id_generos.append(self.__contador)
+				break
 
 	def alterar_genero(self):
 		self.lista_generos()
@@ -54,7 +55,7 @@ class ControladorGeneros:
 			)
 
 	def lista_generos(self):
-		self.__tela_genero.mostra_mensagem("-------==X( LISTA GENEROS )X==-------")
+		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
 		for genero in self.__generos:
 			self.__tela_genero.mostra_genero({
 				"tipo": genero.tipo,
@@ -70,9 +71,7 @@ class ControladorGeneros:
 			self.__generos.remove(genero)
 			self.lista_generos()
 		else:
-			self.__tela_genero.mostra_mensagem(
-				"ATENÇÃO: Gênero não existente"
-			)
+			self.__tela_genero.mostra_mensagem("ATENÇÃO: Gênero não existente")
 
 	def abre_tela(self):
 		lista_opcoes = {
