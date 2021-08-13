@@ -4,29 +4,27 @@ class TelaGenero:
 
 	def tela_opcoes(self):
 
-		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
-
 		while True:
 			print("\n\033[1;96m-------==X( GÊNERO )X==-------\033[0;0m")
 			print("Escolha uma opção")
 			print("0 - Retornar")
-			print("1 - Incluir Genero")
-			print("2 - Alterar Genero")
-			print("3 - Listar Genero")
-			print("4 - Excluir Genero")
+			print("1 - Incluir Gênero")
+			print("2 - Alterar Gênero")
+			print("3 - Listar Gênero")
+			print("4 - Excluir Gênero")
 
 			try:
 				opcao = int(input("Escolha uma das opções: "))
 				if 4 >= opcao >= 0:
 					return opcao
 				else:
-					print(aviso)
+					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
 			except ValueError:
-				print(aviso)
+				print('\n\033[1;31mDigite um número!\033[0;0m')
 
 	def pega_dados_genero(self):
 
-		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
+		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
 		print("\n\033[1;96m-------==X( DADOS GÊNERO )X==-------\033[0;0m")
 		while True:
 			tipo = input("tipo: ")

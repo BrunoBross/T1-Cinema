@@ -29,7 +29,8 @@ class ControladorIngressos:
         material = [self.__contador + 1]
         control_sessao = self.__controlador_sistema.controlador_sessaos
         if len(control_sessao.sessaos) < 1:
-            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão existem sessões cadastradas.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR INGRESSOS )X==-------\033[0;0m")
+            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão há sessão disponível, crie uma antes.\033[0;0m')
             return
 
         while True:

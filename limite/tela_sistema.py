@@ -18,6 +18,6 @@ class TelaSistema:
 				if 6 >= opcao >= 0:
 					return opcao
 				else:
-					print('\033[1;31mDigite um número entre 0 e 6!\033[0;0m')
+					print('\n\033[1;31mDigite um número entre 0 e 6!\033[0;0m')
 			except ValueError:
-				print('\033[1;31mDigite um número!\033[0;0m')
+				print('\n\033[1;31mDigite um número!\033[0;0m')

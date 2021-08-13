@@ -18,13 +18,13 @@ class TelaPoltrona:
 				if 4 >= opcao >= 0:
 					return opcao
 				else:
-					print('\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
+					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
 			except ValueError:
-				print('\033[1;31mDigite um número!\033[0;0m')
+				print('\n\033[1;31mDigite um número!\033[0;0m')
 
 	def pega_dados_poltrona(self):
 		print("\n\033[1;96m-------==X( DADOS POLTRONA )X==-------\033[0;0m")
-		aviso = '\033[1;31mDigite um número correto!\033[0;0m'
+		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
 		while True:
 			fileira = input("Fileira: ")
 			acento = input("Acento: ")
