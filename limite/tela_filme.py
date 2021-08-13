@@ -24,9 +24,8 @@ class TelaFilme:
 
 	def pega_dados_filme(self):
 
-		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
-		print("\n\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
 		while True:
+			print("\n\033[1;96m-------==X( DADOS FILME )X==-------\033[0;0m")
 			titulo = input("Título: ")
 			print('\n\033[1;96m'+titulo+'\033[0;0m\n')
 			while True:
@@ -42,9 +41,9 @@ class TelaFilme:
 							cancelar = False
 							break
 					else:
-						print(aviso)
+						print('\n\033[1;31mDigite um número entre 1 e 3!\033[0;0m\n')
 				except ValueError:
-					print(aviso)
+					print('\n\033[1;31mDigite um número correto!\033[0;0m\n')
 			if cancelar:
 				break
 
@@ -55,7 +54,7 @@ class TelaFilme:
 		)
 
 	def seleciona_filme(self):
-		return input("id do filme que deseja selecionar: ")
+		return input("\nID do filme que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

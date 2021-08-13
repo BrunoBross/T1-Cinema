@@ -38,37 +38,42 @@ class ControladorFilmes:
 			self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
-		if len(self.__filmes) < 1:
-			self.__tela_filme.mostra_mensagem('Não existem filmes cadastrados')
-			return
-		self.lista_filmes()
-		id_filme = self.__tela_filme.seleciona_filme()
-		if self.checa_id(id_filme):
-			filme = self.pega_filme_por_id(int(id_filme))
-			if filme is not None:
-				novos_dados_filme = self.__tela_filme.pega_dados_filme()
-				if novos_dados_filme is not None:
-					filme.titulo = novos_dados_filme
-					self.lista_filmes()
+		if len(self.__filmes) > 0:
+			self.lista_filmes()
+			id_filme = self.__tela_filme.seleciona_filme()
+			if self.checa_id(id_filme):
+				filme = self.pega_filme_por_id(int(id_filme))
+				if filme is not None:
+					novos_dados_filme = self.__tela_filme.pega_dados_filme()
+					if novos_dados_filme is not None:
+						filme.titulo = novos_dados_filme
+						self.lista_filmes()
+				else:
+					self.__tela_filme.mostra_mensagem("\n\033[1;31mATENÇÃO: filme não existente\033[0;0m")
 			else:
-				self.__tela_filme.mostra_mensagem("ATENÇÃO: filme não existente")
+				self.__tela_filme.mostra_mensagem(f'\n\033[1;31m"{id_filme}" não é válido, operação cancelada\033[0;0m')
 		else:
-			self.__tela_filme.mostra_mensagem(f'"{id_filme}" não é válido, operação cancelada')
+			self.lista_filmes()
 
 	def lista_filmes(self):
 		self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( LISTA FILMES )X==-------\033[0;0m")
-		for filme in self.__filmes:
-			self.__tela_filme.mostra_filme({
-				"titulo": filme.titulo,
-				"id_filme": filme.id_filme
-			})
+		if len(self.__filmes) > 0:
+			for filme in self.__filmes:
+				self.__tela_filme.mostra_filme({
+					"titulo": filme.titulo,
+					"id_filme": filme.id_filme
+				})
+		else:
+			self.__tela_filme.mostra_mensagem('\n\033[1;31mNão existem filmes cadastrados\033[0;0m')
+			return
 
 	def excluir_filme(self):
 		if len(self.__filmes) < 1:
-			self.__tela_filme.mostra_mensagem('Não existem filmes cadastrados')
+			self.__tela_filme.mostra_mensagem('\n\033[1;31mNão existem filmes cadastrados!\033[0;0m')
 			return
+		self.lista_filmes()
 		while True:
-			self.lista_filmes()
+
 			id_filme = self.__tela_filme.seleciona_filme()
 			if self.checa_id(id_filme):
 				filme = self.pega_filme_por_id(int(id_filme))
@@ -76,12 +81,12 @@ class ControladorFilmes:
 					titulo = filme.titulo
 					quantidade = len(self.__filmes)
 					self.__filmes.remove(filme)
-					if quantidade+1 == len(self.__filmes):
-						self.__tela_filme.mostra_mensagem(f'O filme {titulo} foi removido do sistema')
+					self.__tela_filme.mostra_mensagem(f'\nO filme \033[1;96m{titulo}\033[0;0m foi \033[1;31mremovido\033[0;0m do sistema')
+					return
 				else:
-					self.__tela_filme.mostra_mensagem("ATENÇÃO: Filme não existente")
+					self.__tela_filme.mostra_mensagem("\n\033[1;31mATENÇÃO: Filme não existente\033[0;0m")
 			else:
-				self.__tela_filme.mostra_mensagem('\t\tTente novamente!')
+				self.__tela_filme.mostra_mensagem('\n\033[1;31mDigite um ID válido!\033[0;0m')
 
 	def abre_tela(self):
 		lista_opcoes = {
