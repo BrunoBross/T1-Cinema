@@ -76,16 +76,16 @@ class ControladorSessaos:
 			self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR SESSÃO )X==-------\033[0;0m")
 
 			if tem_filme == False:
-				self.__tela_sessao.mostra_mensagem('\033[1;31mNão há filme disponível, adicione um antes.\033[0;0m')
+				self.__tela_sessao.mostra_mensagem('\n\033[1;31mNão há filme disponível, adicione um antes.\033[0;0m')
 			else:
-				self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sala disponível, crie uma antes.\033[0;0m')
+				self.__tela_sessao.mostra_mensagem('\n\033[1;31mNão há sala disponível, crie uma antes.\033[0;0m')
 
 	def alterar_sessao(self):
 		self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR SESSÕES )X==-------\033[0;0m")
 
 		tela = self.__tela_sessao
 		if len(self.__id_sessaos) < 1:
-			tela.mostra_mensagem("\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m")
+			tela.mostra_mensagem("\n\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m")
 			return
 		while True:
 			self.lista_sessaos()
@@ -135,13 +135,13 @@ class ControladorSessaos:
 					"id_sessao": sessao.id_sessao
 				})
 		else:
-			self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m')
+			self.__tela_sessao.mostra_mensagem('\n\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m')
 
 	def excluir_sessao(self):
 		self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR SESSÕES )X==-------\033[0;0m")
 
 		if len(self.__sessaos) < 1:
-			self.__tela_sessao.mostra_mensagem('\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m')
+			self.__tela_sessao.mostra_mensagem('\n\033[1;31mNão há sessões disponíveis, crie uma antes.\033[0;0m')
 			return
 		while True:
 			self.lista_sessaos()

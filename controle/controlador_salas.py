@@ -49,10 +49,12 @@ class ControladorSalas:
 
 	def alterar_sala(self):
 
+		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR SALAS )X==-------\033[0;0m")
+
 		tela = self.__tela_sala
 
 		if len(self.__salas) < 1:
-			self.lista_salas()
+			self.__tela_sala.mostra_mensagem('\n\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
 			return
 		self.lista_salas()
 		while True:
@@ -77,12 +79,14 @@ class ControladorSalas:
 					"id_sala": sala.id_sala
 				})
 		else:
-			self.__tela_sala.mostra_mensagem('\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
+			self.__tela_sala.mostra_mensagem('\n\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
 
 	def excluir_sala(self):
 
+		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR SALAS )X==-------\033[0;0m")
+
 		if len(self.__salas) < 1:
-			self.lista_salas()
+			self.__tela_sala.mostra_mensagem('\n\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
 			return
 		while True:
 			self.lista_salas()

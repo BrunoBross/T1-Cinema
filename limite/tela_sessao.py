@@ -8,10 +8,10 @@ class TelaSessao:
 			print("\n\033[1;96m-------==X( SESSÃO )X==-------\033[0;0m")
 			print("Escolha uma opção")
 			print("0 - Retornar")
-			print("1 - Incluir Sessao")
-			print("2 - Alterar Sessao")
-			print("3 - Listar Sessao")
-			print("4 - Excluir Sessao")
+			print("1 - Incluir Sessão")
+			print("2 - Alterar Sessão")
+			print("3 - Listar Sessões")
+			print("4 - Excluir Sessão")
 
 			try:
 				opcao = int(input("Escolha uma das opções: "))
@@ -38,7 +38,7 @@ class TelaSessao:
 		)
 
 	def seleciona_sessao(self):
-		return input("Id da sessão que deseja selecionar: ")
+		return input("\nID da sessão que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

@@ -30,7 +30,7 @@ class ControladorIngressos:
         control_sessao = self.__controlador_sistema.controlador_sessaos
         if len(control_sessao.sessaos) < 1:
             self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR INGRESSOS )X==-------\033[0;0m")
-            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão há sessão disponível, crie uma antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há sessão disponível, crie uma antes.\033[0;0m')
             return
 
         while True:
@@ -49,7 +49,7 @@ class ControladorIngressos:
                 material.append(fileira)
                 break
             else:
-                self.__tela_ingresso.mostra_mensagem('\033[1;31mFileira inválida.\033[0;0m')
+                self.__tela_ingresso.mostra_mensagem('\n\033[1;31mFileira inválida.\033[0;0m')
 
         while True:
             acento = self.__tela_ingresso.pega_dados_ingresso(2)
@@ -57,7 +57,7 @@ class ControladorIngressos:
                 material.append(acento)
                 break
             else:
-                self.__tela_ingresso.mostra_mensagem('\033[1;31mAcento inválido.\033[0;0m')
+                self.__tela_ingresso.mostra_mensagem('\n\033[1;31mAcento inválido.\033[0;0m')
 
         self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
         self.__contador += 1
@@ -82,10 +82,10 @@ class ControladorIngressos:
                 self.lista_ingressos()
             else:
                 self.__tela_ingresso.mostra_mensagem(
-                    "\033[1;31mATENÇÃO: ingresso não existente\033[0;0m"
+                    "\n\033[1;31mATENÇÃO: ingresso não existente\033[0;0m"
                 )
         else:
-            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
 
 
     def lista_ingressos(self):
@@ -103,7 +103,7 @@ class ControladorIngressos:
                     "id_ingresso": ingresso.id_ingresso
                 })
         else:
-            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
 
     def excluir_ingresso(self):
 
@@ -123,7 +123,7 @@ class ControladorIngressos:
                     "ATENCAO: Ingresso nao existente"
                 )
         else:
-            self.__tela_ingresso.mostra_mensagem('\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
 
 
     def abre_tela(self):
