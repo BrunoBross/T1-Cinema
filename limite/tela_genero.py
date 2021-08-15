@@ -10,7 +10,7 @@ class TelaGenero:
 			print("0 - Retornar")
 			print("1 - Incluir Gênero")
 			print("2 - Alterar Gênero")
-			print("3 - Listar Gênero")
+			print("3 - Listar Gêneros")
 			print("4 - Excluir Gênero")
 			print("5 - Adiciona Filme")
 
@@ -55,7 +55,7 @@ class TelaGenero:
 		)
 
 	def seleciona_genero(self):
-		return input("id do genero que deseja selecionar: ")
+		return input("id do gênero que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
 		print(msg)

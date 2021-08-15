@@ -1,3 +1,4 @@
+from entidade.filme import Filme
 
 
 class TelaFilme:
@@ -12,15 +13,21 @@ class TelaFilme:
 			print("2 - Alterar Filme")
 			print("3 - Listar Filme")
 			print("4 - Excluir Filme")
+			print("5 - Listar Gêneros")
 
 			try:
 				opcao = int(input("Escolha uma das opções: "))
-				if 4 >= opcao >= 0:
+				if -1 < opcao < 6:
 					return opcao
 				else:
 					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
 			except ValueError:
 				print('\n\033[1;31mDigite um número!\033[0;0m')
+
+	def lista_generos_do_filme(self, lista: list, filme: Filme):
+		print(f'\n\t{filme.titulo}:')
+		for genero in lista:
+			print(f'* {genero.tipo}')
 
 	def pega_dados_filme(self):
 

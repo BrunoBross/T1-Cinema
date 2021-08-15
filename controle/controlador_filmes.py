@@ -10,6 +10,7 @@ class ControladorFilmes:
 		self.__id_filmes = []
 		self.__tela_filme = TelaFilme()
 		self.__contador = 0
+		self.__filme_com_genero_existe = [False]
 
 	def pega_filme_por_id(self, id_filme: int):
 		for filme in self.__filmes:
@@ -99,13 +100,29 @@ class ControladorFilmes:
 			else:
 				self.__tela_filme.mostra_mensagem('\n\033[1;31mDigite um ID válido!\033[0;0m')
 
+	def listar_generos_por_id(self):
+		print(self.__filme_com_genero_existe[0])
+		if not self.__filme_com_genero_existe[0]:
+			self.__tela_filme.mostra_mensagem('nenhum filme com gênero registrado')
+			return
+		while True:
+			self.lista_filmes()
+			id_filme = self.__tela_filme.seleciona_filme()
+			if self.checa_id(id_filme):
+				filme = self.pega_filme_por_id(int(id_filme))
+				generos = filme.generos
+				self.__tela_filme.lista_generos_do_filme(generos, filme)
+				return
+			self.__tela_filme.mostra_mensagem('ID inválido, tente novamente')
+
 	def abre_tela(self):
 		lista_opcoes = {
 			0: self.retornar,
 			1: self.incluir_filme,
 			2: self.alterar_filme,
 			3: self.lista_filmes,
-			4: self.excluir_filme
+			4: self.excluir_filme,
+			5: self.listar_generos_por_id
 		}
 
 		while True:
@@ -122,3 +139,11 @@ class ControladorFilmes:
 	@property
 	def tela(self):
 		return self.__tela_filme
+
+	@property
+	def filme_com_genero_existe(self):
+		return self.__filme_com_genero_existe
+
+	@filme_com_genero_existe.setter
+	def filme_com_genero_existe(self, valor: bool):
+		self.__filme_com_genero_existe = valor

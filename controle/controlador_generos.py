@@ -69,7 +69,7 @@ class ControladorGeneros:
 		control_filme = self.__controlador_sistema.controlador_filmes
 		tela = self.__tela_genero
 
-		if len(self.__generos) > 1 and len(control_filme.filmes) > 1:
+		if len(self.__generos) > 0 and len(control_filme.filmes) > 0:
 			self.lista_generos()
 			id_genero = tela.seleciona_genero()
 			if self.checa_id(id_genero):
@@ -81,6 +81,7 @@ class ControladorGeneros:
 						filme = control_filme.pega_filme_por_id(int(id_filme))
 						filme.generos.append(genero)
 						tela.mostra_mensagem(f'\n{filme.titulo} é do gênero {genero.tipo}')
+						control_filme.filme_com_genero_existe[0] = True
 						return
 					else:
 						tela.mostra_mensagem('\nID inválido, tente novamente')
@@ -117,3 +118,7 @@ class ControladorGeneros:
 
 		while True:
 			lista_opcoes[self.__tela_genero.tela_opcoes()]()
+
+	@property
+	def generos(self):
+		return self.__generos
