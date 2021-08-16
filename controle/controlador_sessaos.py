@@ -59,7 +59,7 @@ class ControladorSessaos:
 				if control_filme.checa_id(id_filme):
 					filme = control_filme.pega_filme_por_id(int(id_filme))
 					material.append(filme)
-					tela.mostra_mensagem(f'\nO filme \033[1;96m"{filme.titulo}"\033[0;0m foi adicionado a esta sessão')
+					tela.mostra_mensagem(f'\nO filme \033[1;96m"{filme.titulo}"\033[0;0m foi adicionado a esta sessão.')
 					break
 
 			while True:
@@ -75,7 +75,7 @@ class ControladorSessaos:
 				if control_sala.checa_id(id_sala):
 					sala = control_sala.pega_sala_por_id(int(id_sala))
 					material.append(sala)
-					tela.mostra_mensagem(f'\nA sala \033[1;96m"{sala.numero}"\033[0;0m foi adicionada à sessão')
+					tela.mostra_mensagem(f'\nA sala \033[1;96m"{sala.numero}"\033[0;0m foi adicionada à sessão.')
 					break
 			sessao = Sessao(material[0], material[1], material[2], material[3])
 			self.__sessaos.append(sessao)
@@ -120,7 +120,7 @@ class ControladorSessaos:
 				certeza = tela.pega_dados_sessao("certeza")
 				if certeza == '':
 					sessao.horario = horario
-					tela.mostra_mensagem(f'{horario} adicionado a sessão como horário')
+					tela.mostra_mensagem(f'{horario} adicionado a sessão como horário.')
 					break
 			while True:
 				control_sala.lista_salas()
@@ -128,7 +128,7 @@ class ControladorSessaos:
 				if control_sala.checa_id(id_sala):
 					sala = control_sala.pega_sala_por_id(int(id_sala))
 					sessao.sala = sala
-					tela.mostra_mensagem(f'\na sala {sala.numero} foi adicionada à sessão')
+					tela.mostra_mensagem(f'\nA sala {sala.numero} foi adicionada à sessão.')
 					break
 
 	def lista_sessaos(self):
@@ -161,11 +161,11 @@ class ControladorSessaos:
 					quantidade = len(self.__sessaos)
 					self.__sessaos.remove(filme)
 					if quantidade+1 == len(self.__sessaos):
-						self.__tela_sessao.mostra_mensagem(f'o filme {titulo} foi removido do sistema')
+						self.__tela_sessao.mostra_mensagem(f'O filme {titulo} foi removido do sistema.')
 				else:
 					self.__tela_sessao.mostra_mensagem("\033[1;31mATENÇÃO: Filme não existente\033[0;0m")
 			else:
-				self.__tela_sessao.mostra_mensagem('\t\ttente novamente')
+				self.__tela_sessao.mostra_mensagem('\t\tTente novamente.')
 
 	def abre_tela(self):
 		lista_opcoes = {

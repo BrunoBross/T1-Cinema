@@ -34,10 +34,10 @@ class ControladorGeneros:
 		if dado.isalpha():
 			for genero in self.__generos:
 				if genero.tipo == dado:
-					self.__tela_genero.mostra_mensagem(f'\no genero {dado} já está cadastrado')
+					self.__tela_genero.mostra_mensagem(f'\nO gênero {dado} já está cadastrado.')
 					return False
 			return True
-		self.__tela_genero.mostra_mensagem('\nem letras por favor')
+		self.__tela_genero.mostra_mensagem('\nEm letras por favor.')
 		return False
 
 	def retornar(self):
@@ -69,7 +69,7 @@ class ControladorGeneros:
 							self.pega_genero_por_id(int(id_genero)).tipo = tipo
 							break
 					else:
-						self.__tela_genero.mostra_mensagem('\noperação cancelada')
+						self.__tela_genero.mostra_mensagem('\nOperação cancelada.')
 						return
 
 	def adiciona_filme(self):
@@ -94,7 +94,7 @@ class ControladorGeneros:
 					else:
 						tela.mostra_mensagem('\nID inválido, tente novamente')
 			else:
-				tela.mostra_mensagem('\n id inválido, operação cancelada')
+				tela.mostra_mensagem('\nID inválido, operação cancelada.')
 
 	def lista_generos(self):
 		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
@@ -106,7 +106,7 @@ class ControladorGeneros:
 
 	def lista_filmes_por_genero(self):
 		if not self.__controlador_sistema.controlador_filmes.filme_com_genero_existe[0]:
-			self.__tela_genero.mostra_mensagem('não existem filmes com gêneros cadastrados')
+			self.__tela_genero.mostra_mensagem('\nNão existem filmes com gêneros cadastrados.')
 			return
 		todos_generos = self.generos
 		generos_com_filmes = [genero for genero in todos_generos if len(genero.filmes) > 0]
@@ -118,7 +118,7 @@ class ControladorGeneros:
 		if self.checa_id(id_genero):
 			genero = self.pega_genero_por_id(int(id_genero))
 			self.__generos.remove(genero)
-			self.__tela_genero.mostra_mensagem(f'\ngênero {genero.tipo} removido com sucesso')
+			self.__tela_genero.mostra_mensagem(f'\nGênero {genero.tipo} removido com sucesso.')
 
 	def abre_tela(self):
 		lista_opcoes = {
