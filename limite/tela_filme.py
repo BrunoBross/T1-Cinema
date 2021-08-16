@@ -41,17 +41,13 @@ class TelaFilme:
 						if certeza == 1:
 							return titulo
 						elif certeza == 3:
-							cancelar = True
-							break
+							return None
 						elif certeza == 2:
-							cancelar = False
 							break
 					else:
 						print('\n\033[1;31mDigite um número entre 1 e 3!\033[0;0m\n')
 				except ValueError:
 					print('\n\033[1;31mDigite um número correto!\033[0;0m\n')
-			if cancelar:
-				break
 
 	def mostra_filme(self, dados_filme):
 		print(

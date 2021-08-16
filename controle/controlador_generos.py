@@ -17,6 +17,12 @@ class ControladorGeneros:
 				return genero
 		return None
 
+	def existem_generos_cadastrados(self):
+		if len(self.generos) > 0:
+			return True
+		self.__tela_genero.mostra_mensagem('\n\033[1;31mNão há gêneros disponíveis, crie um antes.\033[0;0m')
+		return False
+
 	def checa_id(self, dado: str):
 		if dado.isdecimal() and int(dado) in self.__id_generos:
 			return True
@@ -51,25 +57,25 @@ class ControladorGeneros:
 				break
 
 	def alterar_genero(self):
-		self.lista_generos()
-		id_genero = self.__tela_genero.seleciona_genero()
-		if self.checa_id(id_genero):
-			while True:
-				tipo = self.__tela_genero.pega_dados_genero()
-				checagem = self.checa_tipo(tipo)
-				if checagem is not None:
-					if checagem:
-						self.pega_genero_por_id(int(id_genero)).tipo = tipo
-						break
-				else:
-					self.__tela_genero.mostra_mensagem('\noperação cancelada')
-					return
+		if self.existem_generos_cadastrados():
+			self.lista_generos()
+			id_genero = self.__tela_genero.seleciona_genero()
+			if self.checa_id(id_genero):
+				while True:
+					tipo = self.__tela_genero.pega_dados_genero()
+					checagem = self.checa_tipo(tipo)
+					if checagem is not None:
+						if checagem:
+							self.pega_genero_por_id(int(id_genero)).tipo = tipo
+							break
+					else:
+						self.__tela_genero.mostra_mensagem('\noperação cancelada')
+						return
 
 	def adiciona_filme(self):
 		control_filme = self.__controlador_sistema.controlador_filmes
 		tela = self.__tela_genero
-
-		if len(self.__generos) > 0 and len(control_filme.filmes) > 0:
+		if self.existem_generos_cadastrados() and self.__controlador_sistema.controlador_filmes.existem_filmes_cadastrados():
 			self.lista_generos()
 			id_genero = tela.seleciona_genero()
 			if self.checa_id(id_genero):
@@ -89,7 +95,6 @@ class ControladorGeneros:
 						tela.mostra_mensagem('\nID inválido, tente novamente')
 			else:
 				tela.mostra_mensagem('\n id inválido, operação cancelada')
-		tela.mostra_mensagem('\nfaltam dados para executar esta ação')
 
 	def lista_generos(self):
 		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
