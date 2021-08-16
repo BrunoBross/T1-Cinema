@@ -1,5 +1,6 @@
 from limite.tela_ingresso import TelaIngresso
 from entidade.ingresso import Ingresso
+from entidade.sessao import Sessao
 
 
 class ControladorIngressos:
@@ -46,8 +47,9 @@ class ControladorIngressos:
         while True:
             fileira = self.__tela_ingresso.pega_dados_ingresso(1)
             if fileira.isalpha() and len(fileira) == 1:
-                material.append(fileira)
-                break
+                if fileira.lower() in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+                    material.append(fileira.lower())
+                    break
             else:
                 self.__tela_ingresso.mostra_mensagem('\n\033[1;31mFileira inválida.\033[0;0m')
 
@@ -58,35 +60,22 @@ class ControladorIngressos:
                 break
             else:
                 self.__tela_ingresso.mostra_mensagem('\n\033[1;31mAcento inválido.\033[0;0m')
+        if self.checa_ingresso(material[1], material[2], material[3]):
+            self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
+            self.__contador += 1
+            return
+        self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
 
-        self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
-        self.__contador += 1
-
-
-    def alterar_ingresso(self):
-
-        self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR INGRESSOS )X==-------\033[0;0m")
-
-        if len(self.__ingressos) > 0:
-
-            self.lista_ingressos()
-            id_ingresso = self.__tela_ingresso.seleciona_ingresso()
-            ingresso = self.pega_ingresso_por_id(int(id_ingresso))
-
-            if ingresso is not None:
-                self.__controlador_sistema.controlador_sessaos.lista_sessaos()
-                novos_dados_ingresso = self.__tela_ingresso.pega_dados_ingresso()
-                ingresso.fileira = novos_dados_ingresso["fileira"]
-                ingresso.acento = novos_dados_ingresso["acento"]
-                ingresso.sessao = novos_dados_ingresso["sessao"]
-                self.lista_ingressos()
-            else:
-                self.__tela_ingresso.mostra_mensagem(
-                    "\n\033[1;31mATENÇÃO: ingresso não existente\033[0;0m"
-                )
-        else:
-            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
-
+    def checa_ingresso(self, sessao_dado: Sessao, fileira_dado: str, acento_dado: str):
+        if len(self.__ingressos) < 1:
+            return True
+        for sessao in self.__controlador_sistema.controlador_sessaos.sessaos:
+            if sessao == sessao_dado:
+                for ingresso in self.__ingressos:
+                    if ingresso.fileira == fileira_dado:
+                        if ingresso.acento == acento_dado:
+                            return False
+        return True
 
     def lista_ingressos(self):
 
@@ -125,14 +114,12 @@ class ControladorIngressos:
         else:
             self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
 
-
     def abre_tela(self):
         lista_opcoes = {
             0: self.retornar,
             1: self.incluir_ingresso,
-            2: self.alterar_ingresso,
-            3: self.lista_ingressos,
-            4: self.excluir_ingresso
+            2: self.lista_ingressos,
+            3: self.excluir_ingresso
         }
 
         while True:

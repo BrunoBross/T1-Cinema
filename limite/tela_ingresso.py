@@ -9,13 +9,12 @@ class TelaIngresso:
 			print("Escolha uma opção")
 			print("0 - Retornar")
 			print("1 - Incluir Ingresso")
-			print("2 - Alterar Ingresso")
-			print("3 - Listar Ingresso")
-			print("4 - Excluir Ingresso")
+			print("2 - Listar Ingresso")
+			print("3 - Excluir Ingresso")
 
 			try:
 				opcao = int(input("Escolha uma das opções: "))
-				if 4 >= opcao >= 0:
+				if 3 >= opcao >= 0:
 					return opcao
 				else:
 					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
@@ -25,12 +24,10 @@ class TelaIngresso:
 	def pega_dados_ingresso(self, dados: int):
 		mensagem = {
 			0: '\nDigite o ID da sessão: ',
-			1: '\nEscolha a fileira: ',
+			1: '\nEscolha a fileira (A-J): ',
 			2: '\nEscolha o acento (1-20): '
 		}
 		return input(mensagem[dados])
-
-
 
 	def mostra_ingresso(self, dados_ingresso):
 		print(

@@ -1,6 +1,5 @@
 from limite.tela_sessao import TelaSessao
 from entidade.sessao import Sessao
-from controle.controlador_filmes import ControladorFilmes
 
 
 class ControladorSessaos:
