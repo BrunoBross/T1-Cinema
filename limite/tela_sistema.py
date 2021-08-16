@@ -11,13 +11,13 @@ class TelaSistema:
 			print("3 - Salas")
 			print("4 - Filmes")
 			print("5 - Gêneros")
-			print("6 - Poltronas")
+			#print("6 - Poltronas")
 
 			try:
 				opcao = int(input("Escolha uma das opções: "))
-				if 6 >= opcao >= 0:
+				if 5 >= opcao >= 0:
 					return opcao
 				else:
-					print('\n\033[1;31mDigite um número entre 0 e 6!\033[0;0m')
+					print('\n\033[1;31mDigite um número entre 0 e 5!\033[0;0m')
 			except ValueError:
 				print('\n\033[1;31mDigite um número!\033[0;0m')
