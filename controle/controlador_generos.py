@@ -97,7 +97,7 @@ class ControladorGeneros:
 				tela.mostra_mensagem('\nID inválido, operação cancelada.')
 
 	def lista_generos(self):
-		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
+		self.__tela_genero.mostra_mensagem("\n\033[1;96m-------==X( LISTA GÊNEROS )X==-------\033[0;0m")
 		for genero in self.__generos:
 			self.__tela_genero.mostra_genero({
 				"tipo": genero.tipo,

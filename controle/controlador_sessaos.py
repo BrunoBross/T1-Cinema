@@ -51,7 +51,7 @@ class ControladorSessaos:
 			tem_filme = True
 		if len(control_sala.salas) > 0 and tem_filme:
 			while True:
-				if control_filme.filme_com_genero_existe:
+				if control_filme.filme_com_genero_existe[0]:
 					control_genero.lista_filmes_por_genero()
 				else:
 					control_filme.lista_filmes()
