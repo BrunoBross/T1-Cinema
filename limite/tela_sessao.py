@@ -27,7 +27,7 @@ class TelaSessao:
 		print("\n\033[1;96m-------==X( DADOS SESSÃO )X==-------\033[0;0m")
 		mensagem = {
 			"id_filme": "Digite o ID do filme: ", "horario": "Horário da sessão: ",
-			"id_sala": "Digite o ID da sala: ", "certeza": "Digite 1 para confirmar: "
+			"id_sala": "Digite o ID da sala: ", "certeza": "Pressione Enter para confirmar: "
 		}
 		return input(f'{mensagem[dado]}')
 

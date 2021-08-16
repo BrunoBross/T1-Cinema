@@ -1,4 +1,3 @@
-from entidade.genero import Genero
 
 
 class Filme:
@@ -32,7 +31,6 @@ class Filme:
 		return self.__generos
 
 	@generos.setter
-	def generos(self, genero: Genero):
+	def generos(self, genero):
 
-		if isinstance(genero, Genero):
-			self.__generos.append(genero)
+		self.__generos.append(genero)

@@ -23,6 +23,13 @@ class TelaGenero:
 			except ValueError:
 				print('\n\033[1;31mDigite um número!\033[0;0m')
 
+	def lista_filmes_por_genero(self, generos: list):
+		print('\n\033[1;96m-------==X( GÊNEROS E FILMES )X==-------\033[0;0m')
+		for genero in generos:
+			print(f'\n{genero.tipo:}:')
+			for filme in genero.filmes:
+				print(f'\t- {filme.titulo} / ID = {filme.id_filme},' if filme != generos[-1] else f'\t- {filme.titulo} / ID = {filme.id_filme}')
+
 	def pega_dados_genero(self):
 
 		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'

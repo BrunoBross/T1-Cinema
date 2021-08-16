@@ -79,7 +79,9 @@ class ControladorGeneros:
 					id_filme = control_filme.tela.seleciona_filme()
 					if control_filme.checa_id(id_filme):
 						filme = control_filme.pega_filme_por_id(int(id_filme))
-						filme.generos.append(genero)
+						if filme not in filme.generos and filme not in genero.filmes:
+							filme.generos.append(genero)
+							genero.filmes.append(filme)
 						tela.mostra_mensagem(f'\n{filme.titulo} é do gênero {genero.tipo}')
 						control_filme.filme_com_genero_existe[0] = True
 						return
@@ -89,7 +91,6 @@ class ControladorGeneros:
 				tela.mostra_mensagem('\n id inválido, operação cancelada')
 		tela.mostra_mensagem('\nfaltam dados para executar esta ação')
 
-
 	def lista_generos(self):
 		self.__tela_genero.mostra_mensagem("-------==X( LISTA GÊNEROS )X==-------")
 		for genero in self.__generos:
@@ -97,6 +98,14 @@ class ControladorGeneros:
 				"tipo": genero.tipo,
 				"id_genero": genero.id_genero
 			})
+
+	def lista_filmes_por_genero(self):
+		if not self.__controlador_sistema.controlador_filmes.filme_com_genero_existe[0]:
+			self.__tela_genero.mostra_mensagem('não existem filmes com gêneros cadastrados')
+			return
+		todos_generos = self.generos
+		generos_com_filmes = [genero for genero in todos_generos if len(genero.filmes) > 0]
+		self.__tela_genero.lista_filmes_por_genero(generos_com_filmes)
 
 	def excluir_genero(self):
 		self.lista_generos()

@@ -6,6 +6,7 @@ class TelaFilme:
 	def tela_opcoes(self):
 
 		while True:
+
 			print("\n\033[1;96m-------==X( FILME )X==-------\033[0;0m")
 			print("Escolha uma opção")
 			print("0 - Retornar")
@@ -30,9 +31,7 @@ class TelaFilme:
 			print(f'* {genero.tipo}')
 
 	def pega_dados_filme(self):
-
 		while True:
-
 			titulo = input("Título: ")
 			print('\n\033[1;96m'+titulo+'\033[0;0m\n')
 			while True:

@@ -1,3 +1,4 @@
+from entidade.filme import Filme
 
 
 class Genero:
@@ -9,6 +10,8 @@ class Genero:
 
 		if isinstance(tipo, str):
 			self.__tipo = tipo
+
+		self.__filmes = []
 
 	@property
 	def id_genero(self):
@@ -23,3 +26,13 @@ class Genero:
 
 		if isinstance(tipo, str):
 			self.__tipo = tipo
+
+	@property
+	def filmes(self):
+		return self.__filmes
+
+	@filmes.setter
+	def filmes(self, filme: Filme):
+
+		if isinstance(filme, Filme):
+			self.__filmes.append(Filme)

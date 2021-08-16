@@ -34,6 +34,7 @@ class ControladorSessaos:
 
 		control_filme = self.__controlador_sistema.controlador_filmes
 		control_sala = self.__controlador_sistema.controlador_salas
+		control_genero = self.__controlador_sistema.controlador_generos
 		tela = self.__tela_sessao
 		material = [self.__contador+1]
 		nao_possui = ''
@@ -43,7 +44,7 @@ class ControladorSessaos:
 			tem_filme = True
 		if len(control_sala.salas) > 0 and tem_filme:
 			while True:
-				control_filme.lista_filmes()
+				control_genero.lista_filmes_por_genero()
 				id_filme = tela.pega_dados_sessao("id_filme")
 				if control_filme.checa_id(id_filme):
 					filme = control_filme.pega_filme_por_id(int(id_filme))
@@ -55,7 +56,7 @@ class ControladorSessaos:
 				horario = tela.pega_dados_sessao("horario")
 				tela.mostra_mensagem(f'\nDeseja confirmar \033[1;96m"{horario}"\033[0;0m como horário?')
 				certeza = tela.pega_dados_sessao("certeza")
-				if certeza == '1':
+				if certeza == '':
 					material.append(horario)
 					break
 			while True:
@@ -75,7 +76,7 @@ class ControladorSessaos:
 
 			self.__tela_sessao.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR SESSÃO )X==-------\033[0;0m")
 
-			if tem_filme == False:
+			if not tem_filme:
 				self.__tela_sessao.mostra_mensagem('\n\033[1;31mNão há filme disponível, adicione um antes.\033[0;0m')
 			else:
 				self.__tela_sessao.mostra_mensagem('\n\033[1;31mNão há sala disponível, crie uma antes.\033[0;0m')
