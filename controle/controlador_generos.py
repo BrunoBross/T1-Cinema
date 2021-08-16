@@ -89,7 +89,7 @@ class ControladorGeneros:
 							filme.generos.append(genero)
 							genero.filmes.append(filme)
 						tela.mostra_mensagem(f'\n{filme.titulo} é do gênero {genero.tipo}')
-						control_filme.filme_com_genero_existe[0] = True
+						control_filme.filme_com_genero_existe.insert(0, True)
 						return
 					else:
 						tela.mostra_mensagem('\nID inválido, tente novamente')

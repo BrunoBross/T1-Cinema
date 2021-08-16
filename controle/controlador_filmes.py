@@ -153,4 +153,4 @@ class ControladorFilmes:
 
 	@filme_com_genero_existe.setter
 	def filme_com_genero_existe(self, valor: bool):
-		self.__filme_com_genero_existe[0] = valor
+		self.__filme_com_genero_existe.insert(0, valor)
