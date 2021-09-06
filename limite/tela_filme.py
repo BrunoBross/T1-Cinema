@@ -10,23 +10,44 @@ class TelaFilme:
 
 		while True:
 
-			print("\n\033[1;96m-------==X( FILME )X==-------\033[0;0m")
-			print("Escolha uma opção")
-			print("0 - Retornar")
-			print("1 - Incluir Filme")
-			print("2 - Alterar Filme")
-			print("3 - Listar Filme")
-			print("4 - Excluir Filme")
-			print("5 - Listar Gêneros")
+			# print("\n\033[1;96m-------==X( FILME )X==-------\033[0;0m")
+			# print("Escolha uma opção")
+			# print("0 - Retornar")
+			# print("1 - Incluir Filme")
+			# print("2 - Alterar Filme")
+			# print("3 - Listar Filme")
+			# print("4 - Excluir Filme")
+			# print("5 - Listar Gêneros")
+			#
+			# try:
+			# 	opcao = int(input("Escolha uma das opções: "))
+			# 	if -1 < opcao < 6:
+			# 		return opcao
+			# 	else:
+			# 		print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
+			# except ValueError:
+			# 	print('\n\033[1;31mDigite um número!\033[0;0m')
 
-			try:
-				opcao = int(input("Escolha uma das opções: "))
-				if -1 < opcao < 6:
-					return opcao
-				else:
-					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
-			except ValueError:
-				print('\n\033[1;31mDigite um número!\033[0;0m')
+			import PySimpleGUI as sg
+
+			sg.theme('DarkPurple4')
+
+			layout = [
+				[sg.Text('Cinema', font=('Impact', 20), text_color='white', size=(0, 2))],
+				[sg.Button('Incluir Filme', font=('Sans-Serif', 15), size=(20, 1))],
+				[sg.Button('Alterar Filme', font=('Sans-Serif', 15), size=(20, 1))],
+				[sg.Button('Listar Filme', font=('Sans-Serif', 15), size=(20, 1))],
+				[sg.Button('Excluir Filme', font=('Sans-Serif', 15), size=(20, 1))],
+				[sg.Button('Listar Gêneros', font=('Sans-Serif', 15), size=(20, 1))],
+				[sg.Button('Retornar', font=('Sans-Serif', 15), size=(20, 1))]
+			]
+
+			window = sg.Window('Cinema', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
+
+			button = window.Read()
+			valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3, 'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0}
+			window.Close()
+			return valor_escolhido[button[0]]
 
 	def popup_lista_filme(self, filmes: list):
 		sg.theme('Reds')
