@@ -74,7 +74,7 @@ class ControladorFilmes:
 
 	def lista_filmes(self):
 		self.__tela_filme.popup_lista_filme(
-			[f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
+			[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
 		)
 
 	def excluir_filme(self):

@@ -2,12 +2,11 @@ from entidade.filme import Filme
 import PySimpleGUI as sg
 from limite.temas import tamanho, fonte, tema
 
+
 class TelaFilme:
 
     def tela_opcoes(self):
-
         sg.theme(tema)
-
 
         layout = [
             [sg.Text('Gerenciar Filme', font=('Impact', 20), text_color='white', size=(0, 2))],
@@ -28,12 +27,12 @@ class TelaFilme:
         return valor_escolhido[button[0]]
 
     def popup_lista_filme(self, filmes: list):
-        sg.theme('Reds')
+        sg.theme(tema)
         layout = [
-            [sg.Text('Filmes Cadastrados')],
-            [sg.Text('\n'.join(filmes))]
+            [sg.Text('Filmes Cadastrados:', font=('Impact', 20), text_color='white')],
+            [sg.Text('\n'.join(filmes), text_color='white')]
         ]
-        window = sg.Window('lista_filmes', layout)
+        window = sg.Window('Filmes Cadastrados', layout, size=(400, 60+len(filmes)*17))
         window.Read()
 
     def lista_generos_do_filme(self, lista: list, filme: Filme):

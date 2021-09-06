@@ -1,10 +1,10 @@
 import PySimpleGUI as sg
 from limite.temas import tamanho, fonte, tema
 
+
 class TelaGenero:
 
 	def tela_opcoes(self):
-
 		sg.theme(tema)
 
 		layout = [
