@@ -1,66 +1,71 @@
+import PySimpleGUI as sg
 
 
 class TelaPoltrona:
 
-	def tela_opcoes(self):
+    def tela_opcoes(self):
 
-		while True:
-			print("\n\033[1;96m-------==X( POLTRONA )X==-------\033[0;0m")
-			print("Escolha uma opção")
-			print("0 - Retornar")
-			print("1 - Incluir Poltrona")
-			print("2 - Alterar Poltrona")
-			print("3 - Listar Poltrona")
-			print("4 - Excluir Poltrona")
+        fonte = ('Sans-Serif', 15)
+        tamanho = (20, 1)
 
-			try:
-				opcao = int(input("Escolha uma das opções: "))
-				if 4 >= opcao >= 0:
-					return opcao
-				else:
-					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
-			except ValueError:
-				print('\n\033[1;31mDigite um número!\033[0;0m')
+        sg.theme('DarkPurple4')
 
-	def pega_dados_poltrona(self):
-		print("\n\033[1;96m-------==X( DADOS POLTRONA )X==-------\033[0;0m")
-		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
-		while True:
-			fileira = input("Fileira: ")
-			acento = input("Acento: ")
-			print(f'\nPoltrona: \033[1;96m{fileira}-{acento}\033[0;0m\n')
-			while True:
-				try:
-					certeza = int(input("Tem certeza da poltrona?\n1 - Sim\n2 - Não\n3 - Cancelar\nDigite um número: "))
-					if 3 >= certeza >= 0:
-						if certeza == 1:
-							return {
-								"fileira": fileira,
-								"acento": acento
-							}
-						elif certeza == 3:
-							cancelar = True
-							break
-						elif certeza == 2:
-							cancelar = False
-							break
-					else:
-						print(aviso)
-				except ValueError:
-					print(aviso)
-			if cancelar:
-				break
+        layout = [
+            [sg.Text('Gerenciar Poltrona', font=('Impact', 20), text_color='white', size=(0, 2))],
+            [sg.Button('Incluir Poltrona', font=fonte, size=tamanho)],
+            [sg.Button('Alterar Poltrona', font=fonte, size=tamanho)],
+            [sg.Button('Lista Poltrona', font=fonte, size=tamanho)],
+            [sg.Button('Excluir Poltrona', font=fonte, size=tamanho)],
+            [sg.Button('Retornar', font=fonte, size=tamanho)]
+        ]
 
-	def mostra_poltrona(self, dados_poltrona):
-		print(
-			"FILEIRA: ", dados_poltrona["fileira"],
-			"ACENTO: ", dados_poltrona["acento"],
-			"ID: ", dados_poltrona["id_poltrona"]
-		)
+        window = sg.Window('Poltrona', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
 
-	def seleciona_poltrona(self):
-		id_poltrona = input("ID da poltrona que deseja selecionar: ")
-		return id_poltrona
+        button = window.Read()
+        valor_escolhido = {'Incluir Poltrona': 1, 'Alterar Poltrona': 2, 'Lista Poltrona': 3,
+                           'Excluir Poltrona': 4, 'Retornar': 0}
+        window.Close()
+        return valor_escolhido[button[0]]
 
-	def mostra_mensagem(self, msg):
-		print(msg)
+    def pega_dados_poltrona(self):
+        print("\n\033[1;96m-------==X( DADOS POLTRONA )X==-------\033[0;0m")
+        aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
+        while True:
+            fileira = input("Fileira: ")
+            acento = input("Acento: ")
+            print(f'\nPoltrona: \033[1;96m{fileira}-{acento}\033[0;0m\n')
+            while True:
+                try:
+                    certeza = int(input("Tem certeza da poltrona?\n1 - Sim\n2 - Não\n3 - Cancelar\nDigite um número: "))
+                    if 3 >= certeza >= 0:
+                        if certeza == 1:
+                            return {
+                                "fileira": fileira,
+                                "acento": acento
+                            }
+                        elif certeza == 3:
+                            cancelar = True
+                            break
+                        elif certeza == 2:
+                            cancelar = False
+                            break
+                    else:
+                        print(aviso)
+                except ValueError:
+                    print(aviso)
+            if cancelar:
+                break
+
+    def mostra_poltrona(self, dados_poltrona):
+        print(
+            "FILEIRA: ", dados_poltrona["fileira"],
+            "ACENTO: ", dados_poltrona["acento"],
+            "ID: ", dados_poltrona["id_poltrona"]
+        )
+
+    def seleciona_poltrona(self):
+        id_poltrona = input("ID da poltrona que deseja selecionar: ")
+        return id_poltrona
+
+    def mostra_mensagem(self, msg):
+        print(msg)
