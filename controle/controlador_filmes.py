@@ -73,15 +73,9 @@ class ControladorFilmes:
 					self.lista_filmes()
 
 	def lista_filmes(self):
-		tela = self.__tela_filme
-
-		tela.mostra_mensagem("\n\033[1;96m-------==X( LISTA FILMES )X==-------\033[0;0m")
-		if self.existem_filmes_cadastrados():
-			for filme in self.__filmes:
-				tela.mostra_filme({
-					"titulo": filme.titulo,
-					"id_filme": filme.id_filme
-				})
+		self.__tela_filme.popup_lista_filme(
+			[f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
+		)
 
 	def excluir_filme(self):
 		tela = self.__tela_filme

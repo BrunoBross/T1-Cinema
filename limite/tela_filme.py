@@ -1,4 +1,7 @@
+import PySimpleGUI
+
 from entidade.filme import Filme
+import PySimpleGUI as sg
 
 
 class TelaFilme:
@@ -24,6 +27,15 @@ class TelaFilme:
 					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
 			except ValueError:
 				print('\n\033[1;31mDigite um número!\033[0;0m')
+
+	def popup_lista_filme(self, filmes: list):
+		sg.theme('Reds')
+		layout = [
+			[sg.Text('Filmes Cadastrados')],
+			[sg.Text('\n'.join(filmes))]
+		]
+		window = sg.Window('lista_filmes', layout)
+		window.Read()
 
 	def lista_generos_do_filme(self, lista: list, filme: Filme):
 		print(f'\n\t{filme.titulo}:')
