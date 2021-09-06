@@ -1,27 +1,32 @@
+import PySimpleGUI as sg
 
 
 class TelaGenero:
 
 	def tela_opcoes(self):
+		sg.theme('DarkPurple4')
+		fonte = ('Sans-Serif', 15)
+		tamanho = (20, 1)
 
-		while True:
-			print("\n\033[1;96m-------==X( GÊNERO )X==-------\033[0;0m")
-			print("Escolha uma opção")
-			print("0 - Retornar")
-			print("1 - Incluir Gênero")
-			print("2 - Alterar Gênero")
-			print("3 - Listar Gêneros")
-			print("4 - Excluir Gênero")
-			print("5 - Adiciona Filme")
+		layout = [
+			[sg.Text('Gerenciar Gêneros', font=('Impact', 20), text_color='white', size=(0, 2))],
+			[sg.Button('Incluir Gênero', font=fonte, size=tamanho)],
+			[sg.Button('Alterar Gênero', font=fonte, size=tamanho)],
+			[sg.Button('Listar Gêneros', font=fonte, size=tamanho)],
+			[sg.Button('Excluir Gênero', font=fonte, size=tamanho)],
+			[sg.Button('Adicionar Filme', font=fonte, size=tamanho)],
+			[sg.Button('Retornar', font=fonte, size=tamanho)]
+		]
 
-			try:
-				opcao = int(input("Escolha uma das opções: "))
-				if 5 >= opcao >= 0:
-					return opcao
-				else:
-					print('\n\033[1;31mDigite um número entre 0 e 5!\033[0;0m')
-			except ValueError:
-				print('\n\033[1;31mDigite um número!\033[0;0m')
+		window = sg.Window('Gerenciador de Gêneros', layout, size=(400, 360), element_justification='c')
+
+		valor_escolhido = {
+			'Incluir Gênero': 1, 'Alterar Gênero': 2, 'Listar Gêneros': 3,
+			'Excluir Gênero': 4, 'Adicionar Filme': 5, 'Retornar': 0
+		}[window.Read()[0]]
+
+		window.Close()
+		return valor_escolhido
 
 	def lista_filmes_por_genero(self, generos: list):
 		print('\n\033[1;96m-------==X( GÊNEROS E FILMES )X==-------\033[0;0m')

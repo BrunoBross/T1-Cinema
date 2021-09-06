@@ -1,5 +1,3 @@
-import PySimpleGUI
-
 from entidade.filme import Filme
 import PySimpleGUI as sg
 
@@ -7,47 +5,29 @@ import PySimpleGUI as sg
 class TelaFilme:
 
 	def tela_opcoes(self):
+		sg.theme('DarkPurple4')
+		fonte = ('Sans-Serif', 15)
+		tamanho = (20, 1)
 
-		while True:
+		layout = [
+			[sg.Text('Gerenciar Filmes', font=('Impact', 20), text_color='white', size=(0, 2))],
+			[sg.Button('Incluir Filme', font=fonte, size=tamanho)],
+			[sg.Button('Alterar Filme', font=fonte, size=tamanho)],
+			[sg.Button('Listar Filme', font=fonte, size=tamanho)],
+			[sg.Button('Excluir Filme', font=fonte, size=tamanho)],
+			[sg.Button('Listar Gêneros', font=fonte, size=tamanho)],
+			[sg.Button('Retornar', font=fonte, size=tamanho)]
+		]
 
-			# print("\n\033[1;96m-------==X( FILME )X==-------\033[0;0m")
-			# print("Escolha uma opção")
-			# print("0 - Retornar")
-			# print("1 - Incluir Filme")
-			# print("2 - Alterar Filme")
-			# print("3 - Listar Filme")
-			# print("4 - Excluir Filme")
-			# print("5 - Listar Gêneros")
-			#
-			# try:
-			# 	opcao = int(input("Escolha uma das opções: "))
-			# 	if -1 < opcao < 6:
-			# 		return opcao
-			# 	else:
-			# 		print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
-			# except ValueError:
-			# 	print('\n\033[1;31mDigite um número!\033[0;0m')
+		window = sg.Window('Gerenciador de Filmes', layout, size=(400, 360), element_justification='c')
 
-			import PySimpleGUI as sg
+		valor_escolhido = {
+			'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3,
+			'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0
+		}[window.Read()[0]]
 
-			sg.theme('DarkPurple4')
-
-			layout = [
-				[sg.Text('Cinema', font=('Impact', 20), text_color='white', size=(0, 2))],
-				[sg.Button('Incluir Filme', font=('Sans-Serif', 15), size=(20, 1))],
-				[sg.Button('Alterar Filme', font=('Sans-Serif', 15), size=(20, 1))],
-				[sg.Button('Listar Filme', font=('Sans-Serif', 15), size=(20, 1))],
-				[sg.Button('Excluir Filme', font=('Sans-Serif', 15), size=(20, 1))],
-				[sg.Button('Listar Gêneros', font=('Sans-Serif', 15), size=(20, 1))],
-				[sg.Button('Retornar', font=('Sans-Serif', 15), size=(20, 1))]
-			]
-
-			window = sg.Window('Cinema', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
-
-			button = window.Read()
-			valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3, 'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0}
-			window.Close()
-			return valor_escolhido[button[0]]
+		window.Close()
+		return valor_escolhido
 
 	def popup_lista_filme(self, filmes: list):
 		sg.theme('Reds')

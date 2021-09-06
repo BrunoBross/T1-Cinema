@@ -74,7 +74,6 @@ class ControladorSistema:
 			3: self.gerencia_salas,
 			4: self.gerencia_filmes,
 			5: self.gerencia_generos,
-			#6 : self.gerencia_poltronas,
 			0: self.encerra_sistema
 		}
 

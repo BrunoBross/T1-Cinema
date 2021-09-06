@@ -3,7 +3,7 @@ import PySimpleGUI as sg
 sg.theme('DarkPurple4')
 
 layout = [
-    [sg.Text('Cinema', font=('Impact', 20),text_color='white', size=(0, 2))],
+    [sg.Text('Cinema', font=('Impact', 20), text_color='white', size=(0, 2))],
     [sg.Button('Ingressos', font=('Sans-Serif', 15), size=(20, 1))],
     [sg.Button('Sessões', font=('Sans-Serif', 15), size=(20, 1))],
     [sg.Button('Salas', font=('Sans-Serif', 15), size=(20, 1))],
