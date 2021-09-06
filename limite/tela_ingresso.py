@@ -1,25 +1,28 @@
-
+import PySimpleGUI as sg
 
 class TelaIngresso:
 
 	def tela_opcoes(self):
 
-		while True:
-			print("\n\033[1;96m-------==X( INGRESSO )X==-------\033[0;0m")
-			print("Escolha uma opção")
-			print("0 - Retornar")
-			print("1 - Incluir Ingresso")
-			print("2 - Listar Ingresso")
-			print("3 - Excluir Ingresso")
+		fonte = ('Sans-Serif', 15)
+		tamanho = (20, 1)
 
-			try:
-				opcao = int(input("Escolha uma das opções: "))
-				if 3 >= opcao >= 0:
-					return opcao
-				else:
-					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
-			except ValueError:
-				print('\n\033[1;31mDigite um número!\033[0;0m')
+		sg.theme('DarkPurple4')
+
+		layout = [
+			[sg.Text('Gerenciar Ingresso', font=('Impact', 20), text_color='white', size=(0, 2))],
+			[sg.Button('Incluir Ingresso', font=fonte, size=tamanho)],
+			[sg.Button('Lista Ingresso', font=fonte, size=tamanho)],
+			[sg.Button('Excluir Ingresso', font=fonte, size=tamanho)],
+			[sg.Button('Retornar', font=fonte, size=tamanho)]
+		]
+
+		window = sg.Window('Ingresso', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
+
+		button = window.Read()
+		valor_escolhido = {'Incluir Ingresso': 1, 'Lista Ingresso': 2, 'Excluir Ingresso': 3, 'Retornar': 0}
+		window.Close()
+		return valor_escolhido[button[0]]
 
 	def pega_dados_ingresso(self, dados: int):
 		mensagem = {

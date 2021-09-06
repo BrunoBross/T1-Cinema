@@ -1,26 +1,29 @@
-
+import PySimpleGUI as sg
 
 class TelaSala:
 
 	def tela_opcoes(self):
 
-		while True:
-			print("\n\033[1;96m-------==X( SALA )X==-------\033[0;0m")
-			print("Escolha uma opção")
-			print("0 - Retornar")
-			print("1 - Incluir Sala")
-			print("2 - Alterar Sala")
-			print("3 - Listar Sala")
-			print("4 - Excluir Sala")
+		fonte = ('Sans-Serif', 15)
+		tamanho = (20, 1)
 
-			try:
-				opcao = int(input("Escolha uma das opções: "))
-				if 4 >= opcao >= 0:
-					return opcao
-				else:
-					print('\n\033[1;31mDigite um número entre 0 e 4!\033[0;0m')
-			except ValueError:
-				print('\n\033[1;31mDigite um número!\033[0;0m')
+		sg.theme('DarkPurple4')
+
+		layout = [
+			[sg.Text('Gerenciar Sala', font=('Impact', 20), text_color='white', size=(0, 2))],
+			[sg.Button('Incluir Sala', font=fonte, size=tamanho)],
+			[sg.Button('Alterar Sala', font=fonte, size=tamanho)],
+			[sg.Button('Lista Sala', font=fonte, size=tamanho)],
+			[sg.Button('Excluir Sala', font=fonte, size=tamanho)],
+			[sg.Button('Retornar', font=fonte, size=tamanho)]
+		]
+
+		window = sg.Window('Sala', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
+
+		button = window.Read()
+		valor_escolhido = {'Incluir Sala': 1, 'Alterar Sala': 2, 'Lista Sala': 3, 'Excluir Sala': 4, 'Retornar': 0}
+		window.Close()
+		return valor_escolhido[button[0]]
 
 	def pega_dados_sala(self):
 
