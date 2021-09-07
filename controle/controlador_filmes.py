@@ -21,7 +21,7 @@ class ControladorFilmes:
 	def existem_filmes_cadastrados(self):
 		if len(self.filmes) > 0:
 			return True
-		return False
+		return self.__tela_filme.seleciona_filme([f'Não há filmes cadastrados.'])
 
 	def checa_id(self, id_filme: str):
 		if id_filme.isdecimal():
@@ -44,50 +44,37 @@ class ControladorFilmes:
 			self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
-		global id_filme
 		tela = self.__tela_filme
 
-		if len(self.__filmes) <= 0:
-			self.__tela_filme.seleciona_filme(
-				[f'Não há filmes cadastrados.']
-			)
-		else:
-			id_filme = self.__tela_filme.seleciona_filme(
+		if self.existem_filmes_cadastrados():
+			id_filme = tela.seleciona_filme(
 				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
 			)
-
-		if self.existem_filmes_cadastrados():
-			while True:
+			if id_filme is not None:
 				filme = self.pega_filme_por_id(int(id_filme))
 				novos_dados_filme = tela.altera_filme()
 				if novos_dados_filme is not None:
 					filme.titulo = novos_dados_filme
-					break
-				else:
-					break
 
 	def lista_filmes(self):
-		if len(self.__filmes) <= 0:
+		if len(self.__filmes) < 1:
 			self.__tela_filme.popup_lista_filme(
 				[f'Não há filmes cadastrados.']
 			)
-		else:
-			self.__tela_filme.popup_lista_filme(
-				[f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
-			)
+			return
+		self.__tela_filme.popup_lista_filme(
+			[f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
+		)
 
 	def excluir_filme(self):
-		global id_filme
 		tela = self.__tela_filme
 
-		if len(self.__filmes) <= 0:
-			self.__tela_filme.exclui_filme(
-				[f'Não há filmes cadastrados.']
-			)
-		else:
-			id_filme = self.__tela_filme.exclui_filme(
-				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
-			)
+		if len(self.__filmes) < 1:
+			self.__tela_filme.exclui_filme([f'Não há filmes cadastrados.'])
+			return
+		id_filme = self.__tela_filme.exclui_filme(
+			[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
+		)
 
 		if self.existem_filmes_cadastrados():
 			while True:

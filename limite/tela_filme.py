@@ -22,10 +22,18 @@ class TelaFilme:
         window = sg.Window('Filme', layout, size=tamanho_janela, element_justification='c')
 
         button = window.Read()
-        valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3, 'Excluir Filme': 4,
-                           'Listar Gêneros': 5, 'Retornar': 0}
+        valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3,
+                           'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0}
         window.Close()
         return valor_escolhido[button[0]]
+
+    def popup_nenhum_registro(self):
+        sg.theme(tema_aviso)
+        popup = sg.Window('Aviso', [[sg.Text('Não existem', font=fonte_texto, size=tamanho)],
+                                    [sg.Text('filmes cadastrados!', font=fonte_texto, size=tamanho)],
+                                    [sg.Button('Retornar', font=fonte_texto, size=tamanho)]],
+                          size=tamanho_janela, element_justification='c')
+        popup.Read()
 
     def popup_lista_filme(self, filmes: list):
 
@@ -68,9 +76,7 @@ class TelaFilme:
             window.Close()
 
     def seleciona_filme(self, filmes: list):
-
         sg.theme(tema)
-
         layout = [
             [sg.Text('Seleciona Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
             [sg.Text('Selecione o filme:', font=fonte_texto, text_color=cor)],
@@ -80,11 +86,11 @@ class TelaFilme:
         ]
         window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
         values = window.Read()
-        window.Close()
         if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
-            return str(values[1][0])[6]
-        else:
             window.Close()
+            return str(values[1][0])[6]
+        window.Close()
+        return None
 
     def altera_filme(self):
 
@@ -92,17 +98,20 @@ class TelaFilme:
 
         layout = [
             [sg.Text('Alterar Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
-            [sg.Text('Novo título:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
+            [sg.Text('Novo título:', font=fonte_texto, text_color=cor),
+             sg.InputText('', size=(300, 2), font=fonte_texto)],
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c')
-        values = window.Read()
-        if values[0] == 'Confirmar' and values[1][0] != '':
+        valores = window.Read()
+        escolha = valores[0]
+        user_input = valores[1][0]
+
+        if escolha == 'Confirmar' and user_input != '':
             window.Close()
-            return values[1][0]
-        else:
-            window.Close()
+            return user_input
+        window.Close()
 
     def exclui_filme(self, filmes: list):
 
