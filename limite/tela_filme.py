@@ -28,11 +28,14 @@ class TelaFilme:
 
     def popup_lista_filme(self, filmes: list):
         sg.theme(tema)
-        layout = [
-            [sg.Text('Filmes Cadastrados:', font=('Impact', 20), text_color='white')],
-            [sg.Text('\n'.join(filmes), text_color='white')]
+        col = [
+            [sg.Text('\n'.join(filmes), font=fonte, text_color='white')]
         ]
-        window = sg.Window('Filmes Cadastrados', layout, size=(400, 60+len(filmes)*17))
+        layout = [
+            [sg.Text('Filmes Cadastrados:', size=(0, 2), font=('Impact', 20), text_color='white')],
+            [sg.Column(col, size=(400, 360), scrollable=True)],
+        ]
+        window = sg.Window('Filmes Cadastrados', layout, size=(400, 360))
         window.Read()
 
     def lista_generos_do_filme(self, lista: list, filme: Filme):
