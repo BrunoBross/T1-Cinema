@@ -28,78 +28,112 @@ class ControladorSalas:
 	def checa_numero(self, numero_novo):
 		for sala in self.__salas:
 			if numero_novo == sala.numero:
-				self.__tela_sala.mostra_mensagem('\033[1;31mSala já existente\033[0;0m')
+				self.__tela_sala.mostra_mensagem('Sala já existente.')
 				return False
 			if numero_novo == '':
-				self.__tela_sala.mostra_mensagem('\033[1;31mNúmero inválido\033[0;0m')
+				self.__tela_sala.mostra_mensagem('Número inválido.')
 				return False
 		return True
 
 	def incluir_sala(self):
 
-		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR SALAS )X==-------\033[0;0m")
-
-		dados_sala = self.__tela_sala.pega_dados_sala()
-		if dados_sala is not None:
-			if self.checa_numero(dados_sala):
-				sala = Sala(self.__contador+1, dados_sala)
-				self.__salas.append(sala)
-				self.__contador += 1
-				self.__id_salas.append(self.__contador)
+		while True:
+			dados_sala = self.__tela_sala.pega_dados_sala()
+			if dados_sala is not None:
+				if self.checa_numero(dados_sala):
+					sala = Sala(self.__contador+1, dados_sala)
+					self.__salas.append(sala)
+					self.__contador += 1
+					self.__id_salas.append(self.__contador)
+					break
+			else:
+				break
 
 	def alterar_sala(self):
 
-		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR SALAS )X==-------\033[0;0m")
-
+		global id_sala
 		tela = self.__tela_sala
 
-		if len(self.__salas) < 1:
-			self.__tela_sala.mostra_mensagem('\n\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
-			return
-		self.lista_salas()
-		while True:
-			id_sala = tela.seleciona_sala()
-			if self.checa_id(id_sala):
-				self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( NOVO NÚMERO SALA )X==-------\033[0;0m")
-				sala = self.pega_sala_por_id(int(id_sala))
-				if sala is not None:
-					novos_numero = tela.pega_dados_sala()
-					if self.checa_numero(novos_numero):
-						sala.numero = novos_numero
-						break
+		if len(self.__salas) <= 0:
+			self.__tela_sala.seleciona_sala(
+				[f'Não há salas cadastradas.']
+			)
+		else:
+			id_sala = self.__tela_sala.seleciona_sala(
+				[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
+			)
+
+			while True:
+				filme = self.pega_sala_por_id(int(id_sala))
+				novos_dados_filme = tela.altera_sala()
+				if novos_dados_filme is not None:
+					filme.titulo = novos_dados_filme
+					break
+				else:
+					break
+
+		# tela = self.__tela_sala
+		#
+		# if len(self.__salas) < 1:
+		# 	self.__tela_sala.mostra_mensagem('Não há salas disponíveis, crie uma antes.')
+		# 	return
+		# self.lista_salas()
+		# while True:
+		# 	id_sala = tela.seleciona_sala()
+		# 	if self.checa_id(id_sala):
+		# 		self.__tela_sala.mostra_mensagem("NOVO NÚMERO SALA")
+		# 		sala = self.pega_sala_por_id(int(id_sala))
+		# 		if sala is not None:
+		# 			novos_numero = tela.pega_dados_sala()
+		# 			if self.checa_numero(novos_numero):
+		# 				sala.numero = novos_numero
+		# 				break
 
 	def lista_salas(self):
 
-		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( LISTA SALAS )X==-------\033[0;0m")
-
-		if len(self.__salas) > 0:
-			for sala in self.__salas:
-				self.__tela_sala.mostra_sala({
-					"numero": sala.numero,
-					"id_sala": sala.id_sala
-				})
+		if len(self.__salas) <= 0:
+			self.__tela_sala.popup_lista_salas(
+				[f'Não há salas cadastradas.']
+			)
 		else:
-			self.__tela_sala.mostra_mensagem('\n\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
+			self.__tela_sala.popup_lista_salas(
+				[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
+			)
 
 	def excluir_sala(self):
 
-		self.__tela_sala.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR SALAS )X==-------\033[0;0m")
+		tela = self.__tela_sala
 
-		if len(self.__salas) < 1:
-			self.__tela_sala.mostra_mensagem('\n\033[1;31mNão há salas disponíveis, crie uma antes.\033[0;0m')
-			return
-		while True:
-			self.lista_salas()
-			id_sala = self.__tela_sala.seleciona_sala()
-			if self.checa_id(id_sala):
-				sala = self.pega_sala_por_id(int(id_sala))
-				if sala is not None:
-					numero = sala.numero
-					self.__salas.remove(sala)
-					self.__tela_sala.mostra_mensagem(f'\nA Sala \033[1;96m"{numero}"\033[0;0m foi \033[1;31mremovida\033[0;0m do sistema')
-					return
-			else:
-				self.__tela_sala.mostra_mensagem('\n\033[1;31mDigite um ID válido!\033[0;0m')
+		if len(self.__salas) <= 0:
+			self.__tela_sala.exclui_sala(
+				[f'Não há salas cadastradas.']
+			)
+		else:
+			id_sala_ = self.__tela_sala.exclui_sala(
+				[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
+			)
+
+			while True:
+				sala = self.pega_sala_por_id(int(id_sala_))
+				self.__salas.remove(sala)
+				tela.mostra_mensagem(f'A sala foi removida do sistema!')
+				return
+
+		# if len(self.__salas) < 1:
+		# 	self.__tela_sala.mostra_mensagem('Não há salas disponíveis, crie uma antes.')
+		# 	return
+		# while True:
+		# 	self.lista_salas()
+		# 	id_sala = self.__tela_sala.seleciona_sala()
+		# 	if self.checa_id(id_sala):
+		# 		sala = self.pega_sala_por_id(int(id_sala))
+		# 		if sala is not None:
+		# 			numero = sala.numero
+		# 			self.__salas.remove(sala)
+		# 			self.__tela_sala.mostra_mensagem(f'A Sala {numero} foi removida do sistema')
+		# 			return
+		# 	else:
+		# 		self.__tela_sala.mostra_mensagem('Digite um ID válido!')
 
 	def abre_tela(self):
 		lista_opcoes = {

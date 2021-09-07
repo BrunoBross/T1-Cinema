@@ -24,29 +24,98 @@ class TelaSala:
 		window.Close()
 		return valor_escolhido[button[0]]
 
+	def popup_lista_salas(self, salas: list):
+
+		sg.theme(tema)
+
+		col = [
+			[sg.Text('\n'.join(salas), font=fonte_texto, text_color=cor)]
+		]
+		layout = [
+			[sg.Text('Salas Cadastradas:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Column(col, size=(400, 150), scrollable=True)],
+			[sg.Text('')],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+		]
+		window = sg.Window('Salas Cadastradas', layout, size=tamanho_janela, element_justification='c')
+		window.Read()
+		window.Close()
+
+
 	def pega_dados_sala(self):
 
-		while True:
-			numero = input("Número da Sala: ")
-			print(f'\n\033[1;96mSala Nª: {numero}\033[0;0m\n')
-			while True:
-				try:
-					certeza = int(input('Tem certeza disso? \n1- Sim \n2- Não \n3- Cancelar \nDigite uma opção: '))
-					if 3 >= certeza >= 1:
-						if certeza == 1:
-							return numero
-						elif certeza == 3:
-							cancelar = True
-							break
-						elif certeza == 2:
-							cancelar = False
-							break
-					else:
-						print('\n\033[1;31mDigite um número entre 1 e 3!\033[0;0m\n')
-				except ValueError:
-					print('\n\033[1;31mDigite um número correto!\033[0;0m\n')
-			if cancelar:
-				break
+		sg.theme(tema)
+
+		layout = [
+			[sg.Text('Incluir Sala:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Número da Sala:', font=fonte_texto, text_color=cor), sg.Slider(range=(1, 25), orientation='h', size=(30, 20))],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c')
+		values = window.Read()
+		window.Close()
+		if values[0] == 'Confirmar' and values[1][0] != '':
+			return str(int(values[1][0]))
+		else:
+			window.Close()
+			return None
+
+	def seleciona_sala(self, salas: list):
+
+		sg.theme(tema)
+
+		layout = [
+			[sg.Text('Seleciona Sala:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Selecione a Sala:', font=fonte_texto, text_color=cor)],
+			[sg.Listbox(values=salas, size=(30, 6), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
+		values = window.Read()
+		window.Close()
+		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
+			print(values)
+		else:
+			window.Close()
+
+	def altera_sala(self):
+
+		sg.theme(tema)
+
+		layout = [
+			[sg.Text('Alterar Sala:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Novo Número:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('Salas Cadastradas', layout, size=tamanho_janela, element_justification='c')
+		values = window.Read()
+		if values[0] == 'Confirmar' and values[1][0] != '':
+			window.Close()
+			return values[1][0]
+		else:
+			window.Close()
+
+	def exclui_sala(self, salas: list):
+
+		sg.theme(tema)
+
+		layout = [
+			[sg.Text('Excluir Sala:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Selecione a Sala:', font=fonte_texto, text_color=cor)],
+			[sg.Listbox(values=salas, size=(30, 6), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
+		values = window.Read()
+		window.Close()
+		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
+			return str(values[1][0])[6]
+		else:
+			window.Close()
 
 	def mostra_sala(self, dados_sala):
 		print(
@@ -54,8 +123,15 @@ class TelaSala:
 			"ID: ", dados_sala["id_sala"]
 		)
 
-	def seleciona_sala(self):
-		return input("\nID da sala que deseja selecionar: ")
 
 	def mostra_mensagem(self, msg):
-		print(msg)
+
+		sg.theme(tema_aviso)
+
+		layout = [
+			[sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+		]
+		window = sg.Window('Selecionar', layout, size=(400, 100), element_justification='c')
+		window.Read()
+		window.Close()

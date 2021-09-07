@@ -73,10 +73,11 @@ class ControladorFilmes:
 			)
 		else:
 			self.__tela_filme.popup_lista_filme(
-				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
+				[f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
 			)
 
 	def excluir_filme(self):
+		global id_filme
 		tela = self.__tela_filme
 
 		if len(self.__filmes) <= 0:
@@ -91,7 +92,6 @@ class ControladorFilmes:
 		if self.existem_filmes_cadastrados():
 			while True:
 				filme = self.pega_filme_por_id(int(id_filme))
-				titulo = filme.titulo
 				self.__filmes.remove(filme)
 				tela.mostra_mensagem(f'O filme foi removido do sistema!')
 				return

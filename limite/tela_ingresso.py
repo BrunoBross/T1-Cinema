@@ -46,4 +46,12 @@ class TelaIngresso:
 		return id_ingresso
 
 	def mostra_mensagem(self, msg):
-		print(msg)
+		sg.theme(tema_aviso)
+
+		layout = [
+			[sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+		]
+		window = sg.Window('Selecionar', layout, size=(400, 100), element_justification='c')
+		window.Read()
+		window.Close()
