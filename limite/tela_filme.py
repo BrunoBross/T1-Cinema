@@ -48,12 +48,12 @@ class TelaFilme:
     def pega_dados_filme(self):
         sg.theme(tema)
         layout = [
-            [sg.Text('Incluir Filmes:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Incluir Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
             [sg.Text('Título:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('filmes', layout, size=tamanho_janela, element_justification='c')
 
         valores = window.Read()
         escolha = valores[0]
@@ -93,7 +93,7 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('filmes', layout, size=tamanho_janela, element_justification='c')
 
         valores = window.Read()
         escolha = valores[0]
@@ -120,12 +120,6 @@ class TelaFilme:
         if escolha == 'Confirmar' and len(valores[1][0]):
             id_filme = str(valores[1][0])[6:].split('T')[0].strip()
             return int(id_filme)
-
-    def mostra_filme(self, dados_filme):
-        print(
-            "TITULO: ", dados_filme["titulo"],
-            "ID: ", dados_filme["id_filme"]
-        )
 
     def mostra_mensagem(self, msg):
         sg.theme(tema_aviso)

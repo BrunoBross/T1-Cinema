@@ -92,12 +92,14 @@ class ControladorGeneros:
 				tela.mostra_mensagem('\nID inválido, operação cancelada.')
 
 	def lista_generos(self):
-		self.__tela_genero.mostra_mensagem("\n\033[1;96m-------==X( LISTA GÊNEROS )X==-------\033[0;0m")
-		for genero in self.__generos:
-			self.__tela_genero.mostra_genero({
-				"tipo": genero.tipo,
-				"id_genero": genero.id_genero
-			})
+		if len(self.__generos) < 1:
+			self.__tela_genero.popup_lista_generos(
+				[f'Não há filmes cadastrados.']
+			)
+			return
+		self.__tela_genero.popup_lista_generos(
+			[f'ID: {genero.id_genero}    Gênero: {genero.tipo}' for genero in self.generos]
+		)
 
 	def lista_filmes_por_genero(self):
 		if not self.__controlador_sistema.controlador_filmes.filme_com_genero_existe[0]:

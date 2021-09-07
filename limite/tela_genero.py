@@ -27,55 +27,103 @@ class TelaGenero:
 		window.Close()
 		return valor_escolhido
 
-	def lista_filmes_por_genero(self, generos: list):
-		print('\n\033[1;96m-------==X( GÊNEROS E FILMES )X==-------\033[0;0m')
-		for genero in generos:
-			print(f'\n{genero.tipo:}:')
-			for filme in genero.filmes:
-				print(f'\t- {filme.titulo} / ID = {filme.id_filme},' if filme != generos[-1] else f'\t- {filme.titulo} / ID = {filme.id_filme}')
+	def popup_lista_generos(self, generos: list):
+		sg.theme(tema)
+		col = [
+			[sg.Text('\n'.join(generos), font=fonte_texto, text_color=cor)]
+		]
+		layout = [
+			[sg.Text('Gêneros Cadastrados:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Column(col, size=(400, 150), scrollable=True)],
+			[sg.Text('')],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+		]
+		window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
+
+		window.Read()
+		window.Close()
 
 	def pega_dados_genero(self):
+		sg.theme(tema)
+		layout = [
+			[sg.Text('Incluir Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Gênero:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
 
-		aviso = '\n\033[1;31mDigite um número correto!\033[0;0m'
-		print("\n\033[1;96m-------==X( DADOS GÊNERO )X==-------\033[0;0m")
-		while True:
-			tipo = input("tipo: ")
-			print('\n'+tipo+'\n')
-			while True:
-				try:
-					certeza = int(input("tem certeza do tipo de gênero?\n1 - sim\n2 - não\n3 - cancelar\nDigite um número: "))
-					if 3 >= certeza >= 0:
-						if certeza == 1:
-							return tipo
-						elif certeza == 3:
-							return False
-						elif certeza == 2:
-							cancelar = False
-							break
-					else:
-						print(aviso)
-				except ValueError:
-					print(aviso)
-			if cancelar:
-				break
+		valores = window.Read()
+		escolha = valores[0]
+		user_input = valores[1][0].strip()
 
-	def mostra_genero(self, dados_genero):
-		print(
-			"TIPO: ", dados_genero["tipo"],
-			"ID: ", dados_genero["id_genero"]
-		)
+		window.Close()
+		if escolha == 'Confirmar' and user_input != '':
+			return user_input
 
-	def seleciona_genero(self):
-		return input("id do gênero que deseja selecionar: ")
+	def seleciona_genero(self, generos: list):
+		sg.theme(tema)
+		layout = [
+			[sg.Text('Seleciona Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Selecione o gênero:', font=fonte_texto, text_color=cor)],
+			[sg.Listbox(values=generos, size=(30, 6), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
+
+		valores = window.Read()
+		escolha = valores[0]
+
+		window.Close()
+		if escolha == 'Confirmar' and len(valores[1][0]):
+			id_genero = str(valores[1][0])[6:].split('G')[0].strip()
+			return int(id_genero)
+
+	def altera_genero(self):
+		sg.theme(tema)
+		layout = [
+			[sg.Text('Alterar Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Novo gênero:', font=fonte_texto, text_color=cor),
+				sg.InputText('', size=(300, 2), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
+
+		valores = window.Read()
+		escolha = valores[0]
+		user_input = valores[1][0].strip()
+
+		window.Close()
+		if escolha == 'Confirmar' and user_input != '':
+			return user_input
+
+	def exclui_genero(self, generos: list):
+		sg.theme(tema)
+		layout = [
+			[sg.Text('Excluir Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Selecione o gênero:', font=fonte_texto, text_color=cor)],
+			[sg.Listbox(values=generos, size=(30, 6), font=fonte_texto)],
+			[sg.Text('')],
+			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
+		]
+		window = sg.Window('selecionar gênero', layout, size=tamanho_janela, element_justification='c')
+		valores = window.Read()
+		escolha = valores[0]
+
+		window.Close()
+		if escolha == 'Confirmar' and len(valores[1][0]):
+			id_genero = str(valores[1][0])[6:].split('G')[0].strip()
+			return int(id_genero)
 
 	def mostra_mensagem(self, msg):
-
 		sg.theme(tema_aviso)
-
 		layout = [
 			[sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 		window = sg.Window('Selecionar', layout, size=(400, 100), element_justification='c')
+
 		window.Read()
 		window.Close()
