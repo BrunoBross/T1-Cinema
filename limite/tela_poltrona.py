@@ -1,14 +1,12 @@
 import PySimpleGUI as sg
+from limite.temas import tamanho, fonte, tema
 
 
 class TelaPoltrona:
 
     def tela_opcoes(self):
 
-        fonte = ('Sans-Serif', 15)
-        tamanho = (20, 1)
-
-        sg.theme('DarkPurple4')
+        sg.theme(tema)
 
         layout = [
             [sg.Text('Gerenciar Poltrona', font=('Impact', 20), text_color='white', size=(0, 2))],

@@ -1,12 +1,11 @@
 import PySimpleGUI as sg
-
+from limite.temas import tamanho, fonte, tema
 
 class TelaSessao:
 
 	def tela_opcoes(self):
-		sg.theme('DarkPurple4')
-		fonte = ('Sans-Serif', 15)
-		tamanho = (20, 1)
+
+		sg.theme(tema)
 
 		layout = [
 			[sg.Text('Gerenciar Sessões', font=('Impact', 20), text_color='white', size=(0, 2))],
