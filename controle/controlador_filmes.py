@@ -21,7 +21,8 @@ class ControladorFilmes:
 	def existem_filmes_cadastrados(self):
 		if len(self.filmes) > 0:
 			return True
-		return self.__tela_filme.seleciona_filme([f'Não há filmes cadastrados.'])
+		self.__tela_filme.mostra_mensagem(f'\nNão há filmes cadastrados.')
+		return False
 
 	def checa_id(self, id_filme: str):
 		if id_filme.isdecimal():
@@ -44,44 +45,32 @@ class ControladorFilmes:
 			self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
-		tela = self.__tela_filme
-
 		if self.existem_filmes_cadastrados():
-			id_filme = tela.seleciona_filme(
-				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
-			)
+			id_filme = self.__tela_filme.seleciona_filme(self.dados_lista_filmes())
 			if id_filme is not None:
 				filme = self.pega_filme_por_id(int(id_filme))
-				novos_dados_filme = tela.altera_filme()
+				novos_dados_filme = self.__tela_filme.altera_filme()
 				if novos_dados_filme is not None:
 					filme.titulo = novos_dados_filme
 
+	def dados_lista_filmes(self):
+		return [f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
+
 	def lista_filmes(self):
-		if len(self.__filmes) < 1:
-			self.__tela_filme.popup_lista_filme(
-				[f'Não há filmes cadastrados.']
-			)
-			return
-		self.__tela_filme.popup_lista_filme(
-			[f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
-		)
+		if self.existem_filmes_cadastrados():
+			self.__tela_filme.popup_lista_filme(self.dados_lista_filmes())
 
 	def excluir_filme(self):
-		tela = self.__tela_filme
-
 		if self.existem_filmes_cadastrados():
-			id_filme = tela.exclui_filme(
-				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
-			)
-
+			id_filme = self.__tela_filme.exclui_filme(self.dados_lista_filmes())
 			if id_filme is not None:
 				filme = self.pega_filme_por_id(int(id_filme))
+				nome = filme.titulo
 				self.__filmes.remove(filme)
-				tela.mostra_mensagem(f'O filme foi removido do sistema!')
+				self.__tela_filme.mostra_mensagem(f'\nO filme "{nome}"\nfoi removido com sucesso')
 
 	def listar_generos_por_id(self):
 		tela = self.__tela_filme
-
 		if self.existem_filmes_cadastrados():
 			if not self.__filme_com_genero_existe[0]:
 				tela.mostra_mensagem('\n\033[1;31mNenhum filme com gênero registrado.\033[0;0m')

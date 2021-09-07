@@ -17,7 +17,6 @@ class TelaFilme:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Filme', layout, size=tamanho_janela, element_justification='c')
-
         valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3,
                            'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0}[window.Read()[0]]
 
