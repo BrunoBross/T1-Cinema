@@ -1,6 +1,7 @@
 from limite.tela_ingresso import TelaIngresso
 from entidade.ingresso import Ingresso
 from entidade.sessao import Sessao
+from controle import controlador_sessaos
 
 
 class ControladorIngressos:
@@ -35,42 +36,48 @@ class ControladorIngressos:
 
         while True:
             id_sessao = self.__tela_ingresso.pega_sessao(
-                [f'ID: {sessao.id_sessao}    Título: {sessao.titulo}' for sessao in self.__ingressos]
+                [f'Filme: {sessao.filme.titulo}    Horario: {sessao.horario}   Sala: {sessao.sala.numero}' for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
             )
-            if control_sessao.checa_id(id_sessao):
-                material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
-                break
-
-
-        while True:
-            control_sessao.lista_sessaos()
-
-            id_sessao = self.__tela_ingresso.pega_dados_ingresso(0)
+            print(id_sessao)
             if control_sessao.checa_id(id_sessao):
                 material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
                 break
 
         while True:
-            fileira = self.__tela_ingresso.pega_dados_ingresso(1)
-            if fileira.isalpha() and len(fileira) == 1:
-                if fileira.lower() in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
-                    material.append(fileira.lower())
-                    break
-            else:
-                self.__tela_ingresso.mostra_mensagem('Fileira inválida.')
+            poltrona = self.__tela_ingresso.pega_poltrona()
+            acento = poltrona[0]
+            fileira = poltrona[0]
 
-        while True:
-            acento = self.__tela_ingresso.pega_dados_ingresso(2)
-            if acento.isdecimal() and 20 >= int(acento) >= 1:
-                material.append(acento)
-                break
-            else:
-                self.__tela_ingresso.mostra_mensagem('Acento inválido.')
-        if self.checa_ingresso(material[1], material[2], material[3]):
-            self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
-            self.__contador += 1
-            return
-        self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
+        # while True:
+        #
+        #     control_sessao.lista_sessaos()
+        #
+        #     id_sessao = self.__tela_ingresso.pega_dados_ingresso(0)
+        #     if control_sessao.checa_id(id_sessao):
+        #         material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
+        #         break
+        #
+        # while True:
+        #     fileira = self.__tela_ingresso.pega_dados_ingresso(1)
+        #     if fileira.isalpha() and len(fileira) == 1:
+        #         if fileira.lower() in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+        #             material.append(fileira.lower())
+        #             break
+        #     else:
+        #         self.__tela_ingresso.mostra_mensagem('Fileira inválida.')
+        #
+        # while True:
+        #     acento = self.__tela_ingresso.pega_dados_ingresso(2)
+        #     if acento.isdecimal() and 20 >= int(acento) >= 1:
+        #         material.append(acento)
+        #         break
+        #     else:
+        #         self.__tela_ingresso.mostra_mensagem('Acento inválido.')
+        # if self.checa_ingresso(material[1], material[2], material[3]):
+        #     self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
+        #     self.__contador += 1
+        #     return
+        # self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
 
     def checa_ingresso(self, sessao_dado: Sessao, fileira_dado: str, acento_dado: str):
         if len(self.__ingressos) < 1:

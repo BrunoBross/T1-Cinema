@@ -30,24 +30,25 @@ class TelaIngresso:
 		layout = [
 			[sg.Text('Incluir Ingresso:', size=(0, 2), font=('Impact', 20), text_color=cor)],
 			[sg.Text('Selecione a Sessão:', font=fonte_texto, text_color=cor)],
-			[sg.Listbox(values=sessoes, size=(30, 4), font=fonte_texto)],
+			[sg.Listbox(values=sessoes, size=(80, 4), font=fonte_texto)],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
 		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
-			return str(values[1][0])[6]
+			return values
+			# return str(values[1][0])[6]
 		else:
 			window.Close()
 
 	def pega_poltrona(self):
 
-		background = '#F0F0F0'
 		poltrona_image = './images/poltrona.png'
 
 		sg.theme(tema)
-		
+
+		# colunas de poltronas
 		coluna1 = [
 			[sg.Button('H-1', image_filename=poltrona_image, image_size=(30, 30), font='impact', button_color='white')],
 			[sg.Button('G-1', image_filename=poltrona_image, image_size=(30, 30), font='impact', button_color='white')],

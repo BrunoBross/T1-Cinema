@@ -7,7 +7,7 @@ class TelaSistema:
 
     def tela_opcoes(self):
 
-        tela_ingresso.TelaIngresso.pega_poltrona(self)
+        # tela_ingresso.TelaIngresso.pega_poltrona(self)
 
         sg.theme(tema)
 
