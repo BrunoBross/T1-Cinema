@@ -44,17 +44,12 @@ class ControladorGeneros:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_genero(self):
-		while True:
-			tipo = self.__tela_genero.pega_dados_genero()
-			if not tipo:
-				self.__tela_genero.mostra_mensagem('\noperação cancelada')
-				break
-			if self.checa_tipo(tipo):
-				genero = Genero(self.__contador+1, tipo)
-				self.__generos.append(genero)
-				self.__contador += 1
-				self.__id_generos.append(self.__contador)
-				break
+		dados_genero = self.__tela_genero.pega_dados_genero()
+		if dados_genero is not None:
+			genero = Genero(self.__contador+1, dados_genero)
+			self.__generos.append(genero)
+			self.__contador += 1
+			self.__id_generos.append(self.__contador)
 
 	def alterar_genero(self):
 		if self.existem_generos_cadastrados():
