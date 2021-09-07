@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, fonte, tema
+from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+
 
 class TelaIngresso:
 
@@ -8,14 +9,14 @@ class TelaIngresso:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Gerenciar Ingresso', font=('Impact', 20), text_color='white', size=(0, 2))],
-			[sg.Button('Incluir Ingresso', font=fonte, size=tamanho)],
-			[sg.Button('Lista Ingresso', font=fonte, size=tamanho)],
-			[sg.Button('Excluir Ingresso', font=fonte, size=tamanho)],
-			[sg.Button('Retornar', font=fonte, size=tamanho)]
+			[sg.Text('Gerenciar Ingresso', font=fonte_titulo, text_color=cor, size=(0, 2))],
+			[sg.Button('Incluir Ingresso', font=fonte_texto, size=tamanho)],
+			[sg.Button('Lista Ingresso', font=fonte_texto, size=tamanho)],
+			[sg.Button('Excluir Ingresso', font=fonte_texto, size=tamanho)],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 
-		window = sg.Window('Ingresso', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
+		window = sg.Window('Ingresso', layout, size=tamanho_janela, element_justification='c')
 
 		button = window.Read()
 		valor_escolhido = {'Incluir Ingresso': 1, 'Lista Ingresso': 2, 'Excluir Ingresso': 3, 'Retornar': 0}

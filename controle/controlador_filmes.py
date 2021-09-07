@@ -21,7 +21,6 @@ class ControladorFilmes:
 	def existem_filmes_cadastrados(self):
 		if len(self.filmes) > 0:
 			return True
-		self.__tela_filme.mostra_mensagem('\n\033[1;31mNão há filmes disponíveis, crie um antes.\033[0;0m')
 		return False
 
 	def checa_id(self, id_filme: str):
@@ -37,7 +36,6 @@ class ControladorFilmes:
 		self.__controlador_sistema.abre_tela()
 
 	def incluir_filme(self):
-		self.__tela_filme.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR FILMES )X==-------\033[0;0m")
 		dados_filme = self.__tela_filme.pega_dados_filme()
 		if dados_filme is not None:
 			filme = Filme(self.__contador+1, dados_filme)
@@ -46,58 +44,57 @@ class ControladorFilmes:
 			self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
+		global id_filme
 		tela = self.__tela_filme
 
-		tela.mostra_mensagem("\n\033[1;96m-------==X( ALTERAR FILMES )X==-------\033[0;0m")
+		if len(self.__filmes) <= 0:
+			self.__tela_filme.seleciona_filme(
+				[f'Não há filmes cadastrados.']
+			)
+		else:
+			id_filme = self.__tela_filme.seleciona_filme(
+				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
+			)
 
 		if self.existem_filmes_cadastrados():
 			while True:
-				if len(self.__filmes) > 0:
-					self.lista_filmes()
-					id_filme = tela.seleciona_filme()
-					if self.checa_id(id_filme):
-						filme = self.pega_filme_por_id(int(id_filme))
-						if filme is not None:
-							tela.mostra_mensagem("\n\033[1;96m-------==X( NOVO TÍTULO FILME )X==-------\033[0;0m")
-							novos_dados_filme = tela.pega_dados_filme()
-							if novos_dados_filme is not None:
-								filme.titulo = novos_dados_filme
-								self.lista_filmes()
-							else:
-								return
-						else:
-							tela.mostra_mensagem("\n\033[1;31mATENÇÃO: filme não existente.\033[0;0m")
-					else:
-						tela.mostra_mensagem(f'\n\033[1;31m"{id_filme}" não é um ID válido, tente novamente.\033[0;0m')
+				filme = self.pega_filme_por_id(int(id_filme))
+				novos_dados_filme = tela.altera_filme()
+				if novos_dados_filme is not None:
+					filme.titulo = novos_dados_filme
+					break
 				else:
-					self.lista_filmes()
+					break
 
 	def lista_filmes(self):
-		self.__tela_filme.popup_lista_filme(
-			[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
-		)
+		if len(self.__filmes) <= 0:
+			self.__tela_filme.popup_lista_filme(
+				[f'Não há filmes cadastrados.']
+			)
+		else:
+			self.__tela_filme.popup_lista_filme(
+				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
+			)
 
 	def excluir_filme(self):
 		tela = self.__tela_filme
 
-		tela.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR FILMES )X==-------\033[0;0m")
+		if len(self.__filmes) <= 0:
+			self.__tela_filme.exclui_filme(
+				[f'Não há filmes cadastrados.']
+			)
+		else:
+			id_filme = self.__tela_filme.exclui_filme(
+				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
+			)
 
 		if self.existem_filmes_cadastrados():
-			self.lista_filmes()
 			while True:
-
-				id_filme = tela.seleciona_filme()
-				if self.checa_id(id_filme):
-					filme = self.pega_filme_por_id(int(id_filme))
-					if filme is not None:
-						titulo = filme.titulo
-						self.__filmes.remove(filme)
-						tela.mostra_mensagem(f'\nO filme \033[1;96m{titulo}\033[0;0m foi \033[1;31mremovido\033[0;0m do sistema.')
-						return
-					else:
-						tela.mostra_mensagem("\n\033[1;31mATENÇÃO: Filme não existente.\033[0;0m")
-				else:
-					tela.mostra_mensagem('\n\033[1;31mDigite um ID válido!\033[0;0m')
+				filme = self.pega_filme_por_id(int(id_filme))
+				titulo = filme.titulo
+				self.__filmes.remove(filme)
+				tela.mostra_mensagem(f'O filme foi removido do sistema!')
+				return
 
 	def listar_generos_por_id(self):
 		tela = self.__tela_filme

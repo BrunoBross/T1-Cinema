@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, fonte, tema
+from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
 
 
 class TelaSessao:
@@ -8,15 +8,15 @@ class TelaSessao:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Gerenciar Sessões', font=('Impact', 20), text_color='white', size=(0, 2))],
-			[sg.Button('Incluir Sessão', font=fonte, size=tamanho)],
-			[sg.Button('Alterar Sessão', font=fonte, size=tamanho)],
-			[sg.Button('Listar Gêneros', font=fonte, size=tamanho)],
-			[sg.Button('Excluir Sessão', font=fonte, size=tamanho)],
-			[sg.Button('Retornar', font=fonte, size=tamanho)]
+			[sg.Text('Gerenciar Sessões', font=fonte_titulo, text_color=cor, size=(0, 2))],
+			[sg.Button('Incluir Sessão', font=fonte_texto, size=tamanho)],
+			[sg.Button('Alterar Sessão', font=fonte_texto, size=tamanho)],
+			[sg.Button('Listar Gêneros', font=fonte_texto, size=tamanho)],
+			[sg.Button('Excluir Sessão', font=fonte_texto, size=tamanho)],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 
-		window = sg.Window('Gerenciador de Sessões', layout, size=(400, 360), element_justification='c')
+		window = sg.Window('Gerenciador de Sessões', layout, size=tamanho_janela, element_justification='c')
 
 		valor_escolhido = {
 			'Incluir Sessão': 1, 'Alterar Sessão': 2, 'Listar Sessões': 3,

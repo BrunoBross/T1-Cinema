@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, fonte, tema
+from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
 
 
 class TelaGenero:
@@ -8,16 +8,16 @@ class TelaGenero:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Gerenciar Gêneros', font=('Impact', 20), text_color='white', size=(0, 2))],
-			[sg.Button('Incluir Gênero', font=fonte, size=tamanho)],
-			[sg.Button('Alterar Gênero', font=fonte, size=tamanho)],
-			[sg.Button('Listar Gêneros', font=fonte, size=tamanho)],
-			[sg.Button('Excluir Gênero', font=fonte, size=tamanho)],
-			[sg.Button('Adicionar Filme', font=fonte, size=tamanho)],
-			[sg.Button('Retornar', font=fonte, size=tamanho)]
+			[sg.Text('Gerenciar Gêneros', font=fonte_titulo, text_color=cor, size=(0, 2))],
+			[sg.Button('Incluir Gênero', font=fonte_texto, size=tamanho)],
+			[sg.Button('Alterar Gênero', font=fonte_texto, size=tamanho)],
+			[sg.Button('Listar Gêneros', font=fonte_texto, size=tamanho)],
+			[sg.Button('Excluir Gênero', font=fonte_texto, size=tamanho)],
+			[sg.Button('Adicionar Filme', font=fonte_texto, size=tamanho)],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 
-		window = sg.Window('Gerenciador de Gêneros', layout, size=(400, 360), element_justification='c')
+		window = sg.Window('Gerenciador de Gêneros', layout, size=tamanho_janela, element_justification='c')
 
 		valor_escolhido = {
 			'Incluir Gênero': 1, 'Alterar Gênero': 2, 'Listar Gêneros': 3,

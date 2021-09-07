@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, fonte, tema
+from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+
 
 class TelaSala:
 
@@ -8,15 +9,15 @@ class TelaSala:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Gerenciar Sala', font=('Impact', 20), text_color='white', size=(0, 2))],
-			[sg.Button('Incluir Sala', font=fonte, size=tamanho)],
-			[sg.Button('Alterar Sala', font=fonte, size=tamanho)],
-			[sg.Button('Lista Sala', font=fonte, size=tamanho)],
-			[sg.Button('Excluir Sala', font=fonte, size=tamanho)],
-			[sg.Button('Retornar', font=fonte, size=tamanho)]
+			[sg.Text('Gerenciar Sala', font=fonte_titulo, text_color=cor, size=(0, 2))],
+			[sg.Button('Incluir Sala', font=fonte_texto, size=tamanho)],
+			[sg.Button('Alterar Sala', font=fonte_texto, size=tamanho)],
+			[sg.Button('Lista Sala', font=fonte_texto, size=tamanho)],
+			[sg.Button('Excluir Sala', font=fonte_texto, size=tamanho)],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 
-		window = sg.Window('Sala', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
+		window = sg.Window('Sala', layout, size=tamanho_janela, element_justification='c')
 
 		button = window.Read()
 		valor_escolhido = {'Incluir Sala': 1, 'Alterar Sala': 2, 'Lista Sala': 3, 'Excluir Sala': 4, 'Retornar': 0}

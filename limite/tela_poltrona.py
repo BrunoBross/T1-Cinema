@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, fonte, tema
+from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
 
 
 class TelaPoltrona:
@@ -9,15 +9,15 @@ class TelaPoltrona:
         sg.theme(tema)
 
         layout = [
-            [sg.Text('Gerenciar Poltrona', font=('Impact', 20), text_color='white', size=(0, 2))],
-            [sg.Button('Incluir Poltrona', font=fonte, size=tamanho)],
-            [sg.Button('Alterar Poltrona', font=fonte, size=tamanho)],
-            [sg.Button('Lista Poltrona', font=fonte, size=tamanho)],
-            [sg.Button('Excluir Poltrona', font=fonte, size=tamanho)],
-            [sg.Button('Retornar', font=fonte, size=tamanho)]
+            [sg.Text('Gerenciar Poltrona', font=fonte_titulo, text_color=cor, size=(0, 2))],
+            [sg.Button('Incluir Poltrona', font=fonte_texto, size=tamanho)],
+            [sg.Button('Alterar Poltrona', font=fonte_texto, size=tamanho)],
+            [sg.Button('Lista Poltrona', font=fonte_texto, size=tamanho)],
+            [sg.Button('Excluir Poltrona', font=fonte_texto, size=tamanho)],
+            [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
 
-        window = sg.Window('Poltrona', layout, size=(400, 360), grab_anywhere=True, element_justification='c')
+        window = sg.Window('Poltrona', layout, size=tamanho_janela, element_justification='c')
 
         button = window.Read()
         valor_escolhido = {'Incluir Poltrona': 1, 'Alterar Poltrona': 2, 'Lista Poltrona': 3,
