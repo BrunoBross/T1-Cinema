@@ -114,9 +114,7 @@ class TelaFilme:
         window.Close()
 
     def exclui_filme(self, filmes: list):
-
         sg.theme(tema)
-
         layout = [
             [sg.Text('Excluir Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
             [sg.Text('Selecione o filme:', font=fonte_texto, text_color=cor)],
@@ -126,11 +124,12 @@ class TelaFilme:
         ]
         window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
         values = window.Read()
+        escolha = values[0]
         window.Close()
-        if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
-            return str(values[1][0])[6]
-        else:
-            window.Close()
+        if escolha == 'Confirmar' and len(values[1][0]):
+            id_filme = str(values[1][0])[6:].split('T')[0].strip()
+            return int(id_filme)
+        window.Close()
 
     def mostra_filme(self, dados_filme):
         print(

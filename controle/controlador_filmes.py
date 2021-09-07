@@ -69,19 +69,15 @@ class ControladorFilmes:
 	def excluir_filme(self):
 		tela = self.__tela_filme
 
-		if len(self.__filmes) < 1:
-			self.__tela_filme.exclui_filme([f'Não há filmes cadastrados.'])
-			return
-		id_filme = self.__tela_filme.exclui_filme(
-			[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
-		)
-
 		if self.existem_filmes_cadastrados():
-			while True:
+			id_filme = tela.exclui_filme(
+				[f'ID: {filme.id_filme}    Título: {filme.titulo};' for filme in self.filmes]
+			)
+
+			if id_filme is not None:
 				filme = self.pega_filme_por_id(int(id_filme))
 				self.__filmes.remove(filme)
 				tela.mostra_mensagem(f'O filme foi removido do sistema!')
-				return
 
 	def listar_generos_por_id(self):
 		tela = self.__tela_filme
