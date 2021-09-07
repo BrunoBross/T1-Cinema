@@ -1,10 +1,13 @@
 import PySimpleGUI as sg
 from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+from limite import tela_ingresso
 
 
 class TelaSistema:
 
     def tela_opcoes(self):
+
+        tela_ingresso.TelaIngresso.pega_poltrona(self)
 
         sg.theme(tema)
 

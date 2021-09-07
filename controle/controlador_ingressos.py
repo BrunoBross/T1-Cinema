@@ -30,14 +30,20 @@ class ControladorIngressos:
         material = [self.__contador + 1]
         control_sessao = self.__controlador_sistema.controlador_sessaos
         if len(control_sessao.sessaos) < 1:
-            self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR INGRESSOS )X==-------\033[0;0m")
-            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há sessão disponível, crie uma antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('Não há sessão disponível, crie uma antes.')
             return
 
         while True:
-            control_sessao.lista_sessaos()
+            id_sessao = self.__tela_ingresso.pega_sessao(
+                [f'ID: {sessao.id_sessao}    Título: {sessao.titulo}' for sessao in self.__ingressos]
+            )
+            if control_sessao.checa_id(id_sessao):
+                material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
+                break
 
-            self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( INCLUIR INGRESSOS )X==-------\033[0;0m")
+
+        while True:
+            control_sessao.lista_sessaos()
 
             id_sessao = self.__tela_ingresso.pega_dados_ingresso(0)
             if control_sessao.checa_id(id_sessao):
@@ -51,7 +57,7 @@ class ControladorIngressos:
                     material.append(fileira.lower())
                     break
             else:
-                self.__tela_ingresso.mostra_mensagem('\n\033[1;31mFileira inválida.\033[0;0m')
+                self.__tela_ingresso.mostra_mensagem('Fileira inválida.')
 
         while True:
             acento = self.__tela_ingresso.pega_dados_ingresso(2)
@@ -59,7 +65,7 @@ class ControladorIngressos:
                 material.append(acento)
                 break
             else:
-                self.__tela_ingresso.mostra_mensagem('\n\033[1;31mAcento inválido.\033[0;0m')
+                self.__tela_ingresso.mostra_mensagem('Acento inválido.')
         if self.checa_ingresso(material[1], material[2], material[3]):
             self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
             self.__contador += 1
@@ -79,8 +85,6 @@ class ControladorIngressos:
 
     def lista_ingressos(self):
 
-        self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( LISTA INGRESSOS )X==-------\033[0;0m")
-
         if len(self.__ingressos) > 0:
             for ingresso in self.__ingressos:
                 self.__tela_ingresso.mostra_ingresso({
@@ -92,11 +96,9 @@ class ControladorIngressos:
                     "id_ingresso": ingresso.id_ingresso
                 })
         else:
-            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('Não há ingresso disponível, crie um antes.')
 
     def excluir_ingresso(self):
-
-        self.__tela_ingresso.mostra_mensagem("\n\033[1;96m-------==X( EXCLUIR INGRESSOS )X==-------\033[0;0m")
 
         if len(self.__ingressos) > 0:
 
@@ -112,7 +114,7 @@ class ControladorIngressos:
                     "ATENCAO: Ingresso nao existente"
                 )
         else:
-            self.__tela_ingresso.mostra_mensagem('\n\033[1;31mNão há ingresso disponível, crie um antes.\033[0;0m')
+            self.__tela_ingresso.mostra_mensagem('Não há ingresso disponível, crie um antes.')
 
     def abre_tela(self):
         lista_opcoes = {
