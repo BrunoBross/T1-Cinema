@@ -34,20 +34,28 @@ class ControladorIngressos:
             self.__tela_ingresso.mostra_mensagem('Não há sessão disponível, crie uma antes.')
             return
 
+        # aqui pega a sessao
         while True:
             id_sessao = self.__tela_ingresso.pega_sessao(
-                [f'ID: {sessao.id_sessao}    Filme: {sessao.filme.titulo}    Horario: {sessao.horario}   Sala: {sessao.sala.numero}' for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
+                [
+                    f'ID: {sessao.id_sessao}    Filme: {sessao.filme.titulo}    Horario: {sessao.horario}   Sala: {sessao.sala.numero}'
+                    for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
             )
             if control_sessao.checa_id(id_sessao):
                 material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
                 break
 
+        # aqui pega o acento e poltrona
         while True:
             poltrona = self.__tela_ingresso.pega_poltrona()
-            print(poltrona)
-            acento = poltrona[0]
-            fileira = poltrona[2]
-            return acento, fileira
+            material.append(poltrona)
+            break
+
+        if self.checa_ingresso(id_sessao, poltrona):
+            self.__ingressos.append(Ingresso(material[0], material[1], material[2]))
+            self.__contador += 1
+            return
+        self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
 
         # while True:
         #
@@ -80,15 +88,14 @@ class ControladorIngressos:
         #     return
         # self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
 
-    def checa_ingresso(self, sessao_dado: Sessao, fileira_dado: str, acento_dado: str):
+    def checa_ingresso(self, sessao_dado: Sessao, poltrona_dado: str):
         if len(self.__ingressos) < 1:
             return True
         for sessao in self.__controlador_sistema.controlador_sessaos.sessaos:
             if sessao == sessao_dado:
                 for ingresso in self.__ingressos:
-                    if ingresso.fileira == fileira_dado:
-                        if ingresso.acento == acento_dado:
-                            return False
+                    if ingresso.poltrona == poltrona_dado:
+                        return False
         return True
 
     def lista_ingressos(self):
@@ -96,8 +103,7 @@ class ControladorIngressos:
         if len(self.__ingressos) > 0:
             for ingresso in self.__ingressos:
                 self.__tela_ingresso.mostra_ingresso({
-                    "fileira": ingresso.fileira,
-                    "acento": ingresso.acento,
+                    "poltrona": ingresso.poltrona,
                     "filme": ingresso.sessao.filme.titulo,
                     "sala": ingresso.sessao.sala.numero,
                     "horario": ingresso.sessao.horario,

@@ -4,7 +4,7 @@ from entidade.poltrona import Poltrona
 
 class Ingresso:
 
-    def __init__(self, id_ingresso: int, sessao: Sessao, fileira: str, acento: str):
+    def __init__(self, id_ingresso: int, sessao: Sessao, poltrona: str):    # fileira: str, acento: str
 
         if isinstance(id_ingresso, int):
             self.__id_ingresso = id_ingresso
@@ -12,14 +12,18 @@ class Ingresso:
         if isinstance(sessao, Sessao):
             self.__sessao = sessao
 
-        if isinstance(fileira, str) and isinstance(acento, str):
-            self.__poltrona = Poltrona(fileira, acento)
+        # if isinstance(fileira, str) and isinstance(acento, str):
+        #     self.__poltrona = Poltrona(fileira, acento)
+        #
+        # if isinstance(fileira, str):
+        #     self.__fileira = fileira
+        #
+        # if isinstance(acento, str):
+        #     self.__acento = acento
 
-        if isinstance(fileira, str):
-            self.__fileira = fileira
+        if isinstance(poltrona, str):
+            self.__poltrona = poltrona
 
-        if isinstance(acento, str):
-            self.__acento = acento
 
     @property
     def id_ingresso(self):
@@ -39,16 +43,18 @@ class Ingresso:
     def poltrona(self):
         return self.__poltrona
 
-    @poltrona.setter
-    def poltrona(self, fileira: str, acento: str):
+    # @poltrona.setter
+    # def poltrona(self, fileira: str, acento: str):
+    #
+    #     if isinstance(fileira, str) and isinstance(acento, str):
+    #         self.__poltrona = Poltrona(fileira, acento)
+    #
+    # @property
+    # def fileira(self):
+    #     return self.__fileira
+    #
+    # @property
+    # def acento(self):
+    #     return self.__acento
 
-        if isinstance(fileira, str) and isinstance(acento, str):
-            self.__poltrona = Poltrona(fileira, acento)
 
-    @property
-    def fileira(self):
-        return self.__fileira
-
-    @property
-    def acento(self):
-        return self.__acento

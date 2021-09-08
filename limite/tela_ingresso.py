@@ -30,10 +30,10 @@ class TelaIngresso:
 		layout = [
 			[sg.Text('Incluir Ingresso:', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Selecione a Sessão:', font=fonte_texto, text_color=cor)],
-			[sg.Listbox(values=sessoes, size=(80, 4), font=fonte_texto)],
+			[sg.Listbox(values=sessoes, size=(80, 6), font=fonte_texto)],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
-		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+		window = sg.Window('Selecionar', layout, size=(500, 380), element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar':
@@ -158,10 +158,7 @@ class TelaIngresso:
 		window = sg.Window('Selecionar Poltrona', layout, size=(560, 490), element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
-		if values[0] == 'Confirmar':
-			return values
-		else:
-			window.Close()
+		return values[0]
 
 	def pega_dados_ingresso(self, sessoes: list):
 
@@ -173,8 +170,7 @@ class TelaIngresso:
 
 	def mostra_ingresso(self, dados_ingresso):
 		print(
-			"FILEIRA:", dados_ingresso["fileira"],
-			"ACENTO:", dados_ingresso["acento"],
+			"POLTRONA", dados_ingresso["poltrona"],
 			"FILME:", dados_ingresso["filme"],
 			"SALA:", dados_ingresso["sala"],
 			"HORARIO:", dados_ingresso["horario"],

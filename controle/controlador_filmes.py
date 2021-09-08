@@ -43,6 +43,7 @@ class ControladorFilmes:
 			self.__filmes.append(filme)
 			self.__contador += 1
 			self.__id_filmes.append(self.__contador)
+			self.__tela_filme.mostra_mensagem(f'"{filme.titulo}" foi adicionado!')
 
 	def alterar_filme(self):
 		if self.existem_filmes_cadastrados():
