@@ -17,7 +17,7 @@ class TelaSala:
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 
-		window = sg.Window('Sala', layout, size=tamanho_janela, element_justification='c')
+		window = sg.Window('Sala', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
 		button = window.Read()
 		valor_escolhido = {'Incluir Sala': 1, 'Alterar Sala': 2, 'Lista Sala': 3, 'Excluir Sala': 4, 'Retornar': 0}
@@ -38,7 +38,7 @@ class TelaSala:
 			[sg.Text('')],
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
-		window = sg.Window('Salas Cadastradas', layout, size=tamanho_janela, element_justification='c')
+		window = sg.Window('Salas Cadastradas', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 		window.Read()
 		window.Close()
 
@@ -53,7 +53,7 @@ class TelaSala:
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
-		window = sg.Window('Cadastrar Salas', layout, size=tamanho_janela, element_justification='c')
+		window = sg.Window('Cadastrar Salas', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar' and values[1][0] != '':
@@ -73,7 +73,7 @@ class TelaSala:
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
-		window = sg.Window('Selecionar Sala', layout, size=tamanho_janela, element_justification='c')
+		window = sg.Window('Selecionar Sala', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
@@ -90,7 +90,7 @@ class TelaSala:
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
-		window = sg.Window('Alterar Sala', layout, size=tamanho_janela, element_justification='c')
+		window = sg.Window('Alterar Sala', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar':
@@ -107,7 +107,7 @@ class TelaSala:
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
-		window = sg.Window('Excluir Sala', layout, size=tamanho_janela, element_justification='c')
+		window = sg.Window('Excluir Sala', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
@@ -130,6 +130,6 @@ class TelaSala:
 			[sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
-		window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c')
+		window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image)
 		window.Read()
 		window.Close()

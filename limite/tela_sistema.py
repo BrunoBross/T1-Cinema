@@ -18,9 +18,10 @@ class TelaSistema:
             [sg.Button('Filmes', font=fonte_texto, size=tamanho)],
             [sg.Button('Gêneros', font=fonte_texto, size=tamanho)],
             [sg.Exit('Sair', font=fonte_texto, size=tamanho)]
+
         ]
 
-        window = sg.Window('Cinema', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('Cinema', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         button = window.Read()
         valor_escolhido = {'Ingressos': 1, 'Sessões': 2, 'Salas': 3, 'Filmes': 4, 'Gêneros': 5, 'Sair': 0}

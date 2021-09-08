@@ -6,4 +6,6 @@ cor = 'white'
 tamanho = (20, 1)
 tamanho_janela = (400, 380)
 background_listas = '#232B5C'
-
+poltrona_image = './images/poltrona.png'
+fundo_image = './images/fundo.png'
+icone_image = './images/icone.ico'

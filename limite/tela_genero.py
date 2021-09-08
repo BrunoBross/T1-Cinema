@@ -17,7 +17,7 @@ class TelaGenero:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
 
-        window = sg.Window('Gerenciador de Gêneros', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('Gerenciador de Gêneros', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         valor_escolhido = {
             'Incluir Gênero': 1, 'Alterar Gênero': 2, 'Listar Gêneros': 3,
@@ -42,7 +42,7 @@ class TelaGenero:
             [sg.Column(coluna_filmes, size=(400, 90), scrollable=True)],
             [sg.Button('Confirmar', font=fonte_texto, size=tamanho), sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         valores = window.Read()
         id_genero_e_filme = (str(valores[1][0])[6:].split('G')[0].strip(),
@@ -65,7 +65,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         window.Read()
         window.Close()
@@ -78,7 +78,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         valores = window.Read()
         escolha = valores[0]
@@ -97,7 +97,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         valores = window.Read()
         escolha = valores[0]
@@ -116,7 +116,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('generos', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
 
         valores = window.Read()
         escolha = valores[0]
@@ -135,7 +135,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('selecionar gênero', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('selecionar gênero', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
         valores = window.Read()
         escolha = valores[0]
 
@@ -150,7 +150,7 @@ class TelaGenero:
             [sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c')
+        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image)
 
         window.Read()
         window.Close()

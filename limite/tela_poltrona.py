@@ -73,6 +73,6 @@ class TelaPoltrona:
             [sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c')
+        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image)
         window.Read()
         window.Close()
