@@ -36,17 +36,18 @@ class ControladorIngressos:
 
         while True:
             id_sessao = self.__tela_ingresso.pega_sessao(
-                [f'Filme: {sessao.filme.titulo}    Horario: {sessao.horario}   Sala: {sessao.sala.numero}' for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
+                [f'ID: {sessao.id_sessao}    Filme: {sessao.filme.titulo}    Horario: {sessao.horario}   Sala: {sessao.sala.numero}' for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
             )
-            print(id_sessao)
             if control_sessao.checa_id(id_sessao):
                 material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
                 break
 
         while True:
             poltrona = self.__tela_ingresso.pega_poltrona()
+            print(poltrona)
             acento = poltrona[0]
-            fileira = poltrona[0]
+            fileira = poltrona[2]
+            return acento, fileira
 
         # while True:
         #

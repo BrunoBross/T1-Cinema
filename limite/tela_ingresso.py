@@ -36,9 +36,10 @@ class TelaIngresso:
 		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c')
 		values = window.Read()
 		window.Close()
-		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
-			return values
-			# return str(values[1][0])[6]
+		if values[0] == 'Confirmar':
+			# pega o ID e da um replace pra garantir que nao vai ter espaço em branco
+			value = str(values[1][0][0][4:5]).replace(' ', '')
+			return value
 		else:
 			window.Close()
 
@@ -151,16 +152,16 @@ class TelaIngresso:
 		]
 
 		layout = [
-			[sg.Text('Selecione sua poltrona:', font=fonte_texto)],
+			[sg.Text('Selecione Sua Poltrona:', font=fonte_texto)],
 			[sg.Column(coluna1), sg.Column(coluna2), sg.Column(coluna3), sg.Column(coluna4), sg.Column(coluna5), sg.Column(coluna6), sg.Column(coluna7), sg.Column(coluna8), sg.Column(coluna9), sg.Column(coluna10)],
 			[sg.Text('\n\n\n\n')],
 			[sg.Text('TELA', background_color='red', size=(15, 2), justification='c', font=('Sans-Serif', 15, 'bold'), text_color='white')]
 		]
-		window = sg.Window('Selecionar', layout, size=(560, 490), element_justification='c')
+		window = sg.Window('Selecionar Poltrona', layout, size=(560, 490), element_justification='c')
 		values = window.Read()
 		window.Close()
-		if values[0] == 'Confirmar' and len(values[1][0]) != 0 and str(values[1][0])[6].isdecimal():
-			return str(values[1][0])[6]
+		if values[0] == 'Confirmar':
+			return values
 		else:
 			window.Close()
 
