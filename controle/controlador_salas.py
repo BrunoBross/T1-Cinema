@@ -35,6 +35,15 @@ class ControladorSalas:
 				return False
 		return True
 
+	def existem_salas_cadastradas(self):
+		if len(self.salas) > 0:
+			return True
+		self.__tela_sala.mostra_mensagem(f'Não há salas cadastradas.')
+		return False
+
+	def dados_lista_salas(self):
+		return [f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
+
 	def incluir_sala(self):
 
 		while True:
@@ -45,95 +54,57 @@ class ControladorSalas:
 					self.__salas.append(sala)
 					self.__contador += 1
 					self.__id_salas.append(self.__contador)
+					self.__tela_sala.mostra_mensagem(f'A sala de Nº {sala.numero} foi adicionada!')
 					break
 			else:
 				break
 
 	def alterar_sala(self):
 
-		global id_sala
-		tela = self.__tela_sala
-
-		if len(self.__salas) <= 0:
-			self.__tela_sala.seleciona_sala(
-				[f'Não há salas cadastradas.']
-			)
-		else:
-			id_sala = self.__tela_sala.seleciona_sala(
-				[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
-			)
-
-			while True:
-				filme = self.pega_sala_por_id(int(id_sala))
-				novos_dados_filme = tela.altera_sala()
-				if novos_dados_filme is not None:
-					filme.titulo = novos_dados_filme
-					break
-				else:
-					break
-
-		# tela = self.__tela_sala
-		#
-		# if len(self.__salas) < 1:
-		# 	self.__tela_sala.mostra_mensagem('Não há salas disponíveis, crie uma antes.')
-		# 	return
-		# self.lista_salas()
-		# while True:
-		# 	id_sala = tela.seleciona_sala()
-		# 	if self.checa_id(id_sala):
-		# 		self.__tela_sala.mostra_mensagem("NOVO NÚMERO SALA")
-		# 		sala = self.pega_sala_por_id(int(id_sala))
-		# 		if sala is not None:
-		# 			novos_numero = tela.pega_dados_sala()
-		# 			if self.checa_numero(novos_numero):
-		# 				sala.numero = novos_numero
-		# 				break
+		if self.existem_salas_cadastradas():
+			id_sala = self.__tela_sala.seleciona_sala(self.dados_lista_salas())
+			if id_sala is not None:
+				sala = self.pega_sala_por_id(int(id_sala))
+				novos_dados_sala = self.__tela_sala.altera_sala()
+				if novos_dados_sala is not None:
+					sala_velha = sala.numero
+					sala.numero = novos_dados_sala
+					self.__tela_sala.mostra_mensagem(f'A sala Nº {sala_velha} foi substituida pelo Nº {sala.numero}')
 
 	def lista_salas(self):
 
-		if len(self.__salas) <= 0:
-			self.__tela_sala.popup_lista_salas(
-				[f'Não há salas cadastradas.']
-			)
-		else:
+		if self.existem_salas_cadastradas():
 			self.__tela_sala.popup_lista_salas(
 				[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
 			)
 
 	def excluir_sala(self):
 
-		tela = self.__tela_sala
-
-		if len(self.__salas) <= 0:
-			self.__tela_sala.exclui_sala(
-				[f'Não há salas cadastradas.']
-			)
-		else:
+		if self.existem_salas_cadastradas():
 			id_sala_ = self.__tela_sala.exclui_sala(
 				[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
 			)
-
-			while True:
+			if id_sala_ is not None:
 				sala = self.pega_sala_por_id(int(id_sala_))
 				self.__salas.remove(sala)
-				tela.mostra_mensagem(f'A sala foi removida do sistema!')
-				return
-
-		# if len(self.__salas) < 1:
-		# 	self.__tela_sala.mostra_mensagem('Não há salas disponíveis, crie uma antes.')
-		# 	return
-		# while True:
-		# 	self.lista_salas()
-		# 	id_sala = self.__tela_sala.seleciona_sala()
-		# 	if self.checa_id(id_sala):
-		# 		sala = self.pega_sala_por_id(int(id_sala))
-		# 		if sala is not None:
-		# 			numero = sala.numero
-		# 			self.__salas.remove(sala)
-		# 			self.__tela_sala.mostra_mensagem(f'A Sala {numero} foi removida do sistema')
-		# 			return
-		# 	else:
-		# 		self.__tela_sala.mostra_mensagem('Digite um ID válido!')
+				self.__tela_sala.mostra_mensagem(f'A sala de Nº {sala.numero} foi removida com sucesso')
+		#
+		# tela = self.__tela_sala
+		#
+		# if len(self.__salas) <= 0:
+		# 	self.__tela_sala.exclui_sala(
+		# 		[f'Não há salas cadastradas.']
+		# 	)
+		# else:
+		# 	id_sala_ = self.__tela_sala.exclui_sala(
+		# 		[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
+		# 	)
+		#
+		# 	while True:
+		# 		sala = self.pega_sala_por_id(int(id_sala_))
+		# 		self.__salas.remove(sala)
+		# 		tela.mostra_mensagem(f'A sala foi removida do sistema!')
+		# 		return
 
 	def abre_tela(self):
 		lista_opcoes = {
