@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+from limite.temas import *
 
 
 class TelaIngresso:
@@ -28,7 +28,7 @@ class TelaIngresso:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Incluir Ingresso:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Incluir Ingresso:', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Selecione a Sessão:', font=fonte_texto, text_color=cor)],
 			[sg.Listbox(values=sessoes, size=(80, 4), font=fonte_texto)],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]

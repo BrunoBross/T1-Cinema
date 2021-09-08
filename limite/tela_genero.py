@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+from limite.temas import *
 
 
 class TelaGenero:
@@ -36,9 +36,9 @@ class TelaGenero:
             [sg.Listbox(values=filmes, size=(30, 6), font=fonte_texto, text_color=cor)]
         ]
         layout = [
-            [sg.Text('Gêneros Cadastrados:', size=(0, 1), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Gêneros Cadastrados:', size=(0, 1), font=fonte_titulo, text_color=cor)],
             [sg.Column(coluna_generos, size=(400, 90), scrollable=True)],
-            [sg.Text('Filmes Cadastrados:', size=(0, 1), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Filmes Cadastrados:', size=(0, 1), font=fonte_titulo, text_color=cor)],
             [sg.Column(coluna_filmes, size=(400, 90), scrollable=True)],
             [sg.Button('Confirmar', font=fonte_texto, size=tamanho), sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
@@ -56,11 +56,12 @@ class TelaGenero:
     def popup_lista_generos(self, generos: list):
         sg.theme(tema)
         col = [
-            [sg.Text('\n'.join(generos), font=fonte_texto, text_color=cor)]
+            [sg.Text('\n'.join(generos), font=fonte_texto, text_color=cor, background_color=background_listas)]
         ]
         layout = [
-            [sg.Text('Gêneros Cadastrados:', size=(0, 2), font=('Impact', 20), text_color=cor)],
-            [sg.Column(col, size=(400, 150), scrollable=True)],
+            [sg.Text('Gêneros Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+            [sg.Text('Lista de Gêneros:', font=fonte_texto, text_color=cor)],
+            [sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
@@ -72,7 +73,7 @@ class TelaGenero:
     def pega_dados_genero(self):
         sg.theme(tema)
         layout = [
-            [sg.Text('Incluir Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Incluir Gênero:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Gênero:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
@@ -90,7 +91,7 @@ class TelaGenero:
     def seleciona_genero(self, generos: list):
         sg.theme(tema)
         layout = [
-            [sg.Text('Seleciona Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Seleciona Gênero:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Selecione o gênero:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=generos, size=(30, 6), font=fonte_texto)],
             [sg.Text('')],
@@ -109,7 +110,7 @@ class TelaGenero:
     def altera_genero(self):
         sg.theme(tema)
         layout = [
-            [sg.Text('Alterar Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Alterar Gênero:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Novo gênero:', font=fonte_texto, text_color=cor),
              sg.InputText('', size=(300, 2), font=fonte_texto)],
             [sg.Text('')],
@@ -128,7 +129,7 @@ class TelaGenero:
     def exclui_genero(self, generos: list):
         sg.theme(tema)
         layout = [
-            [sg.Text('Excluir Gênero:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Excluir Gênero:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Selecione o gênero:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=generos, size=(30, 6), font=fonte_texto)],
             [sg.Text('')],

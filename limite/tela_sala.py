@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+from limite.temas import *
 
 
 class TelaSala:
@@ -29,11 +29,12 @@ class TelaSala:
 		sg.theme(tema)
 
 		col = [
-			[sg.Text('\n'.join(salas), font=fonte_texto, text_color=cor)]
+			[sg.Text('\n'.join(salas), font=fonte_texto, text_color=cor, background_color=background_listas)]
 		]
 		layout = [
-			[sg.Text('Salas Cadastradas', size=(0, 2), font=('Impact', 20), text_color=cor)],
-			[sg.Column(col, size=(400, 150), scrollable=True)],
+			[sg.Text('Salas Cadastradas', size=(0, 2), font=fonte_titulo, text_color=cor)],
+			[sg.Text('Lista de Salas:', font=fonte_texto, text_color=cor)],
+			[sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
 			[sg.Text('')],
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
@@ -47,7 +48,7 @@ class TelaSala:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Incluir Sala', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Incluir Sala', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Número da Sala:', font=fonte_texto, text_color=cor), sg.Slider(range=(1, 25), orientation='h', size=(30, 20))],
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
@@ -66,7 +67,7 @@ class TelaSala:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Seleciona Sala', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Seleciona Sala', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Selecione a Sala:', font=fonte_texto, text_color=cor)],
 			[sg.Listbox(values=salas, size=(30, 6), font=fonte_texto)],
 			[sg.Text('')],
@@ -84,7 +85,7 @@ class TelaSala:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Alterar Sala', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Alterar Sala', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Novo Número:', font=fonte_texto, text_color=cor), sg.Slider(range=(1, 25), orientation='h', size=(30, 20))],
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
@@ -100,7 +101,7 @@ class TelaSala:
 		sg.theme(tema)
 
 		layout = [
-			[sg.Text('Excluir Sala', size=(0, 2), font=('Impact', 20), text_color=cor)],
+			[sg.Text('Excluir Sala', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Selecione a Sala:', font=fonte_texto, text_color=cor)],
 			[sg.Listbox(values=salas, size=(30, 6), font=fonte_texto)],
 			[sg.Text('')],

@@ -20,7 +20,7 @@ class ControladorGeneros:
     def existem_generos_cadastrados(self):
         if len(self.generos) > 0:
             return True
-        self.__tela_genero.mostra_mensagem('\nNão há gêneros disponíveis')
+        self.__tela_genero.mostra_mensagem('Não há gêneros disponíveis')
         return False
 
     def checa_id(self, dado: str):
@@ -31,7 +31,7 @@ class ControladorGeneros:
     def checa_tipo(self, dado: str):
         for genero in self.__generos:
             if genero.tipo == dado:
-                self.__tela_genero.mostra_mensagem(f'\nO gênero "{dado}"\njá está cadastrado.')
+                self.__tela_genero.mostra_mensagem(f'O gênero "{dado}" já está cadastrado.')
                 return False
         return True
 
@@ -80,7 +80,7 @@ class ControladorGeneros:
                 genero = self.pega_genero_por_id(id_genero)
                 nome = genero.tipo
                 self.__generos.remove(genero)
-                self.__tela_genero.mostra_mensagem(f'\nGênero {nome}\nremovido com sucesso')
+                self.__tela_genero.mostra_mensagem(f'Gênero {nome} removido com sucesso')
 
     def abre_tela(self):
         lista_opcoes = {

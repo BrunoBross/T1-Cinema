@@ -1,6 +1,5 @@
 import PySimpleGUI as sg
-from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
-from limite import tela_ingresso
+from limite.temas import *
 
 
 class TelaSistema:

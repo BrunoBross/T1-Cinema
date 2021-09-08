@@ -1,6 +1,6 @@
 from entidade.filme import Filme
 import PySimpleGUI as sg
-from limite.temas import tamanho, tamanho_janela, fonte_texto, tema, tema_aviso, fonte_titulo, cor
+from limite.temas import *
 
 
 class TelaFilme:
@@ -26,11 +26,12 @@ class TelaFilme:
     def popup_lista_filme(self, filmes: list):
         sg.theme(tema)
         col = [
-            [sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor)]
+            [sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor, background_color=background_listas)]
         ]
         layout = [
-            [sg.Text('Filmes Cadastrados:', size=(0, 2), font=('Impact', 20), text_color=cor)],
-            [sg.Column(col, size=(400, 150), scrollable=True)],
+            [sg.Text('Filmes Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+            [sg.Text('Lista de Filmes:', font=fonte_texto, text_color=cor)],
+            [sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
@@ -47,7 +48,7 @@ class TelaFilme:
     def pega_dados_filme(self):
         sg.theme(tema)
         layout = [
-            [sg.Text('Incluir Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Incluir Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Título:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
@@ -65,7 +66,7 @@ class TelaFilme:
     def seleciona_filme(self, filmes: list):
         sg.theme(tema)
         layout = [
-            [sg.Text('Seleciona Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Seleciona Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Selecione o filme:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=filmes, size=(30, 6), font=fonte_texto)],
             [sg.Text('')],
@@ -86,7 +87,7 @@ class TelaFilme:
         sg.theme(tema)
 
         layout = [
-            [sg.Text('Alterar Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Alterar Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Novo título:', font=fonte_texto, text_color=cor),
              sg.InputText('', size=(300, 2), font=fonte_texto)],
             [sg.Text('')],
@@ -105,7 +106,7 @@ class TelaFilme:
     def exclui_filme(self, filmes: list):
         sg.theme(tema)
         layout = [
-            [sg.Text('Excluir Filme:', size=(0, 2), font=('Impact', 20), text_color=cor)],
+            [sg.Text('Excluir Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Selecione o filme:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=filmes, size=(30, 6), font=fonte_texto)],
             [sg.Text('')],
