@@ -80,10 +80,13 @@ class TelaFilme:
 
     def seleciona_filme(self, filmes: list):
         sg.theme(tema)
+
+        col = [sg.Listbox(values=filmes, size=(30, 6), font=fonte_texto)]
+
         layout = [
             [sg.Text('Seleciona Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Selecione o filme:', font=fonte_texto, text_color=cor)],
-            [sg.Listbox(values=filmes, size=(30, 6), font=fonte_texto)],
+            [col],
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]

@@ -50,15 +50,15 @@ class TelaSessao:
         horarios = ['13:20', '15:00', '16:40', '18:20', '20:00', '21:40']
         layout = [
             [sg.Text('Filme:', font=fonte_texto, text_color=cor)],
-            [sg.Listbox(values=filmes, expand_y=True, no_scrollbar=True, font=fonte_texto,
+            [sg.Spin(values=filmes, font=fonte_texto,
                         text_color=cor, background_color=background_listas)],
 
             [sg.Text('Horário:', font=fonte_texto, text_color=cor)],
-            [sg.Listbox(values=horarios, expand_y=True, no_scrollbar=True, font=fonte_texto,
+            [sg.Spin(values=horarios, font=fonte_texto,
                         text_color=cor, background_color=background_listas)],
 
             [sg.Text('Sala:', font=fonte_texto, text_color=cor)],
-            [sg.Listbox(values=salas, expand_y=True, no_scrollbar=True, font=fonte_texto,
+            [sg.Spin(values=salas, font=fonte_texto,
                         text_color=cor, background_color=background_listas)],
 
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]

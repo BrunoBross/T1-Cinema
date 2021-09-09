@@ -47,9 +47,13 @@ class TelaSala:
 
 		sg.theme(tema)
 
+		salas = []
+		for _ in range(1, 26):
+			salas.append(_)
+
 		layout = [
 			[sg.Text('Incluir Sala', size=(0, 2), font=fonte_titulo, text_color=cor)],
-			[sg.Text('Número da Sala:', font=fonte_texto, text_color=cor), sg.Slider(range=(1, 25), orientation='h', size=(30, 20))],
+			[sg.Text('Número da Sala:', font=fonte_texto, text_color=cor), sg.Spin(values=salas, font=fonte_texto, text_color=cor, background_color=background_listas)],
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
@@ -66,10 +70,12 @@ class TelaSala:
 
 		sg.theme(tema)
 
+		col = [sg.Listbox(values=salas, size=(30, 6), font=fonte_texto)]
+
 		layout = [
 			[sg.Text('Seleciona Sala', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Selecione a Sala:', font=fonte_texto, text_color=cor)],
-			[sg.Listbox(values=salas, size=(30, 6), font=fonte_texto)],
+			[col],
 			[sg.Text('')],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
