@@ -23,6 +23,7 @@ class TelaFilme:
         return valor_escolhido
 
     def popup_lista_filme(self, filmes: list):
+
         sg.theme(tema)
         col = [
             [sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor, background_color=background_listas)]

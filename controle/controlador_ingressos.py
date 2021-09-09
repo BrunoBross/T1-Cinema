@@ -34,75 +34,51 @@ class ControladorIngressos:
             self.__tela_ingresso.mostra_mensagem('Não há sessão disponível, crie uma antes.')
             return
 
+        # aqui pega a sessao
         while True:
             id_sessao = self.__tela_ingresso.pega_sessao(
-                [f'ID: {sessao.id_sessao}    Filme: {sessao.filme.titulo}    Horario: {sessao.horario}   Sala: {sessao.sala.numero}' for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
+                [
+                    f'ID: {sessao.id_sessao} | Horario: {sessao.horario} | Sala: {sessao.sala.numero} | Filme: {sessao.filme.titulo}'
+                    for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
             )
             if control_sessao.checa_id(id_sessao):
                 material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
                 break
 
+        # aqui pega o acento e poltrona
         while True:
             poltrona = self.__tela_ingresso.pega_poltrona()
-            print(poltrona)
-            acento = poltrona[0]
-            fileira = poltrona[2]
-            return acento, fileira
+            material.append(poltrona)
+            break
 
-        # while True:
-        #
-        #     control_sessao.lista_sessaos()
-        #
-        #     id_sessao = self.__tela_ingresso.pega_dados_ingresso(0)
-        #     if control_sessao.checa_id(id_sessao):
-        #         material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
-        #         break
-        #
-        # while True:
-        #     fileira = self.__tela_ingresso.pega_dados_ingresso(1)
-        #     if fileira.isalpha() and len(fileira) == 1:
-        #         if fileira.lower() in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
-        #             material.append(fileira.lower())
-        #             break
-        #     else:
-        #         self.__tela_ingresso.mostra_mensagem('Fileira inválida.')
-        #
-        # while True:
-        #     acento = self.__tela_ingresso.pega_dados_ingresso(2)
-        #     if acento.isdecimal() and 20 >= int(acento) >= 1:
-        #         material.append(acento)
-        #         break
-        #     else:
-        #         self.__tela_ingresso.mostra_mensagem('Acento inválido.')
-        # if self.checa_ingresso(material[1], material[2], material[3]):
-        #     self.__ingressos.append(Ingresso(material[0], material[1], material[2], material[3]))
-        #     self.__contador += 1
-        #     return
-        # self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
+        if self.checa_ingresso(id_sessao, poltrona):
+            self.__ingressos.append(Ingresso(material[0], material[1], material[2]))
+            self.__contador += 1
+            return
+        self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
 
-    def checa_ingresso(self, sessao_dado: Sessao, fileira_dado: str, acento_dado: str):
+    def checa_ingresso(self, sessao_dado: Sessao, poltrona_dado: str):
         if len(self.__ingressos) < 1:
             return True
         for sessao in self.__controlador_sistema.controlador_sessaos.sessaos:
             if sessao == sessao_dado:
                 for ingresso in self.__ingressos:
-                    if ingresso.fileira == fileira_dado:
-                        if ingresso.acento == acento_dado:
-                            return False
+                    if ingresso.poltrona == poltrona_dado:
+                        return False
         return True
 
     def lista_ingressos(self):
 
         if len(self.__ingressos) > 0:
             for ingresso in self.__ingressos:
-                self.__tela_ingresso.mostra_ingresso({
-                    "fileira": ingresso.fileira,
-                    "acento": ingresso.acento,
-                    "filme": ingresso.sessao.filme.titulo,
-                    "sala": ingresso.sessao.sala.numero,
-                    "horario": ingresso.sessao.horario,
-                    "id_ingresso": ingresso.id_ingresso
-                })
+                self.__tela_ingresso.mostra_ingresso(
+
+                    f'Poltrona: {ingresso.poltrona}'
+                    f' | Filme: {ingresso.sessao.filme.titulo}'
+                    f' | Sala: {ingresso.sessao.sala.numero}'
+                    f' | Horário: {ingresso.sessao.horario}'
+                    f' | ID: {ingresso.id_ingresso}')
+
         else:
             self.__tela_ingresso.mostra_mensagem('Não há ingresso disponível, crie um antes.')
 

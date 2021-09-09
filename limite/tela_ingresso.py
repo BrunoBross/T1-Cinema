@@ -30,10 +30,10 @@ class TelaIngresso:
 		layout = [
 			[sg.Text('Incluir Ingresso:', size=(0, 2), font=fonte_titulo, text_color=cor)],
 			[sg.Text('Selecione a Sessão:', font=fonte_texto, text_color=cor)],
-			[sg.Listbox(values=sessoes, size=(80, 4), font=fonte_texto)],
+			[sg.Listbox(values=sessoes, size=(80, 6), font=fonte_texto)],
 			[sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
 		]
-		window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+		window = sg.Window('Selecionar', layout, size=(500, 380), element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
 		if values[0] == 'Confirmar':
@@ -158,10 +158,27 @@ class TelaIngresso:
 		window = sg.Window('Selecionar Poltrona', layout, size=(560, 490), element_justification='c', icon=icone_image)
 		values = window.Read()
 		window.Close()
-		if values[0] == 'Confirmar':
-			return values
-		else:
-			window.Close()
+		return values[0]
+
+	def popup_lista_ingresso(self, filmes: list):
+		sg.theme(tema)
+
+		col = [
+			[sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor, background_color=background_listas)]
+		]
+
+		layout = [
+			[sg.Text('Filmes Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+			[sg.Text('Lista de Filmes:', font=fonte_texto, text_color=cor)],
+			[sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
+			[sg.Text('')],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+		]
+		window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c',
+						   icon=icone_image)
+
+		window.Read()
+		window.Close()
 
 	def pega_dados_ingresso(self, sessoes: list):
 
@@ -172,14 +189,33 @@ class TelaIngresso:
 		return mensagem[dados]
 
 	def mostra_ingresso(self, dados_ingresso):
-		print(
-			"FILEIRA:", dados_ingresso["fileira"],
-			"ACENTO:", dados_ingresso["acento"],
-			"FILME:", dados_ingresso["filme"],
-			"SALA:", dados_ingresso["sala"],
-			"HORARIO:", dados_ingresso["horario"],
-			"ID:", dados_ingresso["id_ingresso"]
-		)
+
+		#
+		# lista = (
+		# 	"POLTRONA", dados_ingresso["poltrona"],
+		# 	"FILME:", dados_ingresso["filme"],
+		# 	"SALA:", dados_ingresso["sala"],
+		# 	"HORARIO:", dados_ingresso["horario"],
+		# 	"ID:", dados_ingresso["id_ingresso"]
+		# )
+
+		sg.theme(tema)
+
+		col = [
+			[sg.Text(dados_ingresso, font=fonte_texto, text_color=cor, background_color=background_listas)]
+		]
+		layout = [
+			[sg.Text('Filmes Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+			[sg.Text('Lista de Filmes:', font=fonte_texto, text_color=cor)],
+			[sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
+			[sg.Text('')],
+			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+		]
+		window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+		window.Read()
+		window.Close()
+
+
 
 	def seleciona_ingresso(self):
 		id_ingresso = input("ID do ingresso que deseja selecionar: ")
