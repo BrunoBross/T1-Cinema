@@ -1,4 +1,3 @@
-from entidade.filme import Filme
 import PySimpleGUI as sg
 from limite.temas import *
 
@@ -16,7 +15,8 @@ class TelaFilme:
             [sg.Button('Listar Gêneros', font=fonte_texto, size=tamanho)],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Filme', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('Filme', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
         valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3,
                            'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0}[window.Read()[0]]
 
@@ -36,15 +36,29 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
 
         window.Read()
         window.Close()
 
-    def lista_generos_do_filme(self, lista: list, filme: Filme):
-        print(f'\n\t{filme.titulo}:')
-        for genero in lista:
-            print(f'* {genero.tipo}')
+    def popup_lista_filmes_por_genero(self, filmes_por_genero: list):
+        sg.theme(tema)
+        col = [
+            [sg.Text('\n'.join(filmes_por_genero), font=fonte_texto, text_color=cor, background_color=background_listas)]
+        ]
+        layout = [
+            [sg.Text('Filmes Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+            [sg.Text('Filmes e seus gêneros:', font=fonte_texto, text_color=cor)],
+            [sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
+            [sg.Text('')],
+            [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+        ]
+        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
+
+        window.Read()
+        window.Close()
 
     def pega_dados_filme(self):
         sg.theme(tema)
@@ -54,7 +68,8 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('filmes', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('filmes', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
 
         valores = window.Read()
         escolha = valores[0]
@@ -73,7 +88,8 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
 
         valores = window.Read()
         escolha = valores[0]
@@ -94,7 +110,8 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('filmes', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('filmes', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
 
         valores = window.Read()
         escolha = valores[0]
@@ -113,7 +130,8 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Selecionar', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar', layout, size=tamanho_janela,
+                           element_justification='c', icon=icone_image)
         valores = window.Read()
         escolha = valores[0]
 
@@ -128,7 +146,8 @@ class TelaFilme:
             [sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar', layout, size=(420, 100),
+                           element_justification='c', icon=icone_image)
 
         window.Read()
         window.Close()

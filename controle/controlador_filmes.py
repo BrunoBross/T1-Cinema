@@ -10,7 +10,6 @@ class ControladorFilmes:
 		self.__id_filmes = []
 		self.__tela_filme = TelaFilme()
 		self.__contador = 0
-		self.__filme_com_genero_existe = [False]
 
 	def pega_filme_por_id(self, id_filme: int):
 		for filme in self.__filmes:
@@ -24,14 +23,12 @@ class ControladorFilmes:
 		self.__tela_filme.mostra_mensagem(f'\nNão há filmes cadastrados.')
 		return False
 
-	def checa_id(self, id_filme: str):
-		if id_filme.isdecimal():
-			if int(id_filme) in self.__id_filmes:
-				return True
-			else:
+	def checa_titulo(self, dado: str):
+		for filme in self.__filmes:
+			if filme.titulo == dado:
+				self.__tela_filme.mostra_mensagem(f'O filme "{dado}" já está cadastrado.')
 				return False
-		else:
-			return False
+		return True
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
@@ -39,11 +36,11 @@ class ControladorFilmes:
 	def incluir_filme(self):
 		dados_filme = self.__tela_filme.pega_dados_filme()
 		if dados_filme is not None:
-			filme = Filme(self.__contador+1, dados_filme)
-			self.__filmes.append(filme)
-			self.__contador += 1
-			self.__id_filmes.append(self.__contador)
-			self.__tela_filme.mostra_mensagem(f'"{filme.titulo}" foi adicionado!')
+			if self.checa_titulo(dados_filme):
+				filme = Filme(self.__contador+1, dados_filme)
+				self.__filmes.append(filme)
+				self.__contador += 1
+				self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
 		if self.existem_filmes_cadastrados():
@@ -56,6 +53,16 @@ class ControladorFilmes:
 
 	def dados_lista_filmes(self):
 		return [f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
+
+	def dados_lista_filme_por_genero(self):
+		generos = [genero for genero in self.__controlador_sistema.controlador_generos.generos if len(genero.filmes) > 0]
+		filmes = [genero.filmes for genero in generos]
+		filmes_por_genero = []
+		for genero, filmes_lista in zip(generos, filmes):
+			filmes_por_genero.append(f'{genero.tipo}:')
+			for filme in filmes_lista:
+				filmes_por_genero.append(f'   {filme.titulo}')
+		return filmes_por_genero
 
 	def lista_filmes(self):
 		if self.existem_filmes_cadastrados():
@@ -71,20 +78,8 @@ class ControladorFilmes:
 				self.__tela_filme.mostra_mensagem(f'\nO filme "{nome}"\nfoi removido com sucesso')
 
 	def listar_generos_por_id(self):
-		tela = self.__tela_filme
-		if self.existem_filmes_cadastrados():
-			if not self.__filme_com_genero_existe[0]:
-				tela.mostra_mensagem('\n\033[1;31mNenhum filme com gênero registrado.\033[0;0m')
-				return
-			while True:
-				self.lista_filmes()
-				id_filme = tela.seleciona_filme()
-				if self.checa_id(id_filme):
-					filme = self.pega_filme_por_id(int(id_filme))
-					generos = filme.generos
-					tela.lista_generos_do_filme(generos, filme)
-					return
-				tela.mostra_mensagem('\n\033[1;31mID inválido, tente novamente.\033[0;0m')
+		if self.existem_filmes_cadastrados() and self.__controlador_sistema.controlador_generos.existem_generos_cadastrados():
+			self.__tela_filme.popup_lista_filmes_por_genero(self.dados_lista_filme_por_genero())
 
 	def abre_tela(self):
 		lista_opcoes = {
@@ -110,11 +105,3 @@ class ControladorFilmes:
 	@property
 	def tela(self):
 		return self.__tela_filme
-
-	@property
-	def filme_com_genero_existe(self):
-		return self.__filme_com_genero_existe
-
-	@filme_com_genero_existe.setter
-	def filme_com_genero_existe(self, valor: bool):
-		self.__filme_com_genero_existe.insert(0, valor)
