@@ -41,9 +41,13 @@ class ControladorIngressos:
                     f'ID: {sessao.id_sessao} | Horario: {sessao.horario} | Sala: {sessao.sala.numero} | Filme: {sessao.filme.titulo}'
                     for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
             )
-            if control_sessao.checa_id(id_sessao):
-                material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
-                break
+            if id_sessao is not None:
+                if control_sessao.checa_id(id_sessao):
+                    material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
+                    break
+            else:
+                self.__tela_ingresso.mostra_mensagem('Você precisa selecionar uma sessão')
+                self.__tela_ingresso.tela_opcoes()
 
         # aqui pega o acento e poltrona
         while True:
@@ -82,20 +86,21 @@ class ControladorIngressos:
         else:
             self.__tela_ingresso.mostra_mensagem('Não há ingresso disponível, crie um antes.')
 
+    def dados_lista_ingressos(self):
+        return [f'Poltrona: {ingresso.poltrona} | Filme: {ingresso.sessao.filme.titulo} | Sala: {ingresso.sessao.sala.numero} | Horário: {ingresso.sessao.horario} | ID: {ingresso.id_ingresso}' for ingresso in self.__ingressos]
+
     def excluir_ingresso(self):
 
         if len(self.__ingressos) > 0:
 
-            self.lista_ingressos()
-            id_ingresso = self.__tela_ingresso.seleciona_ingresso()
-            ingresso = self.pega_ingresso_por_id(int(id_ingresso))
-
-            if ingresso is not None:
+            id_ingresso = self.__tela_ingresso.excluir_ingresso(self.dados_lista_ingressos())
+            if id_ingresso is not None:
+                ingresso = self.pega_ingresso_por_id(int(id_ingresso))
                 self.__ingressos.remove(ingresso)
-                self.lista_ingressos()
+                self.__tela_ingresso.mostra_mensagem('O ingresso foi removido com sucesso')
             else:
                 self.__tela_ingresso.mostra_mensagem(
-                    "ATENCAO: Ingresso nao existente"
+                    'Não há ingressos cadastrados'
                 )
         else:
             self.__tela_ingresso.mostra_mensagem('Não há ingresso disponível, crie um antes.')
