@@ -1,4 +1,3 @@
-from entidade.filme import Filme
 import PySimpleGUI as sg
 from limite.temas import *
 
@@ -40,10 +39,22 @@ class TelaFilme:
         window.Read()
         window.Close()
 
-    def lista_generos_do_filme(self, lista: list, filme: Filme):
-        print(f'\n\t{filme.titulo}:')
-        for genero in lista:
-            print(f'* {genero.tipo}')
+    def popup_lista_filmes_por_genero(self, filmes_por_genero: list):
+        sg.theme(tema)
+        col = [
+            [sg.Text('\n'.join(filmes_por_genero), font=fonte_texto, text_color=cor, background_color=background_listas)]
+        ]
+        layout = [
+            [sg.Text('Filmes Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+            [sg.Text('Filmes e seus gêneros:', font=fonte_texto, text_color=cor)],
+            [sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
+            [sg.Text('')],
+            [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
+        ]
+        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+
+        window.Read()
+        window.Close()
 
     def pega_dados_filme(self):
         sg.theme(tema)
