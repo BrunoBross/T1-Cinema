@@ -24,7 +24,6 @@ class TelaFilme:
         return valor_escolhido
 
     def popup_lista_filme(self, filmes: list):
-
         sg.theme(tema)
         col = [
             [sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor, background_color=background_listas)]
@@ -100,9 +99,7 @@ class TelaFilme:
             return int(id_filme)
 
     def altera_filme(self):
-
         sg.theme(tema)
-
         layout = [
             [sg.Text('Alterar Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Novo título:', font=fonte_texto, text_color=cor),
@@ -130,7 +127,7 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Selecionar', layout, size=tamanho_janela,
+        window = sg.Window('selecionar', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image)
         valores = window.Read()
         escolha = valores[0]
