@@ -63,6 +63,9 @@ class ControladorSistema:
 	def gerencia_poltronas(self):
 		self.__controlador_poltronas.abre_tela()
 
+	def mostra_creditos(self):
+		self.__tela_sistema.creditos()
+
 	def encerra_sistema(self):
 		print('\033[1;31mAté logo ;(\033[0;0m')
 		exit(0)
@@ -74,6 +77,7 @@ class ControladorSistema:
 			3: self.gerencia_salas,
 			4: self.gerencia_filmes,
 			5: self.gerencia_generos,
+			6: self.mostra_creditos,
 			0: self.encerra_sistema
 		}
 
