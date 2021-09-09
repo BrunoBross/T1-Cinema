@@ -56,6 +56,16 @@ class ControladorFilmes:
 	def dados_lista_filmes(self):
 		return [f'ID: {filme.id_filme}    Título: {filme.titulo}' for filme in self.filmes]
 
+	def dados_lista_filme_por_genero(self):
+		generos = [genero for genero in self.__controlador_sistema.controlador_generos.generos if len(genero.filmes) > 0]
+		filmes = [genero.filmes for genero in generos]
+		filmes_por_genero = []
+		for genero, filmes_lista in zip(generos, filmes):
+			filmes_por_genero.append(f'{genero.tipo}:')
+			for filme in filmes_lista:
+				filmes_por_genero.append(f'   {filme.titulo}')
+		return filmes_por_genero
+
 	def lista_filmes(self):
 		if self.existem_filmes_cadastrados():
 			self.__tela_filme.popup_lista_filme(self.dados_lista_filmes())
@@ -70,20 +80,8 @@ class ControladorFilmes:
 				self.__tela_filme.mostra_mensagem(f'\nO filme "{nome}"\nfoi removido com sucesso')
 
 	def listar_generos_por_id(self):
-		tela = self.__tela_filme
-		if self.existem_filmes_cadastrados():
-			if not self.__filme_com_genero_existe[0]:
-				tela.mostra_mensagem('\n\033[1;31mNenhum filme com gênero registrado.\033[0;0m')
-				return
-			while True:
-				self.lista_filmes()
-				id_filme = tela.seleciona_filme()
-				if self.checa_id(id_filme):
-					filme = self.pega_filme_por_id(int(id_filme))
-					generos = filme.generos
-					tela.lista_generos_do_filme(generos, filme)
-					return
-				tela.mostra_mensagem('\n\033[1;31mID inválido, tente novamente.\033[0;0m')
+		if self.existem_filmes_cadastrados() and self.__controlador_sistema.controlador_generos.existem_generos_cadastrados():
+			self.__tela_filme.popup_lista_filmes_por_genero(self.dados_lista_filme_por_genero())
 
 	def abre_tela(self):
 		lista_opcoes = {
