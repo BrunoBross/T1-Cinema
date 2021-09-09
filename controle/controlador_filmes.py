@@ -10,7 +10,6 @@ class ControladorFilmes:
 		self.__id_filmes = []
 		self.__tela_filme = TelaFilme()
 		self.__contador = 0
-		self.__filme_com_genero_existe = [False]
 
 	def pega_filme_por_id(self, id_filme: int):
 		for filme in self.__filmes:
@@ -24,14 +23,12 @@ class ControladorFilmes:
 		self.__tela_filme.mostra_mensagem(f'\nNão há filmes cadastrados.')
 		return False
 
-	def checa_id(self, id_filme: str):
-		if id_filme.isdecimal():
-			if int(id_filme) in self.__id_filmes:
-				return True
-			else:
+	def checa_titulo(self, dado: str):
+		for filme in self.__filmes:
+			if filme.titulo == dado:
+				self.__tela_filme.mostra_mensagem(f'O filme "{dado}" já está cadastrado.')
 				return False
-		else:
-			return False
+		return True
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
@@ -39,10 +36,11 @@ class ControladorFilmes:
 	def incluir_filme(self):
 		dados_filme = self.__tela_filme.pega_dados_filme()
 		if dados_filme is not None:
-			filme = Filme(self.__contador+1, dados_filme)
-			self.__filmes.append(filme)
-			self.__contador += 1
-			self.__id_filmes.append(self.__contador)
+			if self.checa_titulo(dados_filme):
+				filme = Filme(self.__contador+1, dados_filme)
+				self.__filmes.append(filme)
+				self.__contador += 1
+				self.__id_filmes.append(self.__contador)
 
 	def alterar_filme(self):
 		if self.existem_filmes_cadastrados():
@@ -107,11 +105,3 @@ class ControladorFilmes:
 	@property
 	def tela(self):
 		return self.__tela_filme
-
-	@property
-	def filme_com_genero_existe(self):
-		return self.__filme_com_genero_existe
-
-	@filme_com_genero_existe.setter
-	def filme_com_genero_existe(self, valor: bool):
-		self.__filme_com_genero_existe.insert(0, valor)

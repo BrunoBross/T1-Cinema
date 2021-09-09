@@ -23,11 +23,6 @@ class ControladorGeneros:
         self.__tela_genero.mostra_mensagem('Não há gêneros disponíveis')
         return False
 
-    def checa_id(self, dado: str):
-        if dado.isdecimal() and int(dado) in self.__id_generos:
-            return True
-        return False
-
     def checa_tipo(self, dado: str):
         for genero in self.__generos:
             if genero.tipo == dado:
@@ -40,11 +35,12 @@ class ControladorGeneros:
 
     def incluir_genero(self):
         dados_genero = self.__tela_genero.pega_dados_genero()
-        if self.checa_tipo(dados_genero):
-            genero = Genero(self.__contador + 1, dados_genero)
-            self.__generos.append(genero)
-            self.__contador += 1
-            self.__id_generos.append(self.__contador)
+        if dados_genero is not None:
+            if self.checa_tipo(dados_genero):
+                genero = Genero(self.__contador + 1, dados_genero)
+                self.__generos.append(genero)
+                self.__contador += 1
+                self.__id_generos.append(self.__contador)
 
     def dados_lista_genero(self):
         return [f'ID: {genero.id_genero}     Gênero: {genero.tipo};' for genero in self.generos]
