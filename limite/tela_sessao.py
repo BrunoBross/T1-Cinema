@@ -122,7 +122,7 @@ class TelaSessao:
         valores = window.Read()
         escolha = valores[0]
         user_input = valores[1]
-        print(user_input)
+
         id_filme = ''
         horario = ''
         id_sala = ''
@@ -134,7 +134,6 @@ class TelaSessao:
                 horario = user_input[1][0]
             if user_input[2]:
                 id_sala = str(user_input[2])[6:].split('N')[0].strip()
-            print([id_filme, horario, id_sala])
             return [id_filme, horario, id_sala]
 
     def exclui_sessao(self, sessaos: list):
@@ -159,12 +158,18 @@ class TelaSessao:
 
     def mostra_mensagem(self, msg):
         sg.theme(tema_aviso)
-
+        if '\n' in msg:
+            tamanho_da_janela_de_aviso = (420, 150)
+            tamanho_caixa_de_texto = (0, 4)
+        else:
+            tamanho_da_janela_de_aviso = (420, 100)
+            tamanho_caixa_de_texto = (0, 2)
         layout = [
-            [sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
+            [sg.Text(msg, size=tamanho_caixa_de_texto, font=fonte_texto, text_color=cor)],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Selecionar', layout, size=(420, 100),
+        window = sg.Window('Selecionar', layout, size=tamanho_da_janela_de_aviso,
                            element_justification='c', icon=icone_image)
+
         window.Read()
         window.Close()
