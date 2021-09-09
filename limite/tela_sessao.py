@@ -51,15 +51,15 @@ class TelaSessao:
         layout = [
             [sg.Text('Filme:', font=fonte_texto, text_color=cor)],
             [sg.Spin(values=filmes, font=fonte_texto,
-                        text_color=cor, background_color=background_listas)],
+                     text_color=cor, background_color=background_listas)],
 
             [sg.Text('Horário:', font=fonte_texto, text_color=cor)],
             [sg.Spin(values=horarios, font=fonte_texto,
-                        text_color=cor, background_color=background_listas)],
+                     text_color=cor, background_color=background_listas)],
 
             [sg.Text('Sala:', font=fonte_texto, text_color=cor)],
             [sg.Spin(values=salas, font=fonte_texto,
-                        text_color=cor, background_color=background_listas)],
+                     text_color=cor, background_color=background_listas)],
 
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
@@ -71,10 +71,10 @@ class TelaSessao:
         user_input = valores[1]
 
         window.Close()
-        if escolha == 'Confirmar' and [] not in user_input.values():
-            id_filme = str(user_input[0])[6:].split('T')[0].strip()
-            horario = user_input[1][0]
-            id_sala = str(user_input[2])[6:].split('N')[0].strip()
+        if escolha == 'Confirmar':
+            id_filme = str(user_input[0])[4:].split('T')[0].strip()
+            horario = user_input[1]
+            id_sala = str(user_input[2])[4:].split('N')[0].strip()
             return [id_filme, horario, id_sala]
 
     def seleciona_sessao(self, sessaos: list):
