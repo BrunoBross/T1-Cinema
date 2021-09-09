@@ -17,6 +17,11 @@ class ControladorSessaos:
                 return sessao
         return None
 
+    def checa_id(self, id_sessao: str):
+        if id_sessao.isdecimal() and int(id_sessao) in self.__id_sessaos:
+            return True
+        return False
+
     def existem_sessaos_cadastrados(self):
         if len(self.sessaos) > 0:
             return True
