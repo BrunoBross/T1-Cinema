@@ -16,7 +16,8 @@ class TelaSessao:
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
 
-		window = sg.Window('Gerenciador de Sessões', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+		window = sg.Window('Gerenciador de Sessões', layout, size=tamanho_janela,
+						   element_justification='c', icon=icone_image)
 
 		valor_escolhido = {
 			'Incluir Sessão': 1, 'Alterar Sessão': 2, 'Listar Sessões': 3,
@@ -54,6 +55,7 @@ class TelaSessao:
 			[sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
 			[sg.Button('Retornar', font=fonte_texto, size=tamanho)]
 		]
-		window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image)
+		window = sg.Window('Selecionar', layout, size=(420, 100),
+						   element_justification='c', icon=icone_image)
 		window.Read()
 		window.Close()
