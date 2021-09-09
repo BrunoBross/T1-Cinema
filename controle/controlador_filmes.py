@@ -20,7 +20,7 @@ class ControladorFilmes:
 	def existem_filmes_cadastrados(self):
 		if len(self.filmes) > 0:
 			return True
-		self.__tela_filme.mostra_mensagem(f'\nNão há filmes cadastrados.')
+		self.__tela_filme.mostra_mensagem('\nNão há filmes cadastrados.')
 		return False
 
 	def checa_titulo(self, dado: str):
