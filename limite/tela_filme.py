@@ -16,7 +16,7 @@ class TelaFilme:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Filme', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         valor_escolhido = {'Incluir Filme': 1, 'Alterar Filme': 2, 'Listar Filme': 3,
                            'Excluir Filme': 4, 'Listar Gêneros': 5, 'Retornar': 0}[window.Read()[0]]
 
@@ -36,7 +36,7 @@ class TelaFilme:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()
@@ -54,7 +54,7 @@ class TelaFilme:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()
@@ -68,7 +68,7 @@ class TelaFilme:
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('filmes', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
         escolha = valores[0]
@@ -91,7 +91,7 @@ class TelaFilme:
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('Selecionar', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
         escolha = valores[0]
@@ -111,7 +111,7 @@ class TelaFilme:
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('filmes', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
         escolha = valores[0]
@@ -131,7 +131,7 @@ class TelaFilme:
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('selecionar', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         valores = window.Read()
         escolha = valores[0]
 
@@ -153,7 +153,7 @@ class TelaFilme:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Selecionar', layout, size=tamanho_da_janela_de_aviso,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()

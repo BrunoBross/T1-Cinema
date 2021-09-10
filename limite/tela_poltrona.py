@@ -17,7 +17,7 @@ class TelaPoltrona:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
 
-        window = sg.Window('Poltrona', layout, size=tamanho_janela, element_justification='c')
+        window = sg.Window('Poltrona', layout, size=tamanho_janela, element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         button = window.Read()
         valor_escolhido = {'Incluir Poltrona': 1, 'Alterar Poltrona': 2, 'Lista Poltrona': 3,

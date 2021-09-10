@@ -17,7 +17,7 @@ class TelaSessao:
         ]
 
         window = sg.Window('Gerenciador de Sessões', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valor_escolhido = {
             'Incluir Sessão': 1, 'Alterar Sessão': 2, 'Listar Sessões': 3,
@@ -40,7 +40,7 @@ class TelaSessao:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('sessoes', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()
@@ -52,19 +52,19 @@ class TelaSessao:
             [sg.Text('Filme:', font=fonte_texto, text_color=cor)],
             [sg.Spin(values=filmes, font=fonte_texto,
                      text_color=cor, background_color=background_listas)],
-
+            [sg.Text('')],
             [sg.Text('Horário:', font=fonte_texto, text_color=cor)],
             [sg.Spin(values=horarios, font=fonte_texto,
                      text_color=cor, background_color=background_listas)],
-
+            [sg.Text('')],
             [sg.Text('Sala:', font=fonte_texto, text_color=cor)],
             [sg.Spin(values=salas, font=fonte_texto,
                      text_color=cor, background_color=background_listas)],
-
+            [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('incluir sessao', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
         escolha = valores[0]
@@ -87,7 +87,7 @@ class TelaSessao:
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('Selecionar', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
         escolha = valores[0]
@@ -105,19 +105,19 @@ class TelaSessao:
             [sg.Text('Filme:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=filmes, expand_y=True, no_scrollbar=True, font=fonte_texto,
                         text_color=cor, background_color=background_listas)],
-
+            [sg.Text(' ')],
             [sg.Text('Horário:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=horarios, expand_y=True, no_scrollbar=True, font=fonte_texto,
                         text_color=cor, background_color=background_listas)],
-
+            [sg.Text(' ')],
             [sg.Text('Sala:', font=fonte_texto, text_color=cor)],
             [sg.Listbox(values=salas, expand_y=True, no_scrollbar=True, font=fonte_texto,
                         text_color=cor, background_color=background_listas)],
-
+            [sg.Text(' ')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('alterar sessao', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
         escolha = valores[0]
@@ -146,7 +146,7 @@ class TelaSessao:
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
         window = sg.Window('selecionar', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         valores = window.Read()
         escolha = valores[0]
         selecionado = valores[1][0]
@@ -169,7 +169,7 @@ class TelaSessao:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Selecionar', layout, size=tamanho_da_janela_de_aviso,
-                           element_justification='c', icon=icone_image)
+                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()

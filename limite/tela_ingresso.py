@@ -16,7 +16,7 @@ class TelaIngresso:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
 
-        window = sg.Window('Ingresso', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('Ingresso', layout, size=tamanho_janela, element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         button = window.Read()
         valor_escolhido = {'Incluir Ingresso': 1, 'Lista Ingresso': 2, 'Excluir Ingresso': 3, 'Retornar': 0}
@@ -33,7 +33,7 @@ class TelaIngresso:
             [sg.Listbox(values=sessoes, size=(80, 6), font=fonte_texto)],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Selecionar', layout, size=(500, 380), element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar', layout, size=(500, 380), element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         values = window.Read()
         window.Close()
         if values[0] == 'Confirmar' and str(values[1][0]).replace('[', '').replace(']', '') != '':
@@ -164,7 +164,7 @@ class TelaIngresso:
             [sg.Text('TELA', background_color='red', size=(15, 2), justification='c', font=('Sans-Serif', 15, 'bold'),
                      text_color='white')]
         ]
-        window = sg.Window('Selecionar Poltrona', layout, size=(560, 490), element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar Poltrona', layout, size=(560, 490), element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         values = window.Read()
         window.Close()
         return values[0]
@@ -184,7 +184,7 @@ class TelaIngresso:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c',
-                           icon=icone_image)
+                           icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()
@@ -213,7 +213,7 @@ class TelaIngresso:
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
         window = sg.Window('Ingressos Cadastrados', layout, size=tamanho_janela, element_justification='c',
-                           icon=icone_image)
+                           icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         window.Read()
         window.Close()
 
@@ -227,7 +227,7 @@ class TelaIngresso:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('Selecionar Ingresso', layout, size=tamanho_janela, element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar Ingresso', layout, size=tamanho_janela, element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         values = window.Read()
         escolha = values[0]
 
@@ -247,6 +247,6 @@ class TelaIngresso:
             [sg.Text(msg, size=(0, 2), font=fonte_texto, text_color=cor)],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image)
+        window = sg.Window('Selecionar', layout, size=(420, 100), element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         window.Read()
         window.Close()
