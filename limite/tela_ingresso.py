@@ -169,11 +169,11 @@ class TelaIngresso:
         window.Close()
         return values[0]
 
-    def popup_lista_ingresso(self, filmes: list):
+    def popup_lista_ingresso(self, dados_ingressos: list):
         sg.theme(tema)
 
         col = [
-            [sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor, background_color=background_listas)]
+            [sg.Text('\n'.join(dados_ingressos), font=fonte_texto, text_color=cor, background_color=background_listas)]
         ]
 
         layout = [
@@ -196,26 +196,6 @@ class TelaIngresso:
             1: self.pega_poltrona()
         }
         return mensagem[dados]
-
-    # listagem
-    def mostra_ingresso(self, dados_ingresso):
-
-        sg.theme(tema)
-
-        col = [
-            [sg.Text(dados_ingresso, font=fonte_texto, text_color=cor, background_color=background_listas)]
-        ]
-        layout = [
-            [sg.Text('Ingressos Cadastrados', size=(0, 2), font=fonte_titulo, text_color=cor)],
-            [sg.Text('Lista de Ingressos:', font=fonte_texto, text_color=cor)],
-            [sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
-            [sg.Text('')],
-            [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
-        ]
-        window = sg.Window('Ingressos Cadastrados', layout, size=tamanho_janela, element_justification='c',
-                           icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
-        window.Read()
-        window.Close()
 
     def excluir_ingresso(self, ingressos: list):
 

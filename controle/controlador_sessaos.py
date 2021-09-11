@@ -86,7 +86,7 @@ class ControladorSessaos:
                             sessao.sala = sala
 
     def dados_lista_sessaos(self):
-        return [f'{sessao.horario} | {sessao.filme.titulo} | Sala Nº{sessao.sala.numero} | ID: {sessao.id_sessao}'
+        return [f'Filme: {sessao.filme.titulo} | Sala Nº {sessao.sala.numero} | Horário: {sessao.horario} | ID: {sessao.id_sessao}'
                 for sessao in self.__sessaos]
 
     def lista_sessaos(self):
