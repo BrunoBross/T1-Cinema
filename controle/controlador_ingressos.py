@@ -59,32 +59,27 @@ class ControladorIngressos:
             self.__ingressos.append(Ingresso(material[0], material[1], material[2]))
             self.__contador += 1
             return
-        self.__tela_ingresso.mostra_mensagem('Ingresso já vendido.')
+        self.__tela_ingresso.mostra_mensagem('Essa poltrona já foi vendida.')
 
     def checa_ingresso(self, sessao_dado: Sessao, poltrona_dado: str):
         if len(self.__ingressos) < 1:
             return True
         for sessao in self.__controlador_sistema.controlador_sessaos.sessaos:
-            if sessao == sessao_dado:
+            if str(sessao.id_sessao) == sessao_dado:
                 for ingresso in self.__ingressos:
-                    if ingresso.poltrona == poltrona_dado:
+                    if ingresso.poltrona == poltrona_dado and ingresso.sessao.id_sessao == sessao.id_sessao:
                         return False
         return True
 
+    def existem_ingressos_cadastrados(self):
+        if len(self.ingressos) > 0:
+            return True
+        self.__tela_ingresso.mostra_mensagem('\nNão há ingressos cadastrados.')
+        return False
+
     def lista_ingressos(self):
-
-        if len(self.__ingressos) > 0:
-            for ingresso in self.__ingressos:
-                self.__tela_ingresso.mostra_ingresso(
-
-                    f'Poltrona: {ingresso.poltrona}'
-                    f' | Filme: {ingresso.sessao.filme.titulo}'
-                    f' | Sala: {ingresso.sessao.sala.numero}'
-                    f' | Horário: {ingresso.sessao.horario}'
-                    f' | ID: {ingresso.id_ingresso}')
-
-        else:
-            self.__tela_ingresso.mostra_mensagem('Não há ingresso disponível, crie um antes.')
+        if self.existem_ingressos_cadastrados():
+            self.__tela_ingresso.popup_lista_ingresso(self.dados_lista_ingressos())
 
     def dados_lista_ingressos(self):
         return [f'Poltrona: {ingresso.poltrona} | Filme: {ingresso.sessao.filme.titulo} | Sala: {ingresso.sessao.sala.numero} | Horário: {ingresso.sessao.horario} | ID: {ingresso.id_ingresso}' for ingresso in self.__ingressos]
