@@ -1,12 +1,14 @@
 from limite.tela_sala import TelaSala
 from entidade.sala import Sala
+from persistencia.sala_DAO import SalaDAO
 
 
 class ControladorSalas:
 
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
-		self.__salas = []
+		self.__salas_dao = SalaDAO()
+		self.__salas = self.__salas_dao.get_all()
 		self.__id_salas = []
 		self.__tela_sala = TelaSala()
 		self.__contador = 0
@@ -51,7 +53,7 @@ class ControladorSalas:
 			if dados_sala is not None:
 				if self.checa_numero(dados_sala):
 					sala = Sala(self.__contador+1, dados_sala)
-					self.__salas.append(sala)
+					self.__salas_dao.add(sala)
 					self.__contador += 1
 					self.__id_salas.append(self.__contador)
 					self.__tela_sala.mostra_mensagem(f'A sala de Nº {sala.numero} foi adicionada!')
@@ -86,7 +88,7 @@ class ControladorSalas:
 			)
 			if id_sala_ is not None:
 				sala = self.pega_sala_por_id(int(id_sala_))
-				self.__salas.remove(sala)
+				self.__salas_dao.remove(sala.id_sala)
 				self.__tela_sala.mostra_mensagem(f'A sala de Nº {sala.numero} foi removida com sucesso')
 		#
 		# tela = self.__tela_sala
