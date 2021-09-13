@@ -1,12 +1,14 @@
 from limite.tela_genero import TelaGenero
 from entidade.genero import Genero
+from persistencia.generos_DAO import GeneroDAO
 
 
 class ControladorGeneros:
 
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__generos = []
+        self.__generos_dao = GeneroDAO()
+        self.__generos = self.__generos_dao.get_all()
         self.__id_generos = []
         self.__tela_genero = TelaGenero()
         self.__contador = 0
@@ -38,7 +40,7 @@ class ControladorGeneros:
         if dados_genero is not None:
             if self.checa_tipo(dados_genero):
                 genero = Genero(self.__contador + 1, dados_genero)
-                self.__generos.append(genero)
+                self.__generos_dao.add(genero)
                 self.__contador += 1
                 self.__id_generos.append(self.__contador)
 
@@ -75,7 +77,7 @@ class ControladorGeneros:
             if id_genero is not None:
                 genero = self.pega_genero_por_id(id_genero)
                 nome = genero.tipo
-                self.__generos.remove(genero)
+                self.__generos_dao.remove(genero)
                 self.__tela_genero.mostra_mensagem(f'Gênero {nome} removido com sucesso')
 
     def abre_tela(self):
