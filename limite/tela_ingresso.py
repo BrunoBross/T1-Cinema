@@ -180,13 +180,13 @@ class TelaIngresso:
         ]
 
         layout = [
-            [sg.Text('Filmes Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
-            [sg.Text('Lista de Filmes:', font=fonte_texto, text_color=cor)],
+            [sg.Text('Ingressos Cadastrados:', size=(0, 2), font=fonte_titulo, text_color=cor)],
+            [sg.Text('Lista de Ingressos:', font=fonte_texto, text_color=cor)],
             [sg.Column(col, size=(400, 150), scrollable=True, background_color=background_listas)],
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, element_justification='c',
+        window = sg.Window('Ingressos Cadastrados', layout, size=tamanho_janela, element_justification='c',
                            icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
