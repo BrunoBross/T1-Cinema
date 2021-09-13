@@ -44,7 +44,7 @@ class TelaGenero:
             [sg.Button('Confirmar', font=fonte_texto, size=tamanho),
              sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela,
+        window = sg.Window('Generos', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
@@ -69,7 +69,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela,
+        window = sg.Window('Generos', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
@@ -83,7 +83,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela,
+        window = sg.Window('Generos', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
@@ -123,7 +123,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('generos', layout, size=tamanho_janela,
+        window = sg.Window('Generos', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
@@ -143,7 +143,7 @@ class TelaGenero:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('selecionar gênero', layout, size=tamanho_janela,
+        window = sg.Window('Selecionar gênero', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         valores = window.Read()
         escolha = valores[0]

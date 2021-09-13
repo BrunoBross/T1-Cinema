@@ -32,8 +32,15 @@ class ControladorSessaos:
 
     def checa_atributos(self, dados: list):
         for sessao in self.__sessaos:
-            if sessao.sala in dados and sessao.filme in dados and sessao.horario in dados:
+            if str(sessao.sala.id_sala) == dados[2] and str(sessao.filme.id_filme) == dados[0] and sessao.horario in dados:
                 self.__tela_sessao.mostra_mensagem('Sessão já cadastrada!')
+                return False
+        return True
+
+    def checa_horario_e_sala(self, dados: list):
+        for sessao in self.__sessaos:
+            if sessao.horario in dados and str(sessao.sala.id_sala) in dados:
+                self.__tela_sessao.mostra_mensagem(f'A sala Nº {dados[2]} já está ocupada\nno horário das {dados[1]}')
                 return False
         return True
 
@@ -51,13 +58,14 @@ class ControladorSessaos:
             )
             if dados_sessao is not None:
                 if self.checa_atributos(dados_sessao):
-                    filme = filmes.pega_filme_por_id(int(dados_sessao[0]))
-                    sala = salas.pega_sala_por_id(int(dados_sessao[2]))
-                    horario = dados_sessao[1]
-                    sessao = Sessao(self.__contador + 1, filme, horario, sala)
-                    self.__sessaos_dao.add(sessao)
-                    self.__contador += 1
-                    self.__id_sessaos.append(self.__contador)
+                    if self.checa_horario_e_sala(dados_sessao):
+                        filme = filmes.pega_filme_por_id(int(dados_sessao[0]))
+                        sala = salas.pega_sala_por_id(int(dados_sessao[2]))
+                        horario = dados_sessao[1]
+                        sessao = Sessao(self.__contador + 1, filme, horario, sala)
+                        self.__sessaos_dao.add(sessao)
+                        self.__contador += 1
+                        self.__id_sessaos.append(self.__contador)
 
     def alterar_sessao(self):
         filmes = self.__controlador_sistema.controlador_filmes
@@ -69,23 +77,24 @@ class ControladorSessaos:
                 novos_dados_sessao = self.__tela_sessao.altera_sessao(filmes.dados_lista_filmes(),
                                                                       salas.dados_lista_salas())
                 if novos_dados_sessao is not None:
-                    sessao = self.pega_sessao_por_id(int(id_sessao))
-                    for ingresso in self.__controlador_sistema.controlador_ingressos.ingressos:
-                        if ingresso.sessao == sessao:
-                            self.__tela_sessao.mostra_mensagem('Não é possível alterar está sessão'
-                                                               '\ningressos já foram vendidos')
-                            return
-                    if novos_dados_sessao[0] != '':
-                        filme = filmes.pega_filme_por_id(int(novos_dados_sessao[0]))
-                        if sessao.filme is not filme:
-                            sessao.filme = filme
-                    if novos_dados_sessao[1] != '':
-                        if sessao.horario != novos_dados_sessao[1]:
-                            sessao.horario = novos_dados_sessao[1]
-                    if novos_dados_sessao[2] != '':
-                        sala = salas.pega_sala_por_id(int(novos_dados_sessao[2]))
-                        if sessao.sala is not sala:
-                            sessao.sala = sala
+                    if self.checa_horario_e_sala(novos_dados_sessao):
+                        sessao = self.pega_sessao_por_id(int(id_sessao))
+                        for ingresso in self.__controlador_sistema.controlador_ingressos.ingressos:
+                            if ingresso.sessao == sessao:
+                                self.__tela_sessao.mostra_mensagem('Não é possível alterar está sessão'
+                                                                   '\ningressos já foram vendidos')
+                                return
+                        if novos_dados_sessao[0] != '':
+                            filme = filmes.pega_filme_por_id(int(novos_dados_sessao[0]))
+                            if sessao.filme is not filme:
+                                sessao.filme = filme
+                        if novos_dados_sessao[1] != '':
+                            if sessao.horario != novos_dados_sessao[1]:
+                                sessao.horario = novos_dados_sessao[1]
+                        if novos_dados_sessao[2] != '':
+                            sala = salas.pega_sala_por_id(int(novos_dados_sessao[2]))
+                            if sessao.sala is not sala:
+                                sessao.sala = sala
 
     def dados_lista_sessaos(self):
         return [f'Filme: {sessao.filme.titulo} | Sala Nº {sessao.sala.numero} '

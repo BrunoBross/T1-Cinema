@@ -67,7 +67,7 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('filmes', layout, size=tamanho_janela,
+        window = sg.Window('Filmes', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
@@ -110,7 +110,7 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('filmes', layout, size=tamanho_janela,
+        window = sg.Window('Filmes', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
 
         valores = window.Read()
@@ -130,7 +130,7 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Submit('Confirmar', font=fonte_texto), sg.Cancel('Retornar', font=fonte_texto)]
         ]
-        window = sg.Window('selecionar', layout, size=tamanho_janela,
+        window = sg.Window('Selecionar', layout, size=tamanho_janela,
                            element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
         valores = window.Read()
         escolha = valores[0]
