@@ -1,12 +1,14 @@
 from limite.tela_filme import TelaFilme
 from entidade.filme import Filme
+from persistencia.filme_DAO import FilmeDAO
 
 
 class ControladorFilmes:
 
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__filmes = []
+        self.__filmes_dao = FilmeDAO()
+        self.__filmes = self.__filmes_dao.get_all()
         self.__id_filmes = []
         self.__tela_filme = TelaFilme()
         self.__contador = 0
@@ -38,7 +40,7 @@ class ControladorFilmes:
         if dados_filme is not None:
             if self.checa_titulo(dados_filme):
                 filme = Filme(self.__contador + 1, dados_filme)
-                self.__filmes.append(filme)
+                self.__filmes_dao.add(filme)
                 self.__contador += 1
                 self.__id_filmes.append(self.__contador)
 
@@ -76,7 +78,7 @@ class ControladorFilmes:
             if id_filme is not None:
                 filme = self.pega_filme_por_id(int(id_filme))
                 nome = filme.titulo
-                self.__filmes.remove(filme)
+                self.__filmes_dao.remove(filme.id_filme)
                 self.__tela_filme.mostra_mensagem(f'\nO filme "{nome}"\nfoi removido com sucesso')
 
     def listar_generos_por_id(self):
