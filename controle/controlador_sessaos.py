@@ -1,12 +1,14 @@
 from limite.tela_sessao import TelaSessao
 from entidade.sessao import Sessao
+from persistencia.sessao_DAO import SessaoDAO
 
 
 class ControladorSessaos:
 
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__sessaos = []
+        self.__sessaos_dao = SessaoDAO()
+        self.__sessaos = self.__sessaos_dao.get_all()
         self.__id_sessaos = []
         self.__tela_sessao = TelaSessao()
         self.__contador = 0
@@ -53,7 +55,7 @@ class ControladorSessaos:
                     sala = salas.pega_sala_por_id(int(dados_sessao[2]))
                     horario = dados_sessao[1]
                     sessao = Sessao(self.__contador + 1, filme, horario, sala)
-                    self.__sessaos.append(sessao)
+                    self.__sessaos_dao.add(sessao)
                     self.__contador += 1
                     self.__id_sessaos.append(self.__contador)
 
@@ -99,7 +101,7 @@ class ControladorSessaos:
             id_sessao = self.__tela_sessao.exclui_sessao(self.dados_lista_sessaos())
             if id_sessao is not None:
                 sessao = self.pega_sessao_por_id(int(id_sessao))
-                self.__sessaos.remove(sessao)
+                self.__sessaos_dao.remove(sessao.id_sessao)
 
     def abre_tela(self):
         lista_opcoes = {
