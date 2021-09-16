@@ -8,13 +8,12 @@ class ControladorSalas:
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
 		self.__salas_dao = SalaDAO()
-		self.__salas = self.__salas_dao.get_all()
 		self.__id_salas = []
 		self.__tela_sala = TelaSala()
-		self.__contador = 0
+		self.__contador = self.__salas_dao.get_last_child()
 
 	def pega_sala_por_id(self, id_sala: int):
-		for sala in self.__salas:
+		for sala in self.__salas_dao.get_all():
 			if sala.id_sala == id_sala:
 				return sala
 		return None
@@ -28,7 +27,7 @@ class ControladorSalas:
 		self.__controlador_sistema.abre_tela()
 
 	def checa_numero(self, numero_novo):
-		for sala in self.__salas:
+		for sala in self.__salas_dao.get_all():
 			if numero_novo == sala.numero:
 				self.__tela_sala.mostra_mensagem('Sala já existente.')
 				return False
@@ -71,6 +70,7 @@ class ControladorSalas:
 				if novos_dados_sala is not None:
 					sala_velha = sala.numero
 					sala.numero = novos_dados_sala
+					self.__salas_dao.add(sala)
 					self.__tela_sala.mostra_mensagem(f'A sala Nº {sala_velha} foi substituida pelo Nº {sala.numero}')
 
 	def lista_salas(self):
@@ -90,23 +90,6 @@ class ControladorSalas:
 				sala = self.pega_sala_por_id(int(id_sala_))
 				self.__salas_dao.remove(sala.id_sala)
 				self.__tela_sala.mostra_mensagem(f'A sala de Nº {sala.numero} foi removida com sucesso')
-		#
-		# tela = self.__tela_sala
-		#
-		# if len(self.__salas) <= 0:
-		# 	self.__tela_sala.exclui_sala(
-		# 		[f'Não há salas cadastradas.']
-		# 	)
-		# else:
-		# 	id_sala_ = self.__tela_sala.exclui_sala(
-		# 		[f'ID: {sala.id_sala}    Nº Sala: {sala.numero}' for sala in self.salas]
-		# 	)
-		#
-		# 	while True:
-		# 		sala = self.pega_sala_por_id(int(id_sala_))
-		# 		self.__salas.remove(sala)
-		# 		tela.mostra_mensagem(f'A sala foi removida do sistema!')
-		# 		return
 
 	def abre_tela(self):
 		lista_opcoes = {
@@ -126,4 +109,4 @@ class ControladorSalas:
 
 	@property
 	def salas(self):
-		return self.__salas
+		return self.__salas_dao.get_all()

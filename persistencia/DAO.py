@@ -27,6 +27,15 @@ class DAO(ABC):
         except KeyError:
             pass
 
+    def get_last_child(self):
+        try:
+            if self.__cache.keys():
+                return list(self.__cache.keys())[-1]
+            else:
+                return 0
+        except Exception as e:
+            pass
+
     def remove(self, key):
         try:
             self.__cache.pop(key)

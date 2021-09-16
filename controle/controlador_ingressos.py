@@ -11,7 +11,7 @@ class ControladorIngressos:
         self.__ingressos_dao = IngressoDAO()
         self.__ingressos = self.__ingressos_dao.get_all()
         self.__tela_ingresso = TelaIngresso()
-        self.__contador = 0
+        self.__contador = self.__ingressos_dao.get_last_child()
 
     def pega_ingresso_por_id(self, id_ingresso: int):
         for ingresso in self.__ingressos:

@@ -11,7 +11,7 @@ class ControladorGeneros:
         self.__generos = self.__generos_dao.get_all()
         self.__id_generos = []
         self.__tela_genero = TelaGenero()
-        self.__contador = 0
+        self.__contador = self.__generos_dao.get_last_child()
 
     def pega_genero_por_id(self, id_genero: int):
         for genero in self.__generos:

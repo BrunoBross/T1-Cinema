@@ -11,7 +11,7 @@ class ControladorFilmes:
         self.__filmes = self.__filmes_dao.get_all()
         self.__id_filmes = []
         self.__tela_filme = TelaFilme()
-        self.__contador = 0
+        self.__contador = self.__filmes_dao.get_last_child()
 
     def pega_filme_por_id(self, id_filme: int):
         for filme in self.__filmes:

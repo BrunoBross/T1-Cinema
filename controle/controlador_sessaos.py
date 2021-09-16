@@ -11,7 +11,7 @@ class ControladorSessaos:
         self.__sessaos = self.__sessaos_dao.get_all()
         self.__id_sessaos = []
         self.__tela_sessao = TelaSessao()
-        self.__contador = 0
+        self.__contador = self.__sessaos_dao.get_last_child()
 
     def pega_sessao_por_id(self, id_sessao: int):
         for sessao in self.__sessaos:
