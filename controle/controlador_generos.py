@@ -8,13 +8,12 @@ class ControladorGeneros:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__generos_dao = GeneroDAO()
-        self.__generos = self.__generos_dao.get_all()
         self.__id_generos = []
         self.__tela_genero = TelaGenero()
         self.__contador = self.__generos_dao.get_last_child()
 
     def pega_genero_por_id(self, id_genero: int):
-        for genero in self.__generos:
+        for genero in self.__generos_dao.get_all():
             if genero.id_genero == id_genero:
                 return genero
         return None
@@ -26,7 +25,7 @@ class ControladorGeneros:
         return False
 
     def checa_tipo(self, dado: str):
-        for genero in self.__generos:
+        for genero in self.__generos_dao.get_all():
             if genero.tipo == dado:
                 self.__tela_genero.mostra_mensagem(f'O gênero "{dado}" já está cadastrado.')
                 return False
@@ -95,4 +94,4 @@ class ControladorGeneros:
 
     @property
     def generos(self):
-        return self.__generos
+        return self.__generos_dao.get_all()

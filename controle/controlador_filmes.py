@@ -8,13 +8,12 @@ class ControladorFilmes:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__filmes_dao = FilmeDAO()
-        self.__filmes = self.__filmes_dao.get_all()
         self.__id_filmes = []
         self.__tela_filme = TelaFilme()
         self.__contador = self.__filmes_dao.get_last_child()
 
     def pega_filme_por_id(self, id_filme: int):
-        for filme in self.__filmes:
+        for filme in self.__filmes_dao.get_all():
             if filme.id_filme == id_filme:
                 return filme
         return None
@@ -26,7 +25,7 @@ class ControladorFilmes:
         return False
 
     def checa_titulo(self, dado: str):
-        for filme in self.__filmes:
+        for filme in self.__filmes_dao.get_all():
             if filme.titulo == dado:
                 self.__tela_filme.mostra_mensagem(f'O filme "{dado}" já está cadastrado.')
                 return False
@@ -55,7 +54,7 @@ class ControladorFilmes:
 
     def dados_lista_filmes(self):
         return [f'ID: {filme.id_filme}    Título: {filme.titulo}'
-                for filme in self.__filmes]
+                for filme in self.__filmes_dao.get_all()]
 
     def dados_lista_filme_por_genero(self):
         generos = [genero for genero in self.__controlador_sistema.controlador_generos.generos if
@@ -104,7 +103,7 @@ class ControladorFilmes:
 
     @property
     def filmes(self):
-        return self.__filmes
+        return self.__filmes_dao.get_all()
 
     @property
     def tela(self):

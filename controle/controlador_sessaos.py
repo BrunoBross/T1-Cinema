@@ -8,13 +8,12 @@ class ControladorSessaos:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__sessaos_dao = SessaoDAO()
-        self.__sessaos = self.__sessaos_dao.get_all()
         self.__id_sessaos = []
         self.__tela_sessao = TelaSessao()
         self.__contador = self.__sessaos_dao.get_last_child()
 
     def pega_sessao_por_id(self, id_sessao: int):
-        for sessao in self.__sessaos:
+        for sessao in self.__sessaos_dao.get_all():
             if sessao.id_sessao == id_sessao:
                 return sessao
         return None
@@ -31,14 +30,14 @@ class ControladorSessaos:
         return False
 
     def checa_atributos(self, dados: list):
-        for sessao in self.__sessaos:
+        for sessao in self.__sessaos_dao.get_all():
             if str(sessao.sala.id_sala) == dados[2] and str(sessao.filme.id_filme) == dados[0] and sessao.horario in dados:
                 self.__tela_sessao.mostra_mensagem('Sessão já cadastrada!')
                 return False
         return True
 
     def checa_horario_e_sala(self, dados: list):
-        for sessao in self.__sessaos:
+        for sessao in self.__sessaos_dao.get_all():
             if sessao.horario in dados and str(sessao.sala.id_sala) in dados:
                 self.__tela_sessao.mostra_mensagem(f'A sala Nº {dados[2]} já está ocupada\nno horário das {dados[1]}')
                 return False
@@ -99,7 +98,7 @@ class ControladorSessaos:
     def dados_lista_sessaos(self):
         return [f'Filme: {sessao.filme.titulo} | Sala Nº {sessao.sala.numero} '
                 f'| Horário: {sessao.horario} | ID: {sessao.id_sessao} '
-                for sessao in self.__sessaos]
+                for sessao in self.__sessaos_dao.get_all()]
 
     def lista_sessaos(self):
         if self.existem_sessaos_cadastrados():
@@ -130,4 +129,4 @@ class ControladorSessaos:
 
     @property
     def sessaos(self):
-        return self.__sessaos
+        return self.__sessaos_dao.get_all()

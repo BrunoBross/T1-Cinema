@@ -40,7 +40,7 @@ class TelaIngresso:
         window.Close()
         if values[0] == 'Confirmar' and str(values[1][0]).replace('[', '').replace(']', '') != '':
             # pega o ID e da um replace pra garantir que nao vai ter espaço em branco
-            value = str(values[1][0][0][4:5]).replace(' ', '')
+            value = str(values[1][0][0][4:6]).replace(' ', '')
             return value
         else:
             return None

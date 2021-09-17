@@ -9,20 +9,29 @@ class ControladorIngressos:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__ingressos_dao = IngressoDAO()
-        self.__ingressos = self.__ingressos_dao.get_all()
         self.__tela_ingresso = TelaIngresso()
         self.__contador = self.__ingressos_dao.get_last_child()
 
     def pega_ingresso_por_id(self, id_ingresso: int):
-        for ingresso in self.__ingressos:
+        for ingresso in self.__ingressos_dao.get_all():
             if ingresso.id_ingresso == id_ingresso:
                 return ingresso
         return None
 
     def checa_id(self, id_check: str):
-        if id_check.isdecimal() and int(id_check) in self.__ingressos:
+        if id_check.isdecimal() and int(id_check) in self.__ingressos_dao.get_all():
             return True
         return False
+
+    def checa_ingresso(self, sessao_dado: Sessao, poltrona_dado: str):
+        if len(self.__ingressos_dao.get_all()) < 1:
+            return True
+        for sessao in self.__controlador_sistema.controlador_sessaos.sessaos:
+            if str(sessao.id_sessao) == sessao_dado:
+                for ingresso in self.__ingressos_dao.get_all():
+                    if ingresso.poltrona == poltrona_dado and ingresso.sessao.id_sessao == sessao.id_sessao:
+                        return False
+        return True
 
     def retornar(self):
         self.__controlador_sistema.abre_tela()
@@ -47,8 +56,7 @@ class ControladorIngressos:
                     material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
                     break
             else:
-                self.__tela_ingresso.mostra_mensagem('Você precisa selecionar uma sessão')
-                self.__tela_ingresso.tela_opcoes()
+                return
 
         # aqui pega o acento e poltrona
         while True:
@@ -62,16 +70,6 @@ class ControladorIngressos:
             return
         self.__tela_ingresso.mostra_mensagem('Essa poltrona já foi vendida.')
 
-    def checa_ingresso(self, sessao_dado: Sessao, poltrona_dado: str):
-        if len(self.__ingressos) < 1:
-            return True
-        for sessao in self.__controlador_sistema.controlador_sessaos.sessaos:
-            if str(sessao.id_sessao) == sessao_dado:
-                for ingresso in self.__ingressos:
-                    if ingresso.poltrona == poltrona_dado and ingresso.sessao.id_sessao == sessao.id_sessao:
-                        return False
-        return True
-
     def existem_ingressos_cadastrados(self):
         if len(self.ingressos) > 0:
             return True
@@ -83,11 +81,11 @@ class ControladorIngressos:
             self.__tela_ingresso.popup_lista_ingresso(self.dados_lista_ingressos())
 
     def dados_lista_ingressos(self):
-        return [f'Poltrona: {ingresso.poltrona} | Filme: {ingresso.sessao.filme.titulo} | Sala: {ingresso.sessao.sala.numero} | Horário: {ingresso.sessao.horario} | ID: {ingresso.id_ingresso}' for ingresso in self.__ingressos]
+        return [f'Poltrona: {ingresso.poltrona} | Filme: {ingresso.sessao.filme.titulo} | Sala: {ingresso.sessao.sala.numero} | Horário: {ingresso.sessao.horario} | ID: {ingresso.id_ingresso}' for ingresso in self.__ingressos_dao.get_all()]
 
     def excluir_ingresso(self):
 
-        if len(self.__ingressos) > 0:
+        if len(self.__ingressos_dao.get_all()) > 0:
 
             id_ingresso = self.__tela_ingresso.excluir_ingresso(self.dados_lista_ingressos())
             if id_ingresso is not None:
@@ -114,4 +112,4 @@ class ControladorIngressos:
 
     @property
     def ingressos(self):
-        return self.__ingressos
+        return self.__ingressos_dao.get_all()
