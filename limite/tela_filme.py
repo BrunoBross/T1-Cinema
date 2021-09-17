@@ -5,7 +5,7 @@ from limite.temas import *
 class TelaFilme:
 
     def tela_opcoes(self):
-        sg.theme(tema)
+        
         layout = [
             [sg.Text('Gerenciar Filme', font=fonte_titulo, text_color=cor, size=(0, 2))],
             [sg.Button('Incluir Filme', font=fonte_texto, size=tamanho)],
@@ -24,7 +24,7 @@ class TelaFilme:
         return valor_escolhido
 
     def popup_lista_filme(self, filmes: list):
-        sg.theme(tema)
+        
         col = [
             [sg.Text('\n'.join(filmes), font=fonte_texto, text_color=cor, background_color=background_listas)]
         ]
@@ -42,7 +42,7 @@ class TelaFilme:
         window.Close()
 
     def popup_lista_filmes_por_genero(self, filmes_por_genero: list):
-        sg.theme(tema)
+        
         col = [
             [sg.Text('\n'.join(filmes_por_genero), font=fonte_texto, text_color=cor, background_color=background_listas)]
         ]
@@ -60,7 +60,7 @@ class TelaFilme:
         window.Close()
 
     def pega_dados_filme(self):
-        sg.theme(tema)
+        
         layout = [
             [sg.Text('Incluir Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Título:', font=fonte_texto, text_color=cor), sg.InputText('', size=(300, 2), font=fonte_texto)],
@@ -79,7 +79,6 @@ class TelaFilme:
             return user_input
 
     def seleciona_filme(self, filmes: list):
-        sg.theme(tema)
 
         col = [sg.Listbox(values=filmes, size=(30, 6), font=fonte_texto)]
 
@@ -102,7 +101,7 @@ class TelaFilme:
             return int(id_filme)
 
     def altera_filme(self):
-        sg.theme(tema)
+        
         layout = [
             [sg.Text('Alterar Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Novo título:', font=fonte_texto, text_color=cor),
@@ -122,7 +121,7 @@ class TelaFilme:
             return user_input
 
     def exclui_filme(self, filmes: list):
-        sg.theme(tema)
+        
         layout = [
             [sg.Text('Excluir Filme:', size=(0, 2), font=fonte_titulo, text_color=cor)],
             [sg.Text('Selecione o filme:', font=fonte_texto, text_color=cor)],
@@ -141,6 +140,7 @@ class TelaFilme:
             return int(id_filme)
 
     def mostra_mensagem(self, msg):
+
         sg.theme(tema_aviso)
         if '\n' in msg:
             tamanho_da_janela_de_aviso = (420, 150)
