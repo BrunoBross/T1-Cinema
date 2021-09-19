@@ -5,7 +5,7 @@ from limite.temas import *
 class TelaFilme:
 
     def tela_opcoes(self):
-        
+        sg.theme(tema)
         layout = [
             [sg.Text('Gerenciar Filme', font=fonte_titulo, text_color=cor, size=(0, 2))],
             [sg.Button('Incluir Filme', font=fonte_texto, size=tamanho)],
@@ -53,8 +53,8 @@ class TelaFilme:
             [sg.Text('')],
             [sg.Button('Retornar', font=fonte_texto, size=tamanho)]
         ]
-        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela,
-                           element_justification='c', icon=icone_image, no_titlebar=title_bar, grab_anywhere=grab_any)
+        window = sg.Window('Filmes Cadastrados', layout, size=tamanho_janela, icon=icone_image,
+                           element_justification='c', no_titlebar=title_bar, grab_anywhere=grab_any)
 
         window.Read()
         window.Close()

@@ -45,3 +45,6 @@ class DAO(ABC):
 
     def get_all(self):
         return self.__cache.values()
+
+    def get_ids(self):
+        return self.__cache.keys()

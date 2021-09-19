@@ -19,8 +19,10 @@ class ControladorIngressos:
         return None
 
     def checa_id(self, id_check: str):
-        if id_check.isdecimal() and int(id_check) in self.__ingressos:
-            return True
+        if id_check.isdecimal():
+            for ingresso in self.__ingressos:
+                if ingresso.id_ingresso == int(id_check):
+                    return True
         return False
 
     def retornar(self):
@@ -35,31 +37,26 @@ class ControladorIngressos:
             return
 
         # aqui pega a sessao
-        while True:
-            id_sessao = self.__tela_ingresso.pega_sessao(
-                [
-                    f'ID: {sessao.id_sessao} | Horario: {sessao.horario} | Sala: {sessao.sala.numero} | Filme: {sessao.filme.titulo}'
-                    for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
-            )
-            if id_sessao is not None:
-                if control_sessao.checa_id(id_sessao):
-                    material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
-                    break
-            else:
-                self.__tela_ingresso.mostra_mensagem('Você precisa selecionar uma sessão')
-                self.__tela_ingresso.tela_opcoes()
+        id_sessao = self.__tela_ingresso.pega_sessao(
+            [
+                f'ID: {sessao.id_sessao} | Horario: {sessao.horario} | Sala: {sessao.sala.numero} | Filme: {sessao.filme.titulo} '
+                for sessao in self.__controlador_sistema.controlador_sessaos.sessaos]
+        )
+
+        if id_sessao is None or not control_sessao.checa_id(id_sessao):
+            return
+        material.append(control_sessao.pega_sessao_por_id(int(id_sessao)))
 
         # aqui pega o acento e poltrona
         while True:
             poltrona = self.__tela_ingresso.pega_poltrona()
-            material.append(poltrona)
-            break
 
-        if self.checa_ingresso(id_sessao, poltrona):
-            self.__ingressos.append(Ingresso(material[0], material[1], material[2]))
-            self.__contador += 1
-            return
-        self.__tela_ingresso.mostra_mensagem('Essa poltrona já foi vendida.')
+            if self.checa_ingresso(id_sessao, poltrona):
+                material.append(poltrona)
+                self.__ingressos.append(Ingresso(material[0], material[1], material[2]))
+                self.__contador += 1
+                return
+            self.__tela_ingresso.mostra_mensagem('Essa poltrona já foi vendida.')
 
     def checa_ingresso(self, sessao_dado: Sessao, poltrona_dado: str):
         if len(self.__ingressos) < 1:
@@ -82,7 +79,9 @@ class ControladorIngressos:
             self.__tela_ingresso.popup_lista_ingresso(self.dados_lista_ingressos())
 
     def dados_lista_ingressos(self):
-        return [f'Poltrona: {ingresso.poltrona} | Filme: {ingresso.sessao.filme.titulo} | Sala: {ingresso.sessao.sala.numero} | Horário: {ingresso.sessao.horario} | ID: {ingresso.id_ingresso}' for ingresso in self.__ingressos]
+        return [
+            f'Poltrona: {ingresso.poltrona} | Filme: {ingresso.sessao.filme.titulo} | Sala: {ingresso.sessao.sala.numero} | Horário: {ingresso.sessao.horario} | ID: {ingresso.id_ingresso}'
+            for ingresso in self.__ingressos]
 
     def excluir_ingresso(self):
 

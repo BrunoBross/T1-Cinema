@@ -8,7 +8,7 @@ class ControladorSessaos:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__sessaos_dao = SessaoDAO()
-        self.__id_sessaos = []
+        self.__id_sessaos = self.__sessaos_dao.get_ids()
         self.__tela_sessao = TelaSessao()
         self.__contador = self.__sessaos_dao.get_last_child()
 
@@ -18,10 +18,8 @@ class ControladorSessaos:
                 return sessao
         return None
 
-    def checa_id(self, id_sessao: str):
-        if id_sessao.isdecimal() and int(id_sessao) in self.__id_sessaos:
-            return True
-        return False
+    def checa_id(self, id_str: str):
+        return id_str.strip().isdecimal() and int(id_str) in self.__id_sessaos
 
     def existem_sessaos_cadastrados(self):
         if len(self.sessaos) > 0:
