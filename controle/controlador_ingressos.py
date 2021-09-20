@@ -1,22 +1,23 @@
 from limite.tela_ingresso import TelaIngresso
 from entidade.ingresso import Ingresso
 from entidade.sessao import Sessao
-from controle import controlador_sessaos
+from persistencia.ingresso_DAO import IngressoDAO
 
 
 class ControladorIngressos:
 
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__ingressos = []
+        self.__ingressos_dao = IngressoDAO()
+        self.__ingressos = self.__ingressos_dao.get_all()
+        self.__ids_ingressos = self.__ingressos_dao.get_ids()
         self.__tela_ingresso = TelaIngresso()
-        self.__contador = 0
 
     def pega_ingresso_por_id(self, id_ingresso: int):
-        for ingresso in self.__ingressos:
-            if ingresso.id_ingresso == id_ingresso:
-                return ingresso
-        return None
+        try:
+            return self.__ingressos_dao.get(id_ingresso)
+        except IndexError:
+            return None
 
     def checa_id(self, id_check: str):
         if id_check.isdecimal():
@@ -30,7 +31,7 @@ class ControladorIngressos:
 
     def incluir_ingresso(self):
 
-        material = [self.__contador + 1]
+        material = [self.__ingressos_dao.get_last_child() + 1]
         control_sessao = self.__controlador_sistema.controlador_sessaos
         if len(control_sessao.sessaos) < 1:
             self.__tela_ingresso.mostra_mensagem('Não há sessão disponível, crie uma antes.')
@@ -53,8 +54,7 @@ class ControladorIngressos:
 
             if self.checa_ingresso(id_sessao, poltrona):
                 material.append(poltrona)
-                self.__ingressos.append(Ingresso(material[0], material[1], material[2]))
-                self.__contador += 1
+                self.__ingressos_dao.add(Ingresso(material[0], material[1], material[2]))
                 return
             self.__tela_ingresso.mostra_mensagem('Essa poltrona já foi vendida.')
 
@@ -90,7 +90,7 @@ class ControladorIngressos:
             id_ingresso = self.__tela_ingresso.excluir_ingresso(self.dados_lista_ingressos())
             if id_ingresso is not None:
                 ingresso = self.pega_ingresso_por_id(int(id_ingresso))
-                self.__ingressos.remove(ingresso)
+                self.__ingressos_dao.remove(ingresso.id_ingresso)
                 self.__tela_ingresso.mostra_mensagem('O ingresso foi removido com sucesso')
             else:
                 self.__tela_ingresso.mostra_mensagem(

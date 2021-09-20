@@ -8,15 +8,14 @@ class ControladorFilmes:
     def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
         self.__filmes_dao = FilmeDAO()
-        self.__id_filmes = []
+        self.__id_filmes = self.__filmes_dao.get_ids()
         self.__tela_filme = TelaFilme()
-        self.__contador = self.__filmes_dao.get_last_child()
 
     def pega_filme_por_id(self, id_filme: int):
-        for filme in self.__filmes_dao.get_all():
-            if filme.id_filme == id_filme:
-                return filme
-        return None
+        try:
+            return self.__filmes_dao.get(id_filme)
+        except IndexError:
+            return None
 
     def existem_filmes_cadastrados(self):
         if len(self.filmes) > 0:
@@ -38,10 +37,8 @@ class ControladorFilmes:
         dados_filme = self.__tela_filme.pega_dados_filme()
         if dados_filme is not None:
             if self.checa_titulo(dados_filme):
-                filme = Filme(self.__contador + 1, dados_filme)
+                filme = Filme(self.__filmes_dao.get_last_child() + 1, dados_filme)
                 self.__filmes_dao.add(filme)
-                self.__contador += 1
-                self.__id_filmes.append(self.__contador)
 
     def alterar_filme(self):
         if self.existem_filmes_cadastrados():

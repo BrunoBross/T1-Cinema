@@ -28,13 +28,10 @@ class DAO(ABC):
             pass
 
     def get_last_child(self):
-        try:
-            if self.__cache.keys():
-                return list(self.__cache.keys())[-1]
-            else:
-                return 0
-        except Exception as e:
-            pass
+        if self.__cache.keys():
+            return list(self.__cache.keys())[-1]
+        else:
+            return 0
 
     def remove(self, key):
         try:

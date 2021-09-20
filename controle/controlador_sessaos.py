@@ -10,13 +10,12 @@ class ControladorSessaos:
         self.__sessaos_dao = SessaoDAO()
         self.__id_sessaos = self.__sessaos_dao.get_ids()
         self.__tela_sessao = TelaSessao()
-        self.__contador = self.__sessaos_dao.get_last_child()
 
     def pega_sessao_por_id(self, id_sessao: int):
-        for sessao in self.__sessaos_dao.get_all():
-            if sessao.id_sessao == id_sessao:
-                return sessao
-        return None
+        try:
+            return self.__sessaos_dao.get(id_sessao)
+        except IndexError:
+            return None
 
     def checa_id(self, id_str: str):
         return id_str.strip().isdecimal() and int(id_str) in self.__id_sessaos
@@ -59,10 +58,8 @@ class ControladorSessaos:
                         filme = filmes.pega_filme_por_id(int(dados_sessao[0]))
                         sala = salas.pega_sala_por_id(int(dados_sessao[2]))
                         horario = dados_sessao[1]
-                        sessao = Sessao(self.__contador + 1, filme, horario, sala)
+                        sessao = Sessao(self.__sessaos_dao.get_last_child() + 1, filme, horario, sala)
                         self.__sessaos_dao.add(sessao)
-                        self.__contador += 1
-                        self.__id_sessaos.append(self.__contador)
 
     def alterar_sessao(self):
         filmes = self.__controlador_sistema.controlador_filmes

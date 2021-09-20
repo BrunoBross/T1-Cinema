@@ -8,20 +8,17 @@ class ControladorSalas:
 	def __init__(self, controlador_sistema):
 		self.__controlador_sistema = controlador_sistema
 		self.__salas_dao = SalaDAO()
-		self.__id_salas = []
+		self.__id_salas = self.__salas_dao.get_ids()
 		self.__tela_sala = TelaSala()
-		self.__contador = self.__salas_dao.get_last_child()
 
 	def pega_sala_por_id(self, id_sala: int):
-		for sala in self.__salas_dao.get_all():
-			if sala.id_sala == id_sala:
-				return sala
-		return None
+		try:
+			return self.__salas_dao.get(id_sala)
+		except IndexError:
+			return None
 
 	def checa_id(self, id_sala: str):
-		if id_sala.isdecimal() and int(id_sala) in self.__id_salas:
-			return True
-		return False
+		return id_sala.isdecimal() and int(id_sala) in self.__id_salas
 
 	def retornar(self):
 		self.__controlador_sistema.abre_tela()
@@ -51,10 +48,8 @@ class ControladorSalas:
 			dados_sala = self.__tela_sala.pega_dados_sala()
 			if dados_sala is not None:
 				if self.checa_numero(dados_sala):
-					sala = Sala(self.__contador+1, dados_sala)
+					sala = Sala(self.__salas_dao.get_last_child() + 1, dados_sala)
 					self.__salas_dao.add(sala)
-					self.__contador += 1
-					self.__id_salas.append(self.__contador)
 					self.__tela_sala.mostra_mensagem(f'A sala de Nº {sala.numero} foi adicionada!')
 					break
 			else:
